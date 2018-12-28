@@ -14,10 +14,10 @@ export class UserPageComponent implements OnInit {
 
   public user: User;
   id: string = "";
+  public nav: NavServiceService;
   constructor(private router: Router,
     private r: ActivatedRoute,
-    private m: ApiService,
-    private nav: NavServiceService) {
+    private m: ApiService) {
 
     this.user = new User();
   }

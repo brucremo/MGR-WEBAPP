@@ -17,11 +17,11 @@ export class UserReviewsComponent implements OnInit {
   public user: User;
   public reviews = [];
   public visible: boolean;
+  public nav: NavServiceService;
 
   constructor(
     private route: ActivatedRoute,
     private m: ApiService,
-    private nav: NavServiceService,
     private router: Router
   ) {
     this.user = new User();
