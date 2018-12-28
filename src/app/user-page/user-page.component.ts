@@ -19,6 +19,7 @@ export class UserPageComponent implements OnInit {
     private r: ActivatedRoute,
     private m: ApiService) {
 
+    this.nav = new NavServiceService();
     this.user = new User();
   }
 

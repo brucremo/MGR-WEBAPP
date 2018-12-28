@@ -24,6 +24,8 @@ export class UserReviewsComponent implements OnInit {
     private m: ApiService,
     private router: Router
   ) {
+
+    this.nav = new NavServiceService();
     this.user = new User();
   }
 
