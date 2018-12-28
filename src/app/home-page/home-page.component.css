@@ -1,0 +1,21 @@
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5em;
+    padding-bottom: 5em;
+}
+
+.btn, .btn:active, .btn:visited {
+    background-color: #092e4d !important;
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 3px;
+    border: 1px solid #092e4d;
+    padding-left:20px;
+    padding-right: 20px;
+}
+
+.btn:hover{
+    background-color: #316896 !important;
+}

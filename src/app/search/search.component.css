@@ -1,0 +1,21 @@
+input{
+    width: 50%;
+    border-radius: 5px;
+    border: 1px solid #334a5d;
+    padding: 10px;
+    font-family: Helvetica;
+    font-weight: bold;
+    text-align: center;
+}
+
+h3{
+    color: #fff;
+    font-weight: bold;
+    padding-bottom: 10px;
+    letter-spacing: 1.5em;
+}
+
+ul {
+    list-style-type: none;
+    display: inline;
+}

@@ -1,0 +1,40 @@
+<br>
+<div class="col-lg-12" style="padding:2%">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-2">
+      <div class="card text-center" style="background-color:transparent;">
+          <div class="card-img-top">
+            <img id="card-img" alt="profilePicture" src="../../assets/images/userProfile.svg" height=80 width=90>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">{{user.USERID}}</h3>
+              <!-- need to make this conditional, so only user that's logged in can access it -->
+            <h6><a href="/editUser/{{user.USERID}}" *ngIf="!nav.linkvisible">( Edit Profile )</a></h6>
+            <br />
+          </div>
+        </div>
+      </div>
+    <div class="col-md-8">
+      <div *ngFor="let review of reviews">
+          <div class="card-body" id="revs-and-cmnts">
+            <div class="row">
+              <div class="col-md-3"></div>
+              <div class="col-md-1">
+                <img class="user-pic" src="../../assets/images/user1.png">
+                <p class="user-name">{{review.USERID}}<br />
+                <a *ngIf="visible" [routerLink]="['/editReview/', this.user.USERID, review.GAMEID]">Edit</a> &nbsp;&nbsp;&nbsp; 
+                  <a *ngIf="visible" (click)="this.onDelete(review)" [routerLink]="['/userReviews/', this.user.USERID]">Delete</a></p>
+              </div>
+              <div class="col-md-4">
+                <p id="game-description" class="text-justify">{{review.REVIEWSUMMARY}}</p>
+                <div id="game-rating">User Rating:
+                  <span id="game-rating-number">{{review.REVIEWRATING}} / 5</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

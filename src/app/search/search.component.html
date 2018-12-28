@@ -1,0 +1,31 @@
+<div style="border:0px;">
+  <div style="background-color: #092e4d; border-radius: 0px; padding-top:2em; height:25em; min-width:100%; min-height:100%;">
+      <form (ngSubmit)="onSubmit(searchform)" #searchform="ngForm">
+          <div class="form-group" style="padding-top:5em; text-align: center;">
+            <h3>&nbsp;SEARCH</h3><br>
+            <input type="text" #Search="ngModel" name="Search" [(ngModel)]="game.name"><br>
+          </div>
+      </form>
+  </div>
+  <!---<ul>
+    <li *ngFor="let game of gamesQuery">
+        <a [routerLink]="['/game/', game.id]">
+        <img src="{{game.cover.url}}" id="game-image" class="img-responsive" width="100px" height="100"
+              alt="video game name">
+          {{ game.name }}
+        </a>
+    </li>
+  </ul>-->
+  <div class="list-group">
+    <li *ngFor="let game of gamesQuery" [routerLink]="['/game/', game.id]" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="row">
+        <div class="col-md-2"><img src="{{ game.cover.url }}" id="game-image" class="img-responsive" width="100px"></div>
+        <div class="col-md-10"><div class="d-flex w-100 justify-content-between">
+          <h4 class="mb-1">{{ game.name }}</h4>
+        </div>
+        <p class="mb-1">{{ game.summary }}</p>
+      </div></div>
+    </li>
+  </div>
+
+</div>

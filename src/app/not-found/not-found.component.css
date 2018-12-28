@@ -1,0 +1,11 @@
+.image{
+    height: 100vh;
+    background-size:cover; 
+    width:auto;
+    background-image:url('../../assets/images/background.png');
+    background-position: 50% 50%;
+    overflow: hidden;
+    background-repeat: no-repeat;
+  }
+
+  #trapper{width:100%; height:400px;}

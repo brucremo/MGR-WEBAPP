@@ -1,0 +1,38 @@
+#game-title{
+    text-align: center;
+}
+
+#game-image{
+    margin-left: 10%;
+
+}
+
+#game-description{
+    text-align: center;
+    padding-right: 5%;
+}
+
+#game-rating{
+    padding-top: 10%;
+    padding-right: 10%;
+    text-align: right;
+}
+
+#game-rating-number{
+    font-size: 150%;
+}
+
+#user-pic{
+    vertical-align: middle;
+}
+
+#user-name{
+    text-align: center;
+}
+
+
+textarea{
+    align-content: left;
+    resize: none;
+    overflow: auto;
+}

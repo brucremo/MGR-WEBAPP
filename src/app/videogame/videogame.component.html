@@ -1,0 +1,80 @@
+<div style="background-color: #092e4d; border-radius: 0px; padding:2em;">
+  <h1 id="game-title" style="font-family: Helvetica;color: #ebebeb; text-transform: uppercase;font-weight:bold;">{{game.name}}
+    <br>
+    <small>{{game.developers[0].name}}</small>
+  </h1>
+</div>
+<div class="card" style="border: 0px;">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-3">
+        <img src="{{game.cover.url}}" id="game-image" class="img-responsive" width="250px" height="400" alt="video game name">
+      </div>
+      <div class="col-md-5">
+        <p id="game-description" class="text-justify">{{game.summary}}</p>
+        <div class="row">
+          <div class="col-md-6"></div>
+          <div id="game-rating" class="col-md-6">
+            Rating:
+            <span id="game-rating-number">{{this.rating}} / 5</span>
+            <br />
+            <br />
+            <div id="hidden">
+              <a *ngIf="visible" type="button" class="btn btn-info" [routerLink]="['/review/', game.id]">Create Review</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-header">
+      <h3 id="game-title">Screenshots</h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-2">
+          <a href="{{game.screenshots[0].url}}" target="_blank">
+            <img src="{{game.screenshots[0].url}}" id="game-image" class="img-responsive" width="250px" alt="video game name">
+          </a>
+        </div>
+        <div class="col-md-2">
+          <a href="{{game.screenshots[1].url}}" target="_blank">
+            <img src="{{game.screenshots[1].url}}" id="game-image" class="img-responsive" width="250px" alt="video game name">
+          </a>
+        </div>
+        <div class="col-md-2">
+          <a href="{{game.screenshots[2].url}}" target="_blank">
+            <img src="{{game.screenshots[2].url}}" id="game-image" class="img-responsive" width="250px" alt="video game name">
+          </a>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-header">
+    <h3 id="comments-title" class="text-center">Reviews and Comments</h3>
+  </div>
+
+  <div *ngFor="let review of game.reviews">
+    <div class="card-body" id="revs-and-cmnts">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-1">
+          <img class="user-pic" src="../../assets/images/user1.png">
+          <p class="user-name">{{review.USERID}} <br />
+          <a *ngIf="review.MINE" [routerLink]="['/editReview/', userid, game.id]">Edit</a> &nbsp;&nbsp;&nbsp; 
+            <a *ngIf="review.MINE" (click)="this.onDelete(review)" [routerLink]="['/game/', game.id]">Delete</a></p>
+        </div>
+        <div class="col-md-4">
+          <p id="game-description" class="text-justify">{{review.REVIEWSUMMARY}}</p>
+          <div id="game-rating">User Rating:
+            <span id="game-rating-number">{{review.REVIEWRATING}} / 5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,59 @@
+<div class="row" style="padding:2%">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">Register an Account</div>
+        <div class="card-body">
+          <form (ngSubmit)='onSubmit(f)' #f='ngForm' id="signup">
+  
+            <div class="form-group">
+              <label class="control-label" for="UserName">Name:</label>
+              <input type="text" class="form-control" pattern="[A-Za-z0-9_ ]{2,50}" #UserName="ngModel" name="UserName" [(ngModel)]="user.USERNAME" placeholder="3 to 50 characters" required autofocus><br>
+                <div *ngIf='UserName.invalid && (UserName.dirty || UserName.touched)' class='alert alert-danger'>
+                  <div *ngIf='UserName.errors.required'>Name is required, 2 to 50 characters</div>
+                  <div *ngIf='UserName.errors.pattern'>Name must be at least 2 characters</div>
+                </div>
+
+              <label class="control-label" for="UserId">Username:</label>
+              <input type="text" class="form-control" pattern="[A-Za-z0-9_ ]{3,50}" #UserId="ngModel" name="UserId" [(ngModel)]="user.USERID" required><br>
+                <div *ngIf='UserId.invalid && (UserId.dirty || UserId.touched)' class='alert alert-danger'>
+                  <div *ngIf='UserId.errors.required'>Username is required, 3 to 50 characters</div>
+                  <div *ngIf='UserId.errors.pattern'>Username must be at least 3 characters</div>
+                  </div>
+        
+              <label class="control-label" for="UserEmail">Email Address:</label>
+              <input type="text" class="form-control" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #UserEmail="ngModel" name="UserEmail" [(ngModel)]="user.USEREMAIL" required><br>
+                <div *ngIf='UserEmail.invalid && (UserEmail.dirty || UserEmail.touched)' class='alert alert-danger'>
+                  <div *ngIf='UserEmail.errors.required'>Email is required</div>
+                  <div *ngIf='UserEmail.errors.pattern'>Must be a valid email address</div>
+                </div>
+
+              <label class="control-label" for="UserPassword">Password:</label>
+              <input type="password" class="form-control" pattern="[A-Za-z0-9_ ]{8,35}" #UserPassword="ngModel" name="UserPassword" [(ngModel)]="user.USERPASSWORD" required><br>
+                <div *ngIf='UserPassword.invalid && (UserPassword.dirty || UserPassword.touched)' class='alert alert-danger'>
+                  <div *ngIf='UserPassword.errors.required'>Password is required, at least 8 characters</div>
+                  <div *ngIf='UserPassword.errors.pattern'>Password must be at least 8 characters</div>
+                </div>
+                
+              <label class="control-label" for="UserPassword2">Re-enter Password:</label>
+              <input type="password" class="form-control" pattern="[A-Za-z0-9_ ]{8,35}" required><br>
+            </div>
+            
+            <hr />
+
+            <div class="form-group">
+                <label class="control-label" for="UserAge" >Age:</label>
+                <input type="text" class="form-control" id="UserAge" name="UserAge" #UserAge="ngModel" [(ngModel)]="user.USERAGE"><br>
+                <label class="control-label" for="UserLocation">Location:</label>
+                <input type="text" class="form-control" id="UserLocation" name="UserLocation" #UserLocation="ngModel" [(ngModel)]="user.USERLOCATION"><br>
+                <label class="control-label" for="UserSummary">About Me:</label>
+                <input type="text" class="form-control" id="UserSummary" name="UserSummary" #UserSummary="ngModel" [(ngModel)]="user.USERSUMMARY"><br>
+                
+              </div>
+  
+            <button class="btn btn-primary" type="submit" form="signup" [disabled]='!f.form.valid'>Sign Up</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-default" href="#">Cancel</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

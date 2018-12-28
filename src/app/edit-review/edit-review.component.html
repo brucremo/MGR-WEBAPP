@@ -1,0 +1,67 @@
+<div style="background-color: #092e4d; border-radius: 0px; padding-top:2em; height:20em; min-width:90%; min-height:100%;">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+              <img src={{game.cover.url}} alt={{game.name}} height=25%>
+          </div>
+          <div class="col-md-4"></div>
+      </div>
+  </div>
+</div>
+
+<!-- temporary fix for cover issue
+<div style="background-color: #092e4d; border-radius: 0px; padding-top:2em; height:20em; min-width:90%; min-height:100%;">
+  <h3 id="title">Add a review for:</h3>
+      <h5 id="game-name">{{review.game.name}}</h5>
+</div>
+-->
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-5">
+      <div class="card" style="border:0px;">
+          <div class="card-body">
+              <form (ngSubmit)='onSubmit(reviewForm)' #reviewForm="ngForm">
+
+                  <div class="form-group">
+                      <label class="control-label" for="platform">Platform:</label>
+                      <select class="form-control" id="platform" name="platform" [(ngModel)]="review.GAMEPLATFORM">
+                          <option value="" selected>Select</option>
+                          <option value="PS4">Playstation 4</option>
+                          <option value="XBOX1">Xbox One</option>
+                          <option value="PC">PC</option>
+                          <option value="MAC">MAC</option>
+                          <option value="OTHER">Other</option>
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                      <label class="control-label" for="timeplayed">Time Played:</label>
+                      <input type="time" class="form-control" id="timeplayed" name="timeplayed">
+                  </div>
+
+                  <div class="form-group">
+                      <label class="control-label" for="review">Your Review:</label>
+                      <textarea class="form-control" id="review" name="review" rows="10" [(ngModel)]="review.REVIEWSUMMARY">{{review.content}}</textarea>
+                  </div>
+
+                  <div class="form-group">
+                      <label class="control-label" for="rating">Rating:</label>
+                      <select class="form-control" id="rating" name="rating" [(ngModel)]="review.REVIEWRATING">
+                          <option value="" selected>Select</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                      </select>
+                  </div>
+
+                  <button class="btn btn-primary" type="submit">Edit Review</button>&nbsp;
+                  <button class="btn btn-danger" (click)='this.onCancel()'>Cancel</button>
+
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
