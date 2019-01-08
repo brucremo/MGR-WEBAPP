@@ -168,13 +168,15 @@ export class ApiService {
 
   //--------------------------------- REGISTRATION TOOLS ---------------------------------
 
-  // GET: /register/get-email/:email -> Returns true if the e-mail passed as parameter already exists in the DB
+  /* GET: /register/get-email/:email -> Returns true if the e-mail passed as parameter already 
+  exists in the DB, false otherwise */
   checkEmailDB(email: String): Observable<any> {
 
     return this.http.get<any>(`${this.api}/register/get-email/${email}`);
   }
 
-  // GET: /register/get-userid/:userid -> Returns true if the userid passed as parameter already exists in the DB
+  /* GET: /register/get-userid/:userid -> Returns true if the userid passed as parameter already 
+  exists in the DB, false otherwise */
   checkUserIDDB(userid: String): Observable<any> {
 
     return this.http.get<any>(`${this.api}/register/get-userid/${userid}`);
