@@ -140,4 +140,43 @@ export class ApiService {
 
     return this.http.delete<any>(`${this.api}/review/${review.GAMEID}/${review.USERID}`);
   }
+
+  //--------------------------------- LIBRARY MANAGEMENT ---------------------------------
+
+  // GET: /library/:userid -> Retrieves all stored games associated with a user library
+  getUserLibrary(userid: String): Observable<any>{
+
+    return this.http.get<any>(`${this.api}/library/${userid}`);
+  }
+
+  // PUT: /library/:userid/:gameid -> Associates a gameid to a user's library
+  addToUserLibrary(userid: String, gameid: String): Observable<any>{
+
+    const lib = {
+      USERID : userid,
+      GAMEID : gameid
+    }
+
+    return this.http.put<any>(`${this.api}/library/${lib.USERID}/${lib.GAMEID}`, lib);
+  }
+
+  // DELETE: /library/:userid/:gameid -> Removes a gameid from a user's library
+  removeFromUserLibrary(userid: String, gameid: String): Observable<any>{
+
+    return this.http.delete<any>(`${this.api}/library/${userid}/${gameid}`);
+  }
+
+  //--------------------------------- REGISTRATION TOOLS ---------------------------------
+
+  // GET: /register/get-email/:email -> Returns true if the e-mail passed as parameter already exists in the DB
+  checkEmailDB(email: String): Observable<any> {
+
+    return this.http.get<any>(`${this.api}/register/get-email/${email}`);
+  }
+
+  // GET: /register/get-userid/:userid -> Returns true if the userid passed as parameter already exists in the DB
+  checkUserIDDB(userid: String): Observable<any> {
+
+    return this.http.get<any>(`${this.api}/register/get-userid/${userid}`);
+  }
 }
