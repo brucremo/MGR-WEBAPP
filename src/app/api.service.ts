@@ -181,4 +181,26 @@ export class ApiService {
 
     return this.http.get<any>(`${this.api}/register/get-userid/${userid}`);
   }
+
+  //--------------------------------- TAG FUNCTIONALITY ---------------------------------
+
+  // GET: /tag/:tagid/:userid -> Returns all games related to a tag in a user's library
+  getGamesForTag(userid: String, tagid: String): Observable<any>{
+
+    return this.http.get<any>(`${this.api}/tag/${tagid}/${userid}`);
+  }
+
+  // DELETE: /tag/:tagid/:userid -> Removes a tag from a user's library
+  removeTag(userid: String, tagid: String): Observable<any>{
+
+    return this.http.delete<any>(`${this.api}/tag/${tagid}/${userid}`);
+  }
+
+  // POST: /tag -> Receives an object with USERID, GAMEID, and TAGID to be added to a user's library
+  addTag(tag: any): Observable<any>{
+
+    return this.http.post<any>(`${this.api}/tag`, tag);
+  }
 }
+
+  
