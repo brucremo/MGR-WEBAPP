@@ -196,10 +196,12 @@ export class ApiService {
     return this.http.delete<any>(`${this.api}/tag/${tagid}/${userid}`);
   }
 
-  // POST: /tag -> Receives an object with USERID, GAMEID, and TAGID to be added to a user's library
-  addTag(tag: any): Observable<any>{
+  // POST: /tag -> Receives an object with USERID, GAMEID, and TAGS array to be added to a user's library
+  /* NOTE -> THE GAME MUST BE ADDED TO THE USER'S LIBARY BEFORE RUNNING THIS FUNCTIONS, IN OTHER WORDS 
+  addToUserLibrary MUST BE RUN BEFORE ADD TAG(S)*/
+  addTags(tags: any): Observable<any>{
 
-    return this.http.post<any>(`${this.api}/tag`, tag);
+    return this.http.post<any>(`${this.api}/tag`, tags);
   }
 }
 
