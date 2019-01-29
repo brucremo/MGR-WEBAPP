@@ -20,8 +20,15 @@
             <span id="game-rating-number">{{this.rating}} / 5</span>
             <br />
             <br />
-            <div id="hidden">
-              <a *ngIf="visible" type="button" class="btn btn-info" [routerLink]="['/review/', game.id]">Create Review</a>
+            <div class="row">
+              <div class="col-md-6">
+                <a *ngIf="visible" type="button" class="btn btn-info" [routerLink]="['/review/', game.id]">Create Review</a>
+              </div>
+              <div class="col-md-4"></div>
+              <div class="col-md-2">
+                <a *ngIf="visible" type="button" (click)="onAddToLibrary(game.id)" class="btn btn-info" data-target="#modalConfirm" 
+                data-toggle="modal" href="#">Add to Collection</a>
+              </div>
             </div>
           </div>
         </div>
@@ -158,8 +165,6 @@
     </div>
   </div>
 </div>
-
-
 <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG4" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -169,6 +174,20 @@
       <div class="modal-footer">
       <div><a href="{{game.screenshots[4].url}}" target="_blank">Download</a></div>
         <button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalConfirm" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body mb-0 p-0">
+        <p style="text-align: center; padding-top:3%;">Added to Library!</p>
+      </div>
+      <div class="modal-footer">
+        <div style="padding:30px; padding-top:1px;">
+        <button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
+        </div>
       </div>
     </div>
   </div>
