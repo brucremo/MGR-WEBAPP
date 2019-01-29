@@ -26,7 +26,7 @@
                   <a *ngIf="visible" (click)="this.onDelete(review)" [routerLink]="['/userReviews/', this.user.USERID]">Delete</a></p>
               </div>
               <div class="col-md-6">
-                <h1>{{review.GAMEID}}</h1>
+                <h1>{{review.GAMENAME}}</h1>
                 <p id="game-description" class="text-justify">{{review.REVIEWSUMMARY}}</p>
                 <div id="game-rating">User Rating:
                   <span id="game-rating-number">{{review.REVIEWRATING}} / 5</span>

@@ -6,6 +6,7 @@ import { Review } from 'src/app/review';
 import { Router } from '@angular/router';
 import { Game } from '../game';
 import { User } from '../user';
+import { IgdbService } from '../igdb.service';
 
 @Component({
   selector: 'app-user-reviews',
@@ -22,7 +23,8 @@ export class UserReviewsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private m: ApiService,
-    private router: Router
+    private router: Router,
+    private igdb: IgdbService
   ) {
 
     this.nav = new NavServiceService();
