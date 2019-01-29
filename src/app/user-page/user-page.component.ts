@@ -33,22 +33,38 @@ export class UserPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.r.params.subscribe(params => { this.id = stringify(params); })
-    this.id = this.id.substring(3, this.id.length);
-    this.user.USERID = this.id;
-        
-    this.m.getUser(this.user).subscribe(res => {
-      this.user = res;
-    }, err => {
-      console.log(err);
-      this.router.navigate(['/404']);
-    });
+    if (document.cookie) {
+      this.r.params.subscribe(params => { this.id = stringify(params); })
+      this.id = this.id.substring(3, this.id.length);
+      this.user.USERID = this.id;
+          
+      this.m.getUser(this.user).subscribe(res => {
+        this.user = res;
+      }, err => {
+        console.log(err);
+        this.router.navigate(['/404']);
+      });
+  
+      this.reloadPage();
+  
+      this.nav.loggedInView();
+    } else {
+      this.r.params.subscribe(params => { this.id = stringify(params); })
+      this.id = this.id.substring(3, this.id.length);
+      this.user.USERID = this.id;
+          
+      this.m.getUser(this.user).subscribe(res => {
+        this.user = res;
+      }, err => {
+        console.log(err);
+        this.router.navigate(['/404']);
+      });
+  
+      this.reloadPage();
+  
+      this.nav.loggedOutView();
+    }
 
     this.reloadPage();
-
-    this.nav.loggedInView();
-
-    this.reloadPage();
-
   }
 }

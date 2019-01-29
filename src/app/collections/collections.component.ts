@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavServiceService } from 'src/app/nav-service.service';
 
 @Component({
   selector: 'app-collections',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CollectionsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private nav: NavServiceService) { }
 
-  ngOnInit() {
+  ngOnInit() {    
+    //selecting appropriate navbar
+    if (document.cookie) {
+      this.nav.loggedInView();
+    } else {
+      this.nav.loggedOutView();
+    }
   }
 
 }

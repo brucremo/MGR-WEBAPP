@@ -25,16 +25,20 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.nav.loggedInView();
-    this.sub = this.r.params.subscribe(params => { this.id = stringify(params); })
-    this.id = this.id.substring(3, this.id.length);
-    this.user.USERID = this.id;
-
-    this.m.getUser(this.user).subscribe(res => {
-      this.user = res;
-    }, err => {
-      console.log(err);
-    });
+    if (document.cookie) {
+      this.nav.loggedInView();
+      this.sub = this.r.params.subscribe(params => { this.id = stringify(params); })
+      this.id = this.id.substring(3, this.id.length);
+      this.user.USERID = this.id;
+  
+      this.m.getUser(this.user).subscribe(res => {
+        this.user = res;
+      }, err => {
+        console.log(err);
+      });
+    } else {
+      this.nav.loggedOutView();
+    }
   }
 
   onSubmit(editform: NgForm): void {
