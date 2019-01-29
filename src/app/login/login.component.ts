@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       res as User
 
       if (res.USERPASSWORD == 'true') {
-
+        this.nav.loggedInView();
         this.router.navigate(['/user/' + res.USERID]);
       } else {
         document.getElementById("error").innerHTML = 'The username/password entered does not exist in our database.<br>Please try again.';
