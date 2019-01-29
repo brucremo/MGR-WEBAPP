@@ -34,20 +34,19 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit() {
     if (document.cookie) {
+      this.nav.loggedInView();
+              
       this.r.params.subscribe(params => { this.id = stringify(params); })
       this.id = this.id.substring(3, this.id.length);
       this.user.USERID = this.id;
-          
+      
       this.m.getUser(this.user).subscribe(res => {
         this.user = res;
       }, err => {
         console.log(err);
         this.router.navigate(['/404']);
-      });
+      });  
   
-      this.reloadPage();
-  
-      this.nav.loggedInView();
     } else {
       this.r.params.subscribe(params => { this.id = stringify(params); })
       this.id = this.id.substring(3, this.id.length);
@@ -65,6 +64,9 @@ export class UserPageComponent implements OnInit {
       this.nav.loggedOutView();
     }
 
+    //this.reloadPage();
     this.reloadPage();
+
+    console.log("the cookie with this account is: " + document.cookie);
   }
 }

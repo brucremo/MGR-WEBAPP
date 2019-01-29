@@ -24,21 +24,53 @@ export class EditUserComponent implements OnInit {
     this.user = new User();
   }
 
-  ngOnInit(): void {
+  reloadPage() {
+    var refresh = window.localStorage.getItem('refresh');
+    console.log(refresh);
+    if (refresh === null) {
+      window.location.reload();
+      window.localStorage.setItem('refresh', "1");
+    }
+  }
+
+  ngOnInit() {
+    //check for cookie
     if (document.cookie) {
-      this.nav.loggedInView();
-      this.sub = this.r.params.subscribe(params => { this.id = stringify(params); })
+      //break down the cookie for user id
+      this.r.params.subscribe(params => { this.id = stringify(params); })
       this.id = this.id.substring(3, this.id.length);
       this.user.USERID = this.id;
-  
+
+      //change the view of the navbar
+      this.nav.loggedInView();
+
+      //get the user using the id
       this.m.getUser(this.user).subscribe(res => {
         this.user = res;
       }, err => {
         console.log(err);
+        this.router.navigate(['/404']);
       });
-    } else {
-      this.nav.loggedOutView();
+      //      this.reloadPage();
+
     }
+    else {
+      this.r.params.subscribe(params => { this.id = stringify(params); })
+      this.id = this.id.substring(3, this.id.length);
+      this.user.USERID = this.id;
+
+      this.nav.loggedOutView();
+
+      this.m.getUser(this.user).subscribe(res => {
+        this.user = res;
+      }, err => {
+        console.log(err);
+        this.router.navigate(['/404']);
+      });
+
+      //this.reloadPage();
+    }
+    console.log(this.user.USERID + " is the userid associated with this account");
   }
 
   onSubmit(editform: NgForm): void {

@@ -7,17 +7,17 @@
     <ul class="navbar-nav ml-auto" id="nav-list">
       <li class="nav-item"><a class="nav-link" href="/search"><span class="glyphicon glyphicon-search"></span> Search</a></li>
       <li class="nav-item"><a class="nav-link" href="/collection/{{nav.username}}"> My Collection</a></li>
-      <li class="nav-item dropdown" *ngIf="!nav.linkvisible">
+      <li class="nav-item dropdown" *ngIf="nav.accountOptions">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" 
         aria-expanded="false" href="/user/{{nav.username}}">Profile</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/user/{{nav.username}}">See Profile</a>
+            <a class="dropdown-item" href="/user/{{nav.username}}" onclick="navigateToProfile();return false;">See Profile</a>
             <a class="dropdown-item" href="/editUser/{{nav.username}}">Edit Profile</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/logout">Sign Out</a>
           </div>
       </li>
-      <li class="nav-item" *ngIf="nav.linkvisible"><a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+      <li class="nav-item" *ngIf="nav.promptLogin"><a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
     </ul>
   </div>
 

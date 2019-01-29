@@ -3,12 +3,16 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class NavServiceService {
   visible: boolean;
-  linkvisible: boolean;
+//  linkvisible: boolean;
+  promptLogin: boolean;
+  accountOptions: boolean;
   username: string;
 
   constructor() {
     this.visible = true;
-    this.linkvisible = true;
+   // this.linkvisible = false;
+    this.accountOptions=false;
+    this.promptLogin=true;
     this.username= "";
   }
 
@@ -37,7 +41,8 @@ export class NavServiceService {
   }
 
   loggedOutView() {
-    this.linkvisible = true; 
+    this.accountOptions = false;
+    this.promptLogin = true; 
     this.username = this.getCookie("username");
 
     /*//store the navList element into a variable
@@ -74,7 +79,8 @@ export class NavServiceService {
   }
 
   loggedInView() {
-    this.linkvisible = !this.linkvisible; 
+    this.promptLogin = false;
+    this.accountOptions = true; 
     this.username = this.getCookie("username");
     /*
     //store the navList element into a variable
