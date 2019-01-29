@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 export class VideogameResolve implements Resolve<any> {
 
     constructor(private igdb: IgdbService) { }
-
+    
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot,): Observable<any> {
 
         return this.igdb.getGameInfo(route.params['id']);

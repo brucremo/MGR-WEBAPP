@@ -59,13 +59,13 @@ export class UserPageComponent implements OnInit {
         this.router.navigate(['/404']);
       });
   
-      this.reloadPage();
+      //this.reloadPage();
   
       this.nav.loggedOutView();
     }
 
     //this.reloadPage();
-    this.reloadPage();
+    //this.reloadPage();
 
     console.log("the cookie with this account is: " + document.cookie);
   }
