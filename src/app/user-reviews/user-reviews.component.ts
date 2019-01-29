@@ -34,7 +34,6 @@ export class UserReviewsComponent implements OnInit {
   detail: any;
 
   ngOnInit() {
-    console.log(document.cookie);
     if (document.cookie) {
       this.nav.loggedInView();
       this.visible = true;
@@ -43,7 +42,8 @@ export class UserReviewsComponent implements OnInit {
       this.nav.loggedOutView();
       this.visible = false;
     }
-
+    
+    console.log(document.cookie);
     var ID = document.cookie;
     this.user.USERID = ID.substr(9, ID.length);
 
@@ -62,10 +62,18 @@ export class UserReviewsComponent implements OnInit {
 
       console.log(err);
     }
+
+    if (document.cookie) {
+      this.nav.loggedInView();
+      this.visible = true;
+    }
+    else {
+      this.nav.loggedOutView();
+      this.visible = false;
+    }
   }
 
   onDelete(r: Review) {
-
     this.m.gameReviewDelete(r).subscribe(res => {
       this.ngOnInit();
     }, err => {

@@ -21,8 +21,8 @@
             <div class="row">
               <div class="col-md-1">
                 <img class="user-pic" src="../../assets/images/user1.png">
-                <p class="user-name">{{review.USERID}}<br />
-                <a *ngIf="visible" [routerLink]="['/editReview/', this.user.USERID, review.GAMEID]">Edit</a> &nbsp;&nbsp;&nbsp; 
+                <p class="user-name" style="font-size:15pt; line-height: 12pt; padding-bottom:-40px;">{{review.USERID}}</p>
+                <p style="font-size:9pt; line-height: 9pt; padding-top:-50px;"><a *ngIf="visible" [routerLink]="['/editReview/', this.user.USERID, review.GAMEID]">Edit</a> &nbsp;&nbsp;&nbsp; 
                   <a *ngIf="visible" (click)="this.onDelete(review)" [routerLink]="['/userReviews/', this.user.USERID]">Delete</a></p>
               </div>
               <div class="col-md-6">
