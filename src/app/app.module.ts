@@ -23,6 +23,8 @@ import { VideogameResolve } from './videogame/videogame.resolve';
 import { ReviewPageComponent } from './review-page/review-page.component';
 import { EditReviewComponent } from './edit-review/edit-review.component';
 import { UserReviewsComponent } from './user-reviews/user-reviews.component';
+import { CollectionsComponent } from './collections/collections.component';
+import { FavouritesComponent } from './favourites/favourites.component';
 
 const appRoutes: Routes = [
   { path: 'user/:id', component: UserPageComponent },
@@ -50,6 +52,10 @@ const appRoutes: Routes = [
   { path: 'editReview', component: EditReviewComponent},
   { path: 'editReview/:userid/:gameid', component: EditReviewComponent},
   { path: 'userReviews/:id', component: UserReviewsComponent},
+  { path: 'collection', component: CollectionsComponent},
+  { path: 'collection/:id', component: CollectionsComponent},
+  { path: 'favourites', component: CollectionsComponent},
+  { path: 'favourites/:id', component: CollectionsComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }
@@ -73,7 +79,9 @@ const appRoutes: Routes = [
     LogOutComponent,
     ReviewPageComponent,
     EditReviewComponent,
-    UserReviewsComponent
+    UserReviewsComponent,
+    CollectionsComponent,
+    FavouritesComponent
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,7 @@
     </div>
     <div class="card-info">
       <h3 class="card-title">{{user.USERNAME}}</h3>
-      <!-- need to make this conditional, so only user that's logged in can access it -->
+      <!-- Conditional, so only user that's logged in can access it -->
       <h6><a [routerLink]="['/editUser/', user.USERID]" *ngIf="!nav.linkvisible">( Edit Profile )</a></h6>
       <br />
     </div>
@@ -43,7 +43,7 @@
     <div class="card">
         <a href="#"><img class="card-img-top" src="../../assets/images/collection.png" alt="Card image cap"></a>
         <div class="card-body">
-          <h5 class="card-title">Collection</h5>
+          <h5 class="card-title"><a [routerLink]="['/collection/', user.USERID]">Collection</a></h5>
           <p class="card-text">This card will show the user's video game collection</p>
         </div>
         <div class="card-footer">
@@ -53,8 +53,8 @@
       <div class="card">
         <a href="#"><img class="card-img-top" src="../../assets/images/collection2.png" alt="Card image cap"></a>
         <div class="card-body">
-          <h5 class="card-title">Favorites</h5>
-          <p class="card-text">This card will show the user's favorite video games</p>
+          <h5 class="card-title"><a [routerLink]="['/favourites/', user.USERID]">Favourites</a></h5>
+          <p class="card-text">This card will show the user's favourite video games</p>
         </div>
         <div class="card-footer">
           <small class="text-muted">Last updated 2 mins ago</small>
