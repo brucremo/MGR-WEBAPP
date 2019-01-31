@@ -166,6 +166,17 @@ export class ApiService {
     return this.http.delete<any>(`${this.api}/library/${userid}/${gameid}`);
   }
 
+  // POST: /library/:userid/:gameid -> Toggles game as favourite for the user's library
+  setFavourite(userid: String, gameid: String): Observable<any>{
+
+    const lib = {
+      USERID : userid,
+      GAMEID : gameid
+    }
+
+    return this.http.post<any>(`${this.api}/library/${lib.USERID}/${lib.GAMEID}`, lib);
+  }
+
   //--------------------------------- REGISTRATION TOOLS ---------------------------------
 
   /* GET: /register/get-email/:email -> Returns true if the e-mail passed as parameter already 

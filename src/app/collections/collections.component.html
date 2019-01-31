@@ -2,9 +2,18 @@
     <div class="card-header" style="background-color: #092e4d; border-radius: 0px; padding-top:1em; height:10%; min-width:100%; min-height:100%;">
       <h1>{{id}}'s Games</h1>
     </div>
-    <div class="row">
+    <div class="row" style="border:0px;">
       <div class="col-md-1"></div>
-      <div class="col-md-2">SIDEBAR HERE</div> 
+      <div class="col-md-2" style="border:0px;">
+        <div class="card text-center" style="background-color:transparent; border:0px; padding:5px; padding-top:10px;">
+          <div class="card-img-top">
+            <img id="card-img" alt="profilePicture" src="../../assets/images/userProfile.svg" height=80 width=90 [routerLink]="['/user/', user.USERID]" style="cursor: pointer;">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title"><a [routerLink]="['/user/', user.USERID]" style="text-decoration:none; color:black;">{{user.USERID}}</a></h3>
+            <br />
+          </div>
+        </div></div> 
       <div class="col-md-9" style="border:0px;">
         <div class="row" style="padding:10px; padding-bottom:0px;">
           <div class="col-md-1">
@@ -41,7 +50,12 @@
           </p>
           </div>
           <div class="col-md-1">
-            <p>Checkmark icon here</p>
+            <div class="checkbox">
+                <label style="font-size: 1.5em">
+                  <input type="checkbox" [(checked)]="lib.favourite">
+                  <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                </label>
+            </div>
           </div>
           <div class="col-md-1">
             <button  (click)="onRemoveGame(lib.id)" type="button" class="btn btn-outline-primary">Delete</button>

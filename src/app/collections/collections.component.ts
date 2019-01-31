@@ -13,13 +13,16 @@ import { User } from 'src/app/user';
 })
 export class CollectionsComponent implements OnInit {
 
+  public library: any[] = [];
+  public id: string = "";
+  public user: User;
+
   constructor(private nav: NavServiceService,
     private api: ApiService,
     private router: Router,
     private route: ActivatedRoute) {
+      this.user = new User();
   }
-  public library: any[] = [];
-  public id: string = "";
 
   ngOnInit() {
     console.log("Inside ngOnInit");
@@ -34,6 +37,14 @@ export class CollectionsComponent implements OnInit {
     //create a variable that stores the user's id
     this.route.params.subscribe(params => { this.id = stringify(params); })
     this.id = this.id.substring(3, this.id.length);
+    this.user.USERID = this.id;
+
+    // Get User Info for sidebar -HK
+    this.api.getUser(this.user).subscribe(res => {
+      this.user = res;
+    }, err => {
+      console.log(err);
+    });  
 
     //get the user's collection
     this.api.getUserLibrary(this.id).subscribe(res => {
