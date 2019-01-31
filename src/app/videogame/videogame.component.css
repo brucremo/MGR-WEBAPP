@@ -50,11 +50,10 @@ body.scrollable {
     overflow-y: auto
 }
 
-.modal-footer {
-	display: flex;
-	justify-content: flex-start;
-}
 
+.btn {
+    left: 10px;
+}
 /*
 
 CC 2.0 License Iatek LLC 2018
