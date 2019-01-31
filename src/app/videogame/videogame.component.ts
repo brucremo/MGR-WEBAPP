@@ -86,12 +86,14 @@ export class VideogameComponent implements OnInit {
     });
   }
 
-  onAddToLibrary() {
+  onAddToLibrary(gameid: Number) {
     //console.log("onAddToLibrary() function was triggered!")
     //need to get the userid and gameid
     //console.log("The game id is: " + this.game.id);
     //console.log("The userid is: " + this.userid);
-    this.api.addToUserLibrary(this.userid, this.game.id).subscribe(res => {
+    var gameID = String(gameid);
+    this.api.addToUserLibrary(this.userid, gameID).subscribe(res => {
+      console.log("Added to Collection!");
     }, err => {
       console.log("Error in adding game to collection: " + err);
     });

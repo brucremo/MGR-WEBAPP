@@ -65,7 +65,6 @@ export class CollectionsComponent implements OnInit {
       console.log("error in retrieving user library: " + err);
     });
 
-
     console.log("Exiting ngOnInit");
   }
 
@@ -80,6 +79,30 @@ export class CollectionsComponent implements OnInit {
      }, err => {
       console.log(err);
     });
+  }
+
+  reloadPage() {
+    var refresh = window.localStorage.getItem('refresh');
+    console.log(refresh);
+    if (refresh === null) {
+      window.location.reload();
+      window.localStorage.setItem('refresh', "1");
+    }
+  }
+
+  onRemoveGame(gameid: Number) {
+    //store the user id
+    var userID = document.cookie.split('=')[1];
+    var gameID = String(gameid);
+    console.log(userID);
+    console.log(gameID);
+    this.api.removeFromUserLibrary(userID, gameID).subscribe(res => {
+      //alert("Game removed");
+      this.ngOnInit();
+      }, err =>{
+      console.log("Error in removing game from library: " + err);
+    })
+    this.router.navigate(['/collection/' + userID]);  
   }
 
 }
