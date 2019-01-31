@@ -31,20 +31,20 @@
         </div>
 
         <div class="row" style="border:0px; padding:10px;" *ngFor="let lib of library; let i=index">
-          <div class="col-md-1">
+          <div class="col-md-1" *ngIf="lib.favourite">
             <img src="{{lib.cover.url}}" id="game-image" class="img-responsive" width="100px" height="100px">
           </div>
-          <div class="col-md-1">
+          <div class="col-md-1" *ngIf="lib.favourite">
             <p><b>{{lib.name}}</b></p>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3" *ngIf="lib.favourite">
             <p id="desc">{{lib.summary}}</p>
           </div>
-          <div class="col-md-1">
+          <div class="col-md-1" *ngIf="lib.favourite">
             <p>{{lib.rating}}
           </p>
           </div>
-          <div class="col-md-2"></div>
+          <div class="col-md-2" *ngIf="lib.favourite"></div>
         </div>
     </div>
   </div>
