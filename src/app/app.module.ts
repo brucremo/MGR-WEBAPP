@@ -54,8 +54,8 @@ const appRoutes: Routes = [
   { path: 'userReviews/:id', component: UserReviewsComponent},
   { path: 'collection', component: CollectionsComponent},
   { path: 'collection/:id', component: CollectionsComponent},
-  { path: 'favourites', component: CollectionsComponent},
-  { path: 'favourites/:id', component: CollectionsComponent},
+  { path: 'favourites', component: FavouritesComponent},
+  { path: 'favourites/:id', component: FavouritesComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }
