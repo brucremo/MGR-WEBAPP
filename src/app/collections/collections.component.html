@@ -50,7 +50,12 @@
           </p>
           </div>
           <div class="col-md-1">
-            <p>Checkmark icon here</p>
+            <div class="checkbox">
+                <label style="font-size: 1.5em">
+                  <input type="checkbox" [(checked)]="lib.favourite">
+                  <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                </label>
+            </div>
           </div>
           <div class="col-md-1">
             <button type="button" class="btn btn-outline-primary">Delete</button>
