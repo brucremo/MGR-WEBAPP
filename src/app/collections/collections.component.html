@@ -52,7 +52,7 @@
           <div class="col-md-1">
             <div class="checkbox">
                 <label style="font-size: 1.5em">
-                  <input type="checkbox" [checked]="setFave" (click)="this.setFavourite(lib.id)"/>
+                  <input type="checkbox" [checked]="setFave" (change)='this.setFavourite(lib.id)'/>
                   <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                 </label>
             </div>

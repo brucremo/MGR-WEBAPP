@@ -69,12 +69,8 @@ export class CollectionsComponent implements OnInit {
   }
 
   setFavourite(gameID: Number){
-    var user = stringify(gameID);
-    var game = stringify(gameID);
 
-    console.log(user + game);
-
-    this.api.setFavourite(user, game).subscribe(res => {
+    this.api.setFavourite(this.user.USERID, gameID.toString()).subscribe(res => {
       console.log("Success");
      }, err => {
       console.log(err);
