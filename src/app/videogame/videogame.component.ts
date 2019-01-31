@@ -17,6 +17,9 @@ export class VideogameComponent implements OnInit {
   public reviews = [];
   public rating = 0.0;
   public visible: boolean;
+  public exist: boolean;
+  public notExist: boolean;
+  public library: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -74,6 +77,30 @@ export class VideogameComponent implements OnInit {
       console.log(err);
     });
 
+    //get the user's collection
+    this.api.getUserLibrary(this.userid).subscribe(res => {
+      console.log(res);
+      this.library = res;
+
+      console.log("Library after assigning: " + this.library);
+
+      for (var i = 0; i < this.library.length; i++){
+        if (this.library[i].id == this.game.id){
+          console.log("Exiting here");
+          this.exist = false;
+          this.notExist = true;
+          break;
+        } else{
+          console.log("Exiting here 1");
+          this.exist = true;
+          this.notExist = false;
+        }
+      }
+    },
+    err => {
+      console.log("error in retrieving user library: " + err);
+    });
+
   }
 
   onDelete(r: Review) {
@@ -94,10 +121,26 @@ export class VideogameComponent implements OnInit {
     var gameID = String(gameid);
     this.api.addToUserLibrary(this.userid, gameID).subscribe(res => {
       console.log("Added to Collection!");
+      this.ngOnInit();
     }, err => {
       console.log("Error in adding game to collection: " + err);
     });
     //console.log("Exiting the onAddToLibrary() function");
+  }
+
+  onRemoveGame(gameid: Number) {
+    //store the user id
+    var userID = document.cookie.split('=')[1];
+    var gameID = String(gameid);
+    console.log(userID);
+    console.log(gameID);
+    this.api.removeFromUserLibrary(userID, gameID).subscribe(res => {
+      //alert("Game removed");
+      this.ngOnInit();
+      }, err =>{
+      console.log("Error in removing game from library: " + err);
+    })
+    this.router.navigate(['/game/' + gameID]);  
   }
 
 }
