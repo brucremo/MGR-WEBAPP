@@ -16,6 +16,7 @@ export class CollectionsComponent implements OnInit {
   public library: any[] = [];
   public id: string = "";
   public user: User;
+  public delID: Number;
 
   constructor(private nav: NavServiceService,
     private api: ApiService,
@@ -96,6 +97,10 @@ export class CollectionsComponent implements OnInit {
       console.log("Error in removing game from library: " + err);
     })
     this.router.navigate(['/collection/' + userID]);  
+  }
+
+  setDelete(gameid: Number){
+    this.delID = gameid;
   }
 
 }
