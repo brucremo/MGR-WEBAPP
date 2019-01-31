@@ -1,50 +1,52 @@
 <div style="border:0px;">
     <div class="card-header" style="background-color: #092e4d; border-radius: 0px; padding-top:1em; height:10%; min-width:100%; min-height:100%;">
-      <h1>My Games</h1>
+      <h1>{{id}}'s Games</h1>
     </div>
     <div class="row">
       <div class="col-md-1"></div>
       <div class="col-md-2">SIDEBAR HERE</div> 
-      <div class="card-body col-md-9" style="border:0px;">
-        <div class="row" style="border-bottom:1px solid #092e4d; padding:10px; padding-bottom:0px;">
+      <div class="col-md-9" style="border:0px;">
+        <div class="row" style="padding:10px; padding-bottom:0px;">
           <div class="col-md-1">
-          </div>
-          <div class="col-md-2">
-            <p><b>GAME TITLE</b></p>
-          </div>
-          <div class="col-md-2">
-            <p>DESCRIPTION</p>
+            <p><b>COVER</b></p>
           </div>
           <div class="col-md-1">
-            <p>USER RATING</p>
+            <p><b>TITLE</b></p>
+          </div>
+          <div class="col-md-3">
+            <p><b>DESCRIPTION</b></p>
           </div>
           <div class="col-md-1">
-              <p>FAVOURITE (Y/N)</p>
+            <p><b>USER RATING</b></p>
+          </div>
+          <div class="col-md-1">
+            <p><b>FAVOURITE (Y/N)</b></p>
             </div>
           <div class="col-md-1">
           </div>
         </div>
 
         <div class="row" style="border:0px; padding:10px;" *ngFor="let lib of library; let i=index">
-          <div class="col-md-1" style="border-left: 1px solid #092e4d">
-            <img src="{{lib.cover.url}}" id="game-image" class="img-responsive" width="100px">
-          </div>
-          <div class="col-md-2">
-            <p><b>{{lib.name}}</b></p>
-          </div>
-          <div class="col-md-2">
-            <p>{{lib.summary}}</p>
+          <div class="col-md-1">
+            <img src="{{lib.cover.url}}" id="game-image" class="img-responsive" width="100px" height="100px">
           </div>
           <div class="col-md-1">
-            <p>USER REVIEW HERE</p>
+            <p><b>{{lib.name}}</b></p>
+          </div>
+          <div class="col-md-3">
+            <p id="desc">{{lib.summary}}</p>
+          </div>
+          <div class="col-md-1">
+            <p>{{lib.rating}}
+          </p>
           </div>
           <div class="col-md-1">
             <p>Checkmark icon here</p>
           </div>
           <div class="col-md-1">
-            <a href="#"><p>DELETE FROM COLLECTION</p></a>
+            <button type="button" class="btn btn-outline-primary">Delete</button>
           </div>
+          <div class="col-md-5"></div>
         </div>
     </div>
   </div>
-  
