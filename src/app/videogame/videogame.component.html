@@ -19,28 +19,31 @@
             Rating:
             <span id="game-rating-number">{{this.rating}} / 5</span>
             <br />
-            <br /> 
-            <div class="row">
-              <div class="col-md-4">
-                <button *ngIf="visible" type="button" class="btn btn-info" [routerLink]="['/review/', game.id]">Create Review</button>
-              </div>
-              <div class="col-md-1"></div>
-              <div class="col-md-2">
-                <button *ngIf="this.exist" type="button" (click)="onAddToLibrary(game.id)" class="btn btn-outline-primary btn-rounded" data-target="#modalConfirm" 
-                data-toggle="modal" href="#">Add to Collection</button>
-                <button *ngIf="this.notExist" type="button" class="btn btn-outline-danger btn-rounded" data-target="#modalDel" 
-                data-toggle="modal" href="#">Remove from Library</button>
-              </div>
-            </div>
-            
+            <br />
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-2">
+            <button *ngIf="visible" type="button" class="btn btn-info" [routerLink]="['/review/', game.id]">Create
+              Review</button>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-2">
+            <button *ngIf="this.exist" type="button" (click)="onAddToLibrary(game.id)" class="btn btn-outline-primary btn-rounded"
+              data-target="#modalConfirm" data-toggle="modal" href="#">Add to Collection</button>
+            <button *ngIf="this.notExist" type="button" class="btn btn-outline-danger btn-rounded" data-target="#modalDel"
+              data-toggle="modal" href="#">Remove from Library</button>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+
       </div>
     </div>
 
     <br>
     <br>
-    
+
     <div class="card-header">
       <h3 id="game-title">Screenshots</h3>
     </div>
@@ -48,45 +51,45 @@
       <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <div class="container-fluid">
-                <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        <div class="carousel-item col-md-4 active">
-                            <a data-target="#modalIMG0" data-toggle="modal" href="#" class="color-gray-darker td-hover-none">
-                            <img class="img-fluid mx-auto d-block" src="{{game.screenshots[0].url}}" alt="slide 1">
-                            </a>
-                        </div>
-                        <div class="carousel-item col-md-4">
-                            <a data-target="#modalIMG1" data-toggle="modal" href="#" class="color-gray-darker td-hover-none">
-                            <img class="img-fluid mx-auto d-block" src="{{game.screenshots[1].url}}" alt="slide 2">
-                            </a>
-                        </div>
-                        <div class="carousel-item col-md-4">
-                            <a data-target="#modalIMG2" data-toggle="modal" href="#" class="color-gray-darker td-hover-none">
-                            <img class="img-fluid mx-auto d-block" src="{{game.screenshots[2].url}}" alt="slide 3">
-                            </a>
-                        </div>
-                        <div class="carousel-item col-md-4">
-                            <a data-target="#modalIMG3" data-toggle="modal" href="#" class="color-gray-darker td-hover-none">
-                            <img class="img-fluid mx-auto d-block" src="{{game.screenshots[3].url}}" alt="slide 4">
-                            </a>
-                        </div>
-                        <div class="carousel-item col-md-4">
-                            <a data-target="#modalIMG4" data-toggle="modal" href="#" class="color-gray-darker td-hover-none">
-                            <img class="img-fluid mx-auto d-block" src="{{game.screenshots[4].url}}" alt="slide 5">
-                            </a>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
-                        <i class="fa fa-chevron-left fa-lg" style="color:white; font-size:30pt;"></i>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
-                        <i class="fa fa-chevron-right fa-lg" style="color:white; font-size:30pt;"></i>
-                        <span class="sr-only">Next</span>
-                    </a>
+          <div class="container-fluid">
+            <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
+              <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                <div class="carousel-item col-md-4 active">
+                  <a data-target="#modalIMG0" data-toggle="modal" href="#" class="color-gray-darker td-hover-none">
+                    <img class="img-fluid mx-auto d-block" src="{{game.screenshots[0].url}}" alt="slide 1">
+                  </a>
                 </div>
+                <div class="carousel-item col-md-4">
+                  <a data-target="#modalIMG1" data-toggle="modal" href="#" class="color-gray-darker td-hover-none">
+                    <img class="img-fluid mx-auto d-block" src="{{game.screenshots[1].url}}" alt="slide 2">
+                  </a>
+                </div>
+                <div class="carousel-item col-md-4">
+                  <a data-target="#modalIMG2" data-toggle="modal" href="#" class="color-gray-darker td-hover-none">
+                    <img class="img-fluid mx-auto d-block" src="{{game.screenshots[2].url}}" alt="slide 3">
+                  </a>
+                </div>
+                <div class="carousel-item col-md-4">
+                  <a data-target="#modalIMG3" data-toggle="modal" href="#" class="color-gray-darker td-hover-none">
+                    <img class="img-fluid mx-auto d-block" src="{{game.screenshots[3].url}}" alt="slide 4">
+                  </a>
+                </div>
+                <div class="carousel-item col-md-4">
+                  <a data-target="#modalIMG4" data-toggle="modal" href="#" class="color-gray-darker td-hover-none">
+                    <img class="img-fluid mx-auto d-block" src="{{game.screenshots[4].url}}" alt="slide 5">
+                  </a>
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                <i class="fa fa-chevron-left fa-lg" style="color:white; font-size:30pt;"></i>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
+                <i class="fa fa-chevron-right fa-lg" style="color:white; font-size:30pt;"></i>
+                <span class="sr-only">Next</span>
+              </a>
             </div>
+          </div>
         </div>
         <div class="col-md-3"></div>
       </div>
@@ -104,7 +107,7 @@
         <div class="col-md-1">
           <img class="user-pic" src="../../assets/images/user1.png">
           <p class="user-name">{{review.USERID}} <br />
-          <a *ngIf="review.MINE" [routerLink]="['/editReview/', userid, game.id]">Edit</a> &nbsp;&nbsp;&nbsp; 
+            <a *ngIf="review.MINE" [routerLink]="['/editReview/', userid, game.id]">Edit</a> &nbsp;&nbsp;&nbsp;
             <a *ngIf="review.MINE" (click)="this.onDelete(review)" [routerLink]="['/game/', game.id]">Delete</a></p>
         </div>
         <div class="col-md-4">
@@ -142,7 +145,7 @@
         <img src="{{game.screenshots[1].url}}" alt="" style="width:100%">
       </div>
       <div class="modal-footer">
-      <div><a href="{{game.screenshots[1].url}}" target="_blank">Download</a></div>
+        <div><a href="{{game.screenshots[1].url}}" target="_blank">Download</a></div>
         <button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
       </div>
     </div>
@@ -155,7 +158,7 @@
         <img src="{{game.screenshots[2].url}}" alt="" style="width:100%">
       </div>
       <div class="modal-footer">
-      <div><a href="{{game.screenshots[2].url}}" target="_blank">Download</a></div>
+        <div><a href="{{game.screenshots[2].url}}" target="_blank">Download</a></div>
         <button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
       </div>
     </div>
@@ -168,7 +171,7 @@
         <img src="{{game.screenshots[3].url}}" alt="" style="width:100%">
       </div>
       <div class="modal-footer">
-      <div><a href="{{game.screenshots[3].url}}" target="_blank">Download</a></div>
+        <div><a href="{{game.screenshots[3].url}}" target="_blank">Download</a></div>
         <button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
       </div>
     </div>
@@ -181,7 +184,7 @@
         <img src="{{game.screenshots[4].url}}" alt="" style="width:100%">
       </div>
       <div class="modal-footer">
-      <div><a href="{{game.screenshots[4].url}}" target="_blank">Download</a></div>
+        <div><a href="{{game.screenshots[4].url}}" target="_blank">Download</a></div>
         <button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
       </div>
     </div>
@@ -194,62 +197,63 @@
         <p style="text-align: center; padding-top:3%;">Added to Library!</p>
       </div>
       <div class="modal-footer" style="text-align:center; padding-left:50px;">
-        <button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button" (click)="this.ngOnInit()">Close</button>
+        <button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button"
+          (click)="this.ngOnInit()">Close</button>
       </div>
     </div>
   </div>
 </div>
 
 <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalDel" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-body mb-0 p-0">
-          <p style="text-align: center; padding-top:3%;">Are you sure?</p>
-        </div>
-        <div class="modal-footer">
-          <div style="padding:30px; padding-top:1px; padding-bottom:0%; padding-left: 50px;">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body mb-0 p-0">
+        <p style="text-align: center; padding-top:3%;">Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <div style="padding:30px; padding-top:1px; padding-bottom:0%; padding-left: 50px;">
           <button (click)="onRemoveGame(game.id)" type="button" class="btn btn-outline-primary" data-dismiss="modal">Delete</button>
           <button class="btn btn-outline-danger btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Cancel</button>
-          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
 <script js>
-$('#carouselExample').on('slide.bs.carousel', function (e) {
+  $('#carouselExample').on('slide.bs.carousel', function (e) {
 
-/*
+    /*
+    
+    CC 2.0 License Iatek LLC 2018
+    Attribution required
+    
+    */
 
-CC 2.0 License Iatek LLC 2018
-Attribution required
+    var $e = $(e.relatedTarget);
+    var idx = $e.index();
+    var itemsPerSlide = 3;
+    var totalItems = $('.carousel-item').length;
 
-*/
-
-var $e = $(e.relatedTarget);
-var idx = $e.index();
-var itemsPerSlide = 3;
-var totalItems = $('.carousel-item').length;
-
-if (idx >= totalItems-(itemsPerSlide-1)) {
-    var it = itemsPerSlide - (totalItems - idx);
-    for (var i=0; i<it; i++) {
+    if (idx >= totalItems - (itemsPerSlide - 1)) {
+      var it = itemsPerSlide - (totalItems - idx);
+      for (var i = 0; i < it; i++) {
         // append slides to end
-        if (e.direction=="left") {
-            $('.carousel-item').eq(i).appendTo('.carousel-inner');
+        if (e.direction == "left") {
+          $('.carousel-item').eq(i).appendTo('.carousel-inner');
         }
         else {
-            $('.carousel-item').eq(0).appendTo('.carousel-inner');
+          $('.carousel-item').eq(0).appendTo('.carousel-inner');
         }
+      }
     }
-}
-});
+  });
 
-$( 'a a' ).remove();
+  $('a a').remove();
 
-document.documentElement.setAttribute("lang", "en");
-document.documentElement.removeAttribute("class");
+  document.documentElement.setAttribute("lang", "en");
+  document.documentElement.removeAttribute("class");
 
-axe.run( function(err, results) {
-  console.log( results.violations );
-} );</script>
+  axe.run(function (err, results) {
+    console.log(results.violations);
+  });</script>
