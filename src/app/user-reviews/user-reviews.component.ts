@@ -58,10 +58,10 @@ export class UserReviewsComponent implements OnInit {
     this.m.userGetReviews(this.user.USERID).subscribe(res => {
 
       this.reviews = res;
-    }), err => {
+    }, err => {
 
       console.log(err);
-    }
+    });
 
     if (document.cookie) {
       this.nav.loggedInView();

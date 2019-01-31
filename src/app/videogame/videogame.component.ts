@@ -23,7 +23,7 @@ export class VideogameComponent implements OnInit {
     private api: ApiService,
     private nav: NavServiceService,
     private router: Router
-  ) { 
+  ) {
   }
   detail: any;
 
@@ -31,11 +31,11 @@ export class VideogameComponent implements OnInit {
     console.log(document.cookie);
     this.userid = document.cookie.split('=')[1];
     console.log(this.userid);
-    if(document.cookie){
+    if (document.cookie) {
       this.nav.loggedInView();
       this.visible = true;
     }
-    else{
+    else {
       this.nav.loggedOutView();
       this.visible = false;
     }
@@ -49,25 +49,25 @@ export class VideogameComponent implements OnInit {
       this.game.reviews = res;
       console.log(this.game.reviews);
 
-      if(this.game.reviews.length != 0){
+      if (this.game.reviews.length != 0) {
 
-        for(var i = 0; i < this.game.reviews.length; i++){
+        for (var i = 0; i < this.game.reviews.length; i++) {
 
           this.rating += this.game.reviews[i].REVIEWRATING;
 
-          if(this.game.reviews[i].USERID == this.userid){
+          if (this.game.reviews[i].USERID == this.userid) {
 
             this.game.reviews[i].MINE = true;
-          }else{
+          } else {
 
             this.game.reviews[i].MINE = false;
           }
         }
-  
-        this.rating = this.rating/this.game.reviews.length;
-      }else{
 
-        this.rating = (this.game.aggregated_rating * 5)/100;
+        this.rating = this.rating / this.game.reviews.length;
+      } else {
+
+        this.rating = (this.game.aggregated_rating * 5) / 100;
       }
     }, err => {
 
@@ -76,7 +76,7 @@ export class VideogameComponent implements OnInit {
 
   }
 
-  onDelete(r: Review){
+  onDelete(r: Review) {
 
     this.api.gameReviewDelete(r).subscribe(res => {
 
@@ -85,17 +85,17 @@ export class VideogameComponent implements OnInit {
       console.log(err);
     });
   }
-  
-  onAddToLibrary(){
+
+  onAddToLibrary() {
     //console.log("onAddToLibrary() function was triggered!")
     //need to get the userid and gameid
     //console.log("The game id is: " + this.game.id);
     //console.log("The userid is: " + this.userid);
-    this.api.addToUserLibrary(this.userid, this.game.id).subscribe(res =>{ }, err =>{
-      console.log("Error in adding game to collection: " + err );
-      });
-  
+    this.api.addToUserLibrary(this.userid, this.game.id).subscribe(res => {
+    }, err => {
+      console.log("Error in adding game to collection: " + err);
+    });
     //console.log("Exiting the onAddToLibrary() function");
-    }
+  }
 
 }

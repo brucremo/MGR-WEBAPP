@@ -25,18 +25,18 @@
           </div>
         </div>
 
-        <div class="row" style="border:0px; padding:10px;">
+        <div class="row" style="border:0px; padding:10px;" *ngFor="let lib of library; let i=index">
           <div class="col-md-1" style="border-left: 1px solid #092e4d">
-            <img src="http://images.igdb.com/igdb/image/upload/t_1080p/p73nqxuc20nf8upc22lx.jpg" id="game-image" class="img-responsive" width="100px">
+            <img src="{{lib.cover.url}}" id="game-image" class="img-responsive" width="100px">
           </div>
           <div class="col-md-2">
-            <p><b>GAME NAME HERE</b></p>
+            <p><b>{{lib.name}}</b></p>
           </div>
           <div class="col-md-2">
-            <p>Game Description Here</p>
+            <p>{{lib.summary}}</p>
           </div>
           <div class="col-md-1">
-            <p>Rating Here</p>
+            <p>USER REVIEW HERE</p>
           </div>
           <div class="col-md-1">
             <p>Checkmark icon here</p>
