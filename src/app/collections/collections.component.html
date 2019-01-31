@@ -26,10 +26,10 @@
             <p><b>DESCRIPTION</b></p>
           </div>
           <div class="col-md-1">
-            <p><b>USER RATING</b></p>
+            <p><b>RATING</b></p>
           </div>
           <div class="col-md-1">
-            <p><b>FAVOURITE (Y/N)</b></p>
+            <p><b>FAVOURITE?</b></p>
             </div>
           <div class="col-md-1">
           </div>
@@ -52,7 +52,7 @@
           <div class="col-md-1">
             <div class="checkbox">
                 <label style="font-size: 1.5em">
-                  <input type="checkbox" [(checked)]="lib.favourite">
+                  <input type="checkbox" [checked]="setFave" (click)="this.setFavourite(lib.id)"/>
                   <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                 </label>
             </div>

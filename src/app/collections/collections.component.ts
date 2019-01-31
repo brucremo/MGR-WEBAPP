@@ -5,6 +5,8 @@ import { ApiService } from 'src/app/api.service';
 import { Router } from '@angular/router';
 import { stringify } from 'querystring';
 import { User } from 'src/app/user';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-collections',
@@ -16,6 +18,7 @@ export class CollectionsComponent implements OnInit {
   public library: any[] = [];
   public id: string = "";
   public user: User;
+  public setFave: boolean = false;
 
   constructor(private nav: NavServiceService,
     private api: ApiService,
@@ -66,5 +69,17 @@ export class CollectionsComponent implements OnInit {
     console.log("Exiting ngOnInit");
   }
 
+  setFavourite(gameID: Number){
+    var user = stringify(gameID);
+    var game = stringify(gameID);
+
+    console.log(user + game);
+
+    this.api.setFavourite(user, game).subscribe(res => {
+      console.log("Success");
+     }, err => {
+      console.log(err);
+    });
+  }
 
 }
