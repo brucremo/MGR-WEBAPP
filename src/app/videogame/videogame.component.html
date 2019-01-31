@@ -19,7 +19,7 @@
             Rating:
             <span id="game-rating-number">{{this.rating}} / 5</span>
             <br />
-            <br />
+            <br /> 
             <div class="row">
               <div class="col-md-4">
                 <button *ngIf="visible" type="button" class="btn btn-info" [routerLink]="['/review/', game.id]">Create Review</button>
@@ -32,10 +32,15 @@
                 data-toggle="modal" href="#">Remove from Library</button>
               </div>
             </div>
+            
           </div>
         </div>
       </div>
     </div>
+
+    <br>
+    <br>
+    
     <div class="card-header">
       <h3 id="game-title">Screenshots</h3>
     </div>
@@ -113,6 +118,8 @@
   </div>
 
 </div>
+
+
 
 <!-- Modal Pop Ups -->
 <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG0" role="dialog" tabindex="-1">
