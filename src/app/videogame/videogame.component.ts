@@ -20,6 +20,7 @@ export class VideogameComponent implements OnInit {
   public exist: boolean;
   public notExist: boolean;
   public library: any[] = [];
+  public screen: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -143,4 +144,8 @@ export class VideogameComponent implements OnInit {
     this.router.navigate(['/game/' + gameID]);  
   }
 
+  // Set Screenshot variable //
+  setScreenshot(ind: any){
+    this.screen = this.game.screenshots[ind].url;
+  }
 }
