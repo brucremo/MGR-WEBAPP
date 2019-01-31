@@ -54,6 +54,33 @@
           <div class="container-fluid">
             <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
               <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                  <div *ngFor="let gamesc of game.screenshots;let i=index" class="carousel-item col-md-4 active">
+                      <a data-target="#modalIMG0" data-toggle="modal" href="#" class="color-gray-darker td-hover-none">
+                        <img class="img-fluid mx-auto d-block" src="{{gamesc.url}}" alt="slide 1">
+                      </a>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG0" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-body mb-0 p-0">
+                  <img src="{{gamesc.url}}" alt="" style="width:100%">
+                </div>
+                <div class="modal-footer">
+                  <div><a href="{{gamesc.url}}" target="_blank">Download</a></div>
+                  <button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- 
+        <div class="col-md-6">
+          <div class="container-fluid">
+            <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
+              <div class="carousel-inner row w-100 mx-auto" role="listbox">
                 <div class="carousel-item col-md-4 active">
                   <a data-target="#modalIMG0" data-toggle="modal" href="#" class="color-gray-darker td-hover-none">
                     <img class="img-fluid mx-auto d-block" src="{{game.screenshots[0].url}}" alt="slide 1">
@@ -91,6 +118,9 @@
             </div>
           </div>
         </div>
+      -->
+
+
         <div class="col-md-3"></div>
       </div>
     </div>
@@ -122,9 +152,7 @@
 
 </div>
 
-
-
-<!-- Modal Pop Ups -->
+<!-- Modal Pop Ups
 <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG0" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -138,6 +166,7 @@
     </div>
   </div>
 </div>
+
 <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG1" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -190,6 +219,7 @@
     </div>
   </div>
 </div>
+-->
 <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalConfirm" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
     <div class="modal-content">
