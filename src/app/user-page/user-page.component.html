@@ -10,7 +10,7 @@
     <div class="card-info">
       <h3 class="card-title">{{user.USERNAME}}</h3>
       <!-- Conditional, so only user that's logged in can access it -->
-      <h6><a [routerLink]="['/editUser/', user.USERID]" *ngIf="!nav.linkvisible">( Edit Profile )</a></h6>
+      <h6><a [routerLink]="['/editUser/', user.USERID]" *ngIf="nav.visible">( Edit Profile )</a></h6>
       <br />
     </div>
   </div>
