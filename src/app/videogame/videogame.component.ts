@@ -32,9 +32,7 @@ export class VideogameComponent implements OnInit {
   detail: any;
 
   ngOnInit() {
-    console.log(document.cookie);
     this.userid = document.cookie.split('=')[1];
-    console.log(this.userid);
     if (document.cookie) {
       this.nav.loggedInView();
       this.visible = true;
@@ -51,7 +49,6 @@ export class VideogameComponent implements OnInit {
     this.api.gameGetReviews(this.game.id).subscribe(res => {
 
       this.game.reviews = res;
-      console.log(this.game.reviews);
 
       if (this.game.reviews.length != 0) {
 
@@ -126,7 +123,6 @@ export class VideogameComponent implements OnInit {
     }, err => {
       console.log("Error in adding game to collection: " + err);
     });
-    //console.log("Exiting the onAddToLibrary() function");
   }
 
   onRemoveGame(gameid: Number) {
