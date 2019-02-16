@@ -11,7 +11,7 @@ import { NavServiceService } from 'src/app/nav-service.service';
   styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent implements OnInit {
-
+  public sameUser: boolean;
   public user: User;
   id: string = "";
   public nav: NavServiceService;
@@ -59,14 +59,17 @@ export class UserPageComponent implements OnInit {
         this.router.navigate(['/404']);
       });
   
-      //this.reloadPage();
-  
       this.nav.loggedOutView();
     }
 
-    //this.reloadPage();
-    //this.reloadPage();
+    //check if user ID matches document.cookie
+    var verifier = document.cookie.split("=")[1];
+    if (verifier == this.user.USERID){
+      this.sameUser = true;
+    }
+    else{
+      this.sameUser = false;
+    }
 
-    console.log("the cookie with this account is: " + document.cookie);
   }
 }

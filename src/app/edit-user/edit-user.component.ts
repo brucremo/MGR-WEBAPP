@@ -34,13 +34,18 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    //check for cookie
-    if (document.cookie) {
       //break down the cookie for user id
-      this.r.params.subscribe(params => { this.id = stringify(params); })
+      this.r.params.subscribe(params => { this.id = stringify(params); });
       this.id = this.id.substring(3, this.id.length);
+      console.log("starting ngOnInit()");
+      console.log(this.id + " is the id from the params");
+      console.log(document.cookie + " is the id from document.cookie");
       this.user.USERID = this.id;
 
+      //check with cookie
+      var verifier = document.cookie;
+      var anotherVerifier = verifier.split("=")[1];
+    if (anotherVerifier == this.user.USERID) {
       //change the view of the navbar
       this.nav.loggedInView();
 
@@ -51,24 +56,13 @@ export class EditUserComponent implements OnInit {
         console.log(err);
         this.router.navigate(['/404']);
       });
-      //      this.reloadPage();
 
     }
     else {
-      this.r.params.subscribe(params => { this.id = stringify(params); })
-      this.id = this.id.substring(3, this.id.length);
-      this.user.USERID = this.id;
-
       this.nav.loggedOutView();
 
-      this.m.getUser(this.user).subscribe(res => {
-        this.user = res;
-      }, err => {
-        console.log(err);
-        this.router.navigate(['/404']);
-      });
+      this.router.navigate(['/404']);
 
-      //this.reloadPage();
     }
     console.log(this.user.USERID + " is the userid associated with this account");
   }
