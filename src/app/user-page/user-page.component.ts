@@ -72,4 +72,9 @@ export class UserPageComponent implements OnInit {
     }
 
   }
+
+  onAddFriend(userEmail: String){
+    alert(userEmail);
+  }
+
 }
