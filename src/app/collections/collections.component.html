@@ -16,7 +16,7 @@
         </div></div> 
       <div class="col-md-9" style="border:0px;">
         <div class="row" style="padding:10px; padding-bottom:0px;">
-          <div class="col-md-1">
+          <div class="col-md-2">
             <p><b>COVER</b></p>
           </div>
           <div class="col-md-2">
@@ -36,7 +36,7 @@
         </div>
 
         <div class="row" style="border:0px; padding:10px;" *ngFor="let lib of library; let i=index">
-          <div class="col-md-1">
+          <div class="col-md-2">
             <img src="{{lib.cover.url}}" id="game-image" class="img-responsive" width="100px" height="100px" [routerLink]="['/game/', lib.id]" style="cursor: pointer;">
           </div>
           <div class="col-md-2">
