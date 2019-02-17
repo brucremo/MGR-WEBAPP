@@ -214,6 +214,52 @@ export class ApiService {
 
     return this.http.post<any>(`${this.api}/tag`, tags);
   }
+
+  //--------------------------------- FRIEND NETWORKING FUNCTIONALITY ---------------------------------
+  //ALL FUNCTIONS GO TO ROUTE /friends AND REQUIRE A JS OBJECT AS DESCRIBED ON THE FOOTPRINTS BELOW
+
+  /* 
+    {USER_ONE_ID : String, USER_TWO_ID : String, STATUS: Int, ACTION_USERID : String}
+
+    USER_ONE_ID -> One of the users of the connection, can be either the current user or the user 
+    receiving the request.
+
+    USER_TWO_ID -> The other user of the connection, can be either the current user or the user 
+    receiving the request. CANNOT BE THE SAME AS USER_ONE_ID
+    
+    STATUS -> Friendship requests status, used to treat requests and filter friends displays. 
+    0 => PENDING | 1 => DECLINED/OK | 2 => DECLINED | 3 => BLOCKED (to be fully implemented later)
+    
+    ACTION_USERID => Last user to alter the friendship status. MUST BE RELEVANT.
+  */
+
+  /*GET: Gets all friends for a specific user. 
+    Requires the object as follows {USER_ONE_ID : String, STATUS: Int}*/
+  getFriends(relationship: any): Observable<any>{
+
+    return this.http.get<any>(`${this.api}/friends`, relationship);
+  }
+
+  /*POST: Adds user as friend and sends it an e-mail with the request if their relationship does not exist yet. 
+    Requires the object as follows {USER_ONE_ID : String, USER_TWO_ID : String, ACTION_USERID : String}*/
+  addFriend(relationship: any): Observable<any>{
+
+    return this.http.post<any>(`${this.api}/friends`, relationship);
+  }
+
+  /*PUT: Updates friendship status between users. 
+    Requires the full object with relevant information regarding ACTION_USERID and STATUS*/
+  updateFriend(relationship: any): Observable<any>{
+
+    return this.http.put<any>(`${this.api}/friends`, relationship);
+  }
+
+  /*PUT: Removes friendship links between users. 
+    Requires the object as follows {USER_ONE_ID : String, USER_TWO_ID : String}*/
+  deleteFriend(relationship: any): Observable<any>{
+
+    return this.http.delete<any>(`${this.api}/friends`, relationship);
+  }
 }
 
   
