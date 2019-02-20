@@ -25,6 +25,7 @@ import { EditReviewComponent } from './edit-review/edit-review.component';
 import { UserReviewsComponent } from './user-reviews/user-reviews.component';
 import { CollectionsComponent } from './collections/collections.component';
 import { FavouritesComponent } from './favourites/favourites.component';
+import { FriendComponent } from './friend/friend.component';
 
 const appRoutes: Routes = [
   { path: 'user/:id', component: UserPageComponent },
@@ -56,6 +57,7 @@ const appRoutes: Routes = [
   { path: 'collection/:id', component: CollectionsComponent},
   { path: 'favourites', component: FavouritesComponent},
   { path: 'favourites/:id', component: FavouritesComponent},
+  { path: 'friends/:id', component: FriendComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }
@@ -81,7 +83,8 @@ const appRoutes: Routes = [
     EditReviewComponent,
     UserReviewsComponent,
     CollectionsComponent,
-    FavouritesComponent
+    FavouritesComponent,
+    FriendComponent
   ],
   imports: [
     BrowserModule,

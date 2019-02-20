@@ -8,7 +8,7 @@
       <img id="card-img" alt="profilePicture" src="../../assets/images/userProfile.svg" height=80 width=90>
     </div>
     <div class="card-info">
-      <h3 class="card-title">{{user.USERNAME}}</h3>
+      <h3 class="card-title">{{user.USERID}}</h3>
       <!-- Conditional, so only user that's logged in can access it -->
       <h6><a [routerLink]="['/editUser/', user.USERID]" *ngIf="nav.visible">( Edit Profile )</a></h6>
       <br />
@@ -35,6 +35,8 @@
       <button class="btn btn-dark btn-sm" type="button">See Networks</button>
       <br/>
       <button class="btn btn-dark btn-sm" type="button" [routerLink]="['/search/']">Create New Review</button>
+      <br />
+      <button class="btn btn-dark btn-sm" type="button" [routerLink]="['/friends/', nav.username]">View Friends</button>
     </div>
   </div>
 
