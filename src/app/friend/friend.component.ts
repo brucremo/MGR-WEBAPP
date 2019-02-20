@@ -15,6 +15,7 @@ export class FriendComponent implements OnInit {
   id: string = "";
   public nav: NavServiceService;
   public friends: any[] = [];
+  public delFriend: string ="";
 
   constructor(private router: Router,
     private r: ActivatedRoute,
@@ -51,6 +52,20 @@ export class FriendComponent implements OnInit {
     err => {
       console.log("error in retrieving friends list: " + err);
     });
+  }
+
+    // Delete A User
+  onRemoveFriend(friendId: string) {
+    this.m.deleteFriend(friendId).subscribe(res =>{
+      this.ngOnInit();
+    }, err =>{
+      console.log("Error in deleting friend: " + err);
+    });
+    this.router.navigate(['/friends/' + this.user.USERID]);  
+  }
+  
+  setDelete(friendId: string){
+    this.delFriend = friendId;
   }
 
 }
