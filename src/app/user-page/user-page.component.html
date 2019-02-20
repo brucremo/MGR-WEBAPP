@@ -10,7 +10,7 @@
     <div class="card-info">
       <h3 class="card-title">{{user.USERID}}</h3>
       <!-- Conditional, so only user that's logged in can access it -->
-      <h6><a [routerLink]="['/editUser/', user.USERID]" *ngIf="nav.visible">( Edit Profile )</a></h6>
+      <h6><a [routerLink]="['/editUser/', user.USERID]" *ngIf="nav.accountOptions">( Edit Profile )</a></h6>
       <br />
     </div>
   </div>
@@ -30,13 +30,13 @@
       <h4 class="card-title"><b>LATEST REVIEW</b></h4>
       <p><a href="#">Eve Online: Valkyrie Warzone</a></p>
       <br>
-      <button class="btn btn-dark btn-sm" type="button" (click)="onAddFriend(user.USERID)">Add Friend</button>
+      <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions" type="button" (click)="onAddFriend(user.USERID)">Add Friend</button>
       <br/>
-      <button class="btn btn-dark btn-sm" type="button">See Networks</button>
+      <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions" type="button">See Networks</button>
       <br/>
-      <button class="btn btn-dark btn-sm" type="button" [routerLink]="['/search/']">Create New Review</button>
+      <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions" type="button" [routerLink]="['/search/']">Create New Review</button>
       <br />
-      <button class="btn btn-dark btn-sm" type="button" [routerLink]="['/friends/', nav.username]">View Friends</button>
+      <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions" type="button" [routerLink]="['/friends/', nav.username]">View Friends</button>
     </div>
   </div>
 
