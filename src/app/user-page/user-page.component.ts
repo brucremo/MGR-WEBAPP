@@ -12,13 +12,14 @@ import { NavServiceService } from 'src/app/nav-service.service';
 })
 export class UserPageComponent implements OnInit {
 
+  public sameUser: boolean;
   public user: User;
   id: string = "";
   public nav: NavServiceService;
   constructor(private router: Router,
     private r: ActivatedRoute,
     private m: ApiService) {
-
+    this.sameUser=false;
     this.nav = new NavServiceService();
     this.user = new User();
   }
@@ -39,6 +40,15 @@ export class UserPageComponent implements OnInit {
       this.r.params.subscribe(params => { this.id = stringify(params); })
       this.id = this.id.substring(3, this.id.length);
       this.user.USERID = this.id;
+
+      if(document.cookie.split("=")[1] == this.id){
+        //user is on their own profile page
+        this.sameUser=true;
+      }
+      else{
+        //user is on someone else's profile page
+        this.sameUser=false;
+      }
 
       this.m.getUser(this.user).subscribe(res => {
         this.user = res;

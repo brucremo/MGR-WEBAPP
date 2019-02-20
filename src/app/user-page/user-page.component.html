@@ -18,7 +18,7 @@
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-3">
-    <div class="card" style="line-height:10px;">
+    <div class="card" style="line-height:15px;">
       <h4 class="card-title"><b>DETAILS</b></h4>
       <p>Location: {{user.USERLOCATION}}</p>
       <p>Age: {{user.USERAGE}}</p>
@@ -29,14 +29,17 @@
       <p><a href="#">Assassin's Creed Odyssey</a></p>
       <h4 class="card-title"><b>LATEST REVIEW</b></h4>
       <p><a href="#">Eve Online: Valkyrie Warzone</a></p>
-      <br>
-      <button class="btn btn-dark btn-sm" *ngIf="!nav.accountOptions" type="button" (click)="onAddFriend(user.USERID)">Add Friend</button>
+      <hr>
+      <button class="btn btn-dark btn-sm" *ngIf="!nav.accountOptions || !sameUser" 
+        type="button" (click)="onAddFriend(user.USERID)">
+        Add Friend
+      </button>
       <br/>
       <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions" type="button">See Networks</button>
       <br/>
-      <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions" type="button" [routerLink]="['/search/']">Create New Review</button>
-      <br />
       <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions" type="button" [routerLink]="['/friends/', nav.username]">View Friends</button>
+      <hr />
+      <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions" type="button" [routerLink]="['/search/']">Create New Review</button>
     </div>
   </div>
 
