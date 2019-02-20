@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user';
 import { map } from 'rxjs/operators';
@@ -14,10 +14,10 @@ const httpOptions = {
 })
 export class ApiService {
   //API URL
-  public api = "https://mgr-restapi.herokuapp.com";
+  //public api = "https://mgr-restapi.herokuapp.com";
 
   //For API local testing
-  //public api = "http://localhost:8082"
+  public api = "http://localhost:8082"
   
   constructor(
     private http: HttpClient
@@ -236,8 +236,9 @@ export class ApiService {
   /*GET: Gets all friends for a specific user. 
     Requires the object as follows {USER_ONE_ID : String, STATUS: Int}*/
   getFriends(relationship: any): Observable<any>{
-    console.log(relationship);
-    return this.http.get<any>(`${this.api}/friends`, relationship);
+    let params = new HttpParams().set("USER_ONE_ID", relationship.USER_ONE_ID).set("STATUS", relationship.STATUS);
+
+    return this.http.get<any>(`${this.api}/friends`, {params : params});
   }
 
   /*POST: Adds user as friend and sends it an e-mail with the request if their relationship does not exist yet. 
