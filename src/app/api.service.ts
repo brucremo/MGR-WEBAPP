@@ -14,10 +14,10 @@ const httpOptions = {
 })
 export class ApiService {
   //API URL
-  //public api = "https://mgr-restapi.herokuapp.com";
+  public api = "https://mgr-restapi.herokuapp.com";
 
   //For API local testing
-  public api = "http://localhost:8082"
+  //public api = "http://localhost:8082"
   
   constructor(
     private http: HttpClient
