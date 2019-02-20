@@ -59,14 +59,25 @@ export class UserPageComponent implements OnInit {
         this.router.navigate(['/404']);
       });
   
-      //this.reloadPage();
-  
       this.nav.loggedOutView();
     }
 
-    //this.reloadPage();
-    //this.reloadPage();
-
     console.log("the cookie with this account is: " + document.cookie);
   }
+
+  onAddFriend(user_id: String){
+    var friendToAdd = user_id;
+    var relationshipObj = {
+      USER_ONE_ID: document.cookie.split("=")[1],
+      USER_TWO_ID: friendToAdd,
+      ACTION_USERID: document.cookie.split("=")[1]
+    };
+
+    this.m.addFriend(relationshipObj).subscribe(res => {
+      relationshipObj = res;
+    }, err => {
+      console.log("Error in onAddFriend(): " + err);
+    });
+  }
+
 }
