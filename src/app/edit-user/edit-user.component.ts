@@ -39,6 +39,15 @@ export class EditUserComponent implements OnInit {
       //break down the cookie for user id
       this.r.params.subscribe(params => { this.id = stringify(params); })
       this.id = this.id.substring(3, this.id.length);
+
+      console.log(this.id);
+      console.log();
+      console.log(document.cookie.split("=")[1]);
+
+      if (this.id != document.cookie.split("=")[1]){
+        console.log("attempting to edit another user's profile!!");
+        this.router.navigate(['/404']);
+      }
       this.user.USERID = this.id;
 
       //change the view of the navbar
@@ -51,24 +60,11 @@ export class EditUserComponent implements OnInit {
         console.log(err);
         this.router.navigate(['/404']);
       });
-      //      this.reloadPage();
 
     }
     else {
-      this.r.params.subscribe(params => { this.id = stringify(params); })
-      this.id = this.id.substring(3, this.id.length);
-      this.user.USERID = this.id;
-
       this.nav.loggedOutView();
-
-      this.m.getUser(this.user).subscribe(res => {
-        this.user = res;
-      }, err => {
-        console.log(err);
-        this.router.navigate(['/404']);
-      });
-
-      //this.reloadPage();
+      this.router.navigate(['/404']);
     }
     console.log(this.user.USERID + " is the userid associated with this account");
   }
