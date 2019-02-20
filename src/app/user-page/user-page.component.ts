@@ -35,49 +35,54 @@ export class UserPageComponent implements OnInit {
   ngOnInit() {
     if (document.cookie) {
       this.nav.loggedInView();
-              
+
       this.r.params.subscribe(params => { this.id = stringify(params); })
       this.id = this.id.substring(3, this.id.length);
       this.user.USERID = this.id;
-      
-      this.m.getUser(this.user).subscribe(res => {
-        this.user = res;
-      }, err => {
-        console.log(err);
-        this.router.navigate(['/404']);
-      });  
-  
-    } else {
-      this.r.params.subscribe(params => { this.id = stringify(params); })
-      this.id = this.id.substring(3, this.id.length);
-      this.user.USERID = this.id;
-          
+
       this.m.getUser(this.user).subscribe(res => {
         this.user = res;
       }, err => {
         console.log(err);
         this.router.navigate(['/404']);
       });
-  
+
+    } else {
+      this.r.params.subscribe(params => { this.id = stringify(params); })
+      this.id = this.id.substring(3, this.id.length);
+      this.user.USERID = this.id;
+
+      this.m.getUser(this.user).subscribe(res => {
+        this.user = res;
+      }, err => {
+        console.log(err);
+        this.router.navigate(['/404']);
+      });
+
       this.nav.loggedOutView();
     }
 
     console.log("the cookie with this account is: " + document.cookie);
   }
 
-  onAddFriend(user_id: String){
-    var friendToAdd = user_id;
-    var relationshipObj = {
-      USER_ONE_ID: document.cookie.split("=")[1],
-      USER_TWO_ID: friendToAdd,
-      ACTION_USERID: document.cookie.split("=")[1]
-    };
+  onAddFriend(user_id: String) {
+    if (document.cookie) {
+      var friendToAdd = user_id;
+      var relationshipObj = {
+        USER_ONE_ID: document.cookie.split("=")[1],
+        USER_TWO_ID: friendToAdd,
+        ACTION_USERID: document.cookie.split("=")[1]
+      };
 
-    this.m.addFriend(relationshipObj).subscribe(res => {
-      relationshipObj = res;
-    }, err => {
-      console.log("Error in onAddFriend(): " + err);
-    });
+      this.m.addFriend(relationshipObj).subscribe(res => {
+        relationshipObj = res;
+      }, err => {
+        console.log("Error in onAddFriend(): " + err);
+      });
+    }
+    else{
+      alert("Please log in and try again");
+      this.router.navigate(['/login']);
+    }
   }
-
 }

@@ -30,7 +30,7 @@
       <h4 class="card-title"><b>LATEST REVIEW</b></h4>
       <p><a href="#">Eve Online: Valkyrie Warzone</a></p>
       <br>
-      <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions" type="button" (click)="onAddFriend(user.USERID)">Add Friend</button>
+      <button class="btn btn-dark btn-sm" *ngIf="!nav.accountOptions" type="button" (click)="onAddFriend(user.USERID)">Add Friend</button>
       <br/>
       <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions" type="button">See Networks</button>
       <br/>
