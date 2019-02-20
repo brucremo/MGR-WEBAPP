@@ -45,18 +45,30 @@ export class FriendComponent implements OnInit {
       console.log(err);
     });
 
-    // Get User's Friends List
-    this.m.getFriends(this.user.USERID).subscribe(res =>{
+    //object used for retrieving friends list
+    var friendsRetriever = {
+      "USER_ONE_ID": "brucremo",
+      "STATUS": 0
+    };
+
+    this.m.getFriends(friendsRetriever).subscribe(res =>{
       this.friends = res;
+      console.log(this.friends);
     },
     err => {
       console.log("error in retrieving friends list: " + err);
     });
   }
 
+  //sort friends by STATUS
+
     // Delete A User
   onRemoveFriend(friendId: string) {
-    this.m.deleteFriend(friendId).subscribe(res =>{
+    var friendDeleter = {
+      "USER_ONE_ID": this.user.USERID,
+      "USER_TWO_ID": friendId
+    };    
+    this.m.deleteFriend(friendDeleter).subscribe(res =>{
       this.ngOnInit();
     }, err =>{
       console.log("Error in deleting friend: " + err);
@@ -67,5 +79,7 @@ export class FriendComponent implements OnInit {
   setDelete(friendId: string){
     this.delFriend = friendId;
   }
+
+  
 
 }

@@ -41,7 +41,10 @@ export class UserPageComponent implements OnInit {
       this.id = this.id.substring(3, this.id.length);
       this.user.USERID = this.id;
 
-      if(document.cookie.split("=")[1] == this.id){
+      console.log("docCookie: " + document.cookie.split("=")[1]);
+      console.log(this.user.USERID);
+      
+      if(document.cookie.split("=")[1] == this.user.USERID){
         //user is on their own profile page
         this.sameUser=true;
       }
@@ -94,5 +97,9 @@ export class UserPageComponent implements OnInit {
       alert("Please log in and try again");
       this.router.navigate(['/login']);
     }
+  }
+
+  onViewFriends(){
+    this.router.navigate(['/user/' + this.user.USERID + "/friends"]);
   }
 }

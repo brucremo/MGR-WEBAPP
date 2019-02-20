@@ -14,8 +14,25 @@
       </div>
     </div>
   </div>
-  <div *ngFor="let f of friends | async; let i = index">
-    <div class="row" *ngIf="i % 3 == 0">
+
+  <section>
+    Will show list of friend requests sent
+  </section>
+  
+  <br>
+
+  <section>
+    Will show list of friend requests received
+  </section>
+
+  <br>
+
+  <section>
+    Will show list sof friend requests accepted
+  </section>
+
+  <div *ngFor="let f of friends">
+    <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-2">
         <img id="card-img" alt="profilePicture" src="../../assets/images/userProfile.svg" height=80 width=90>

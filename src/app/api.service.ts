@@ -236,14 +236,13 @@ export class ApiService {
   /*GET: Gets all friends for a specific user. 
     Requires the object as follows {USER_ONE_ID : String, STATUS: Int}*/
   getFriends(relationship: any): Observable<any>{
-
+    console.log(relationship);
     return this.http.get<any>(`${this.api}/friends`, relationship);
   }
 
   /*POST: Adds user as friend and sends it an e-mail with the request if their relationship does not exist yet. 
     Requires the object as follows {USER_ONE_ID : String, USER_TWO_ID : String, ACTION_USERID : String}*/
   addFriend(relationship: any): Observable<any>{
-
     return this.http.post<any>(`${this.api}/friends`, relationship);
   }
 
