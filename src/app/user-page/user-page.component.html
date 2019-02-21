@@ -1,97 +1,101 @@
 <br>
 <div class="col-lg-12" style="padding:2%">
-<div class="row">
-<div class="col-md-1"></div>
-<div class="col-md-10">
-  <div class="card text-center" style="background-color:transparent;">
-    <div class="card-img-top">
-      <img id="card-img" alt="profilePicture" src="../../assets/images/userProfile.svg" height=80 width=90>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div class="card text-center" style="background-color:transparent;">
+        <div class="card-img-top">
+          <img id="card-img" alt="profilePicture" src="../../assets/images/userProfile.svg" height=80 width=90>
+        </div>
+        <div class="card-info">
+          <h3 class="card-title">{{user.USERID}}</h3>
+          <!-- Conditional, so only user that's logged in can access it -->
+          <h6><a [routerLink]="['/editUser/', user.USERID]" *ngIf="sameUser">( Edit Profile )</a></h6>
+          <br />
+        </div>
+      </div>
     </div>
-    <div class="card-info">
-      <h3 class="card-title">{{user.USERID}}</h3>
-      <!-- Conditional, so only user that's logged in can access it -->
-      <h6><a [routerLink]="['/editUser/', user.USERID]" *ngIf="sameUser">( Edit Profile )</a></h6>
-      <br />
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-3">
-    <div class="card" style="line-height:15px;">
-      <h4 class="card-title"><b>DETAILS</b></h4>
-      <p>Location: {{user.USERLOCATION}}</p>
-      <p>Age: {{user.USERAGE}}</p>
-      <p>Bio: {{user.USERSUMMARY}}</p>
-      <h4 class="card-title"><b>ACTIVITY</b></h4>
-      <p>Joined August 2018</p>
-      <h4 class="card-title"><b>RECENTLY PLAYED</b></h4>
-      <p><a href="#">Assassin's Creed Odyssey</a></p>
-      <h4 class="card-title"><b>LATEST REVIEW</b></h4>
-      <p><a href="#">Eve Online: Valkyrie Warzone</a></p>
-      <hr>
-      <button class="btn btn-dark btn-sm" *ngIf="!nav.accountOptions || !sameUser" 
-        type="button" (click)="onAddFriend(user.USERID)" data-target="#modalConfirm" data-toggle="modal" href="#">
-        Add Friend
-      </button>
-      <br/>
-      <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions" type="button">See Networks</button>
-      <br/>
-      <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions && sameUser" type="button" (click)="onViewFriends()">View Friends</button>
-      <hr *ngIf="nav.accountOptions && sameUser" />
-      <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions" type="button" [routerLink]="['/search/']">Create New Review</button>
-    </div>
-  </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-3">
+        <div class="card" style="line-height:15px;">
+          <h4 class="card-title"><b>DETAILS</b></h4>
+          <p>Location: {{user.USERLOCATION}}</p>
+          <p>Age: {{user.USERAGE}}</p>
+          <p>Bio: {{user.USERSUMMARY}}</p>
+          <h4 class="card-title"><b>ACTIVITY</b></h4>
+          <p>Joined August 2018</p>
+          <h4 class="card-title"><b>RECENTLY PLAYED</b></h4>
+          <p><a href="#">Assassin's Creed Odyssey</a></p>
+          <h4 class="card-title"><b>LATEST REVIEW</b></h4>
+          <p><a href="#">Eve Online: Valkyrie Warzone</a></p>
+          <hr>
 
-  <div class="col-md-7">
-  <div class="card-deck">  
-    <div class="card">
-        <a href="#"><img class="card-img-top" src="../../assets/images/collection.png" alt="Card image cap"></a>
-        <div class="card-body">
-          <h5 class="card-title"><a [routerLink]="['/collection/', user.USERID]">Collection</a></h5>
-          <p class="card-text">This card will show the user's video game collection</p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-      </div>
-      <div class="card">
-        <a href="#"><img class="card-img-top" src="../../assets/images/collection2.png" alt="Card image cap"></a>
-        <div class="card-body">
-          <h5 class="card-title"><a [routerLink]="['/favourites/', user.USERID]">Favourites</a></h5>
-          <p class="card-text">This card will show the user's favourite video games</p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated 2 mins ago</small>
+          <button class="btn btn-dark btn-sm" *ngIf="(!nav.accountOptions || !sameUser && alreadyAdded)" type="button" (click)="onAddFriend(user.USERID)"
+            data-target="#modalConfirm" data-toggle="modal" href="#">
+            Add Friend
+          </button>
+            <br />
+            <button class="btn btn-dark btn-sm" *ngIf="sameUser" type="button">See Networks</button>
+            <br />
+            <button class="btn btn-dark btn-sm" *ngIf="sameUser" type="button" (click)="onViewFriends()">View
+              Friends</button>
+            <hr *ngIf="nav.accountOptions && sameUser" />
+            <button class="btn btn-dark btn-sm" *ngIf="sameUser" type="button" [routerLink]="['/search/']">Create
+              New Review</button>
         </div>
       </div>
-      <div class="card">
-        <a href="#"><img class="card-img-top" src="../../assets/images/review1.png" alt="Card image cap"></a>
-        <div class="card-body">
-          <h5 class="card-title"><a [routerLink]="['/userReviews/', user.USERID]">Reviews</a></h5>
-          <p class="card-text">This card will show the user's reviews</p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-      </div>
-    </div>
-    </div>
-</div>
-</div>
-</div>
 
-<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalConfirm" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-body mb-0 p-0">
-          <p style="text-align: center; padding-top:3%;">Friend Request Sent!</p>
-        </div>
-        <div class="modal-footer">
-          <div style="padding:30px; padding-top:1px; padding-bottom:0%; padding-left: 50px;">
-            <button class="btn btn-outline-danger btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button" (click)="reloadPage()">Close</button>
+      <div class="col-md-7">
+        <div class="card-deck">
+          <div class="card">
+            <a href="#"><img class="card-img-top" src="../../assets/images/collection.png" alt="Card image cap"></a>
+            <div class="card-body">
+              <h5 class="card-title"><a [routerLink]="['/collection/', user.USERID]">Collection</a></h5>
+              <p class="card-text">This card will show the user's video game collection</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+          </div>
+          <div class="card">
+            <a href="#"><img class="card-img-top" src="../../assets/images/collection2.png" alt="Card image cap"></a>
+            <div class="card-body">
+              <h5 class="card-title"><a [routerLink]="['/favourites/', user.USERID]">Favourites</a></h5>
+              <p class="card-text">This card will show the user's favourite video games</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated 2 mins ago</small>
+            </div>
+          </div>
+          <div class="card">
+            <a href="#"><img class="card-img-top" src="../../assets/images/review1.png" alt="Card image cap"></a>
+            <div class="card-body">
+              <h5 class="card-title"><a [routerLink]="['/userReviews/', user.USERID]">Reviews</a></h5>
+              <p class="card-text">This card will show the user's reviews</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalConfirm" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body mb-0 p-0">
+        <p style="text-align: center; padding-top:3%;">Friend Request Sent!</p>
+      </div>
+      <div class="modal-footer">
+        <div style="padding:30px; padding-top:1px; padding-bottom:0%; padding-left: 50px;">
+          <button class="btn btn-outline-danger btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button"
+            (click)="reloadPage()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

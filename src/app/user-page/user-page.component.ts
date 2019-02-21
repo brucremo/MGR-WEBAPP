@@ -12,6 +12,7 @@ import { NavServiceService } from 'src/app/nav-service.service';
 })
 export class UserPageComponent implements OnInit {
 
+  public alreadyAdded: boolean;
   public sameUser: boolean;
   public user: User;
   id: string = "";
@@ -22,15 +23,19 @@ export class UserPageComponent implements OnInit {
     this.sameUser=false;
     this.nav = new NavServiceService();
     this.user = new User();
+    this.alreadyAdded = false;
   }
 
   reloadPage() {
     var refresh = window.localStorage.getItem('refresh');
     console.log(refresh);
+
     if (refresh === null) {
       window.location.reload();
       window.localStorage.setItem('refresh', "1");
     }
+
+    this.alreadyAdded = true;
   }
 
   ngOnInit() {
