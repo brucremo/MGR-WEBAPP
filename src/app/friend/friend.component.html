@@ -54,23 +54,23 @@
         <div class="row" *ngIf="i % 4 == 0" style="margin:20px;">
           <div class="friend">
             <img id="card-img" alt="profilePicture" src="../../assets/images/userProfile.svg" height=100 width=100>
-            <h3 class="card-title" [routerLink]="['/user/', f.USER_ONE_ID]" >{{f.USER_TWO_ID}}</h3>
-            <a data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(f.USERID)" href="#">Remove</a>
+            <h3 class="card-title" [routerLink]="['/user/', f.USER_TWO_ID]" >{{f.USER_TWO_ID}}</h3>
+            <a data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(f.USER_TWO_ID)" href="#">Remove</a>
           </div>
             <div *ngIf="i + 1 < acceptedFriends.length" class="friend">
                 <img id="card-img" alt="profilePicture" src="../../assets/images/userProfile.svg" height=100 width=100>
-                <h3 class="card-title" [routerLink]="['/user/', acceptedFriends[i+1].USER_ONE_ID]">{{acceptedFriends[i+1].USER_TWO_ID}}</h3>
-                <a data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(acceptedFriends[i+1].USERID)" href="#">Remove</a>
+                <h3 class="card-title" [routerLink]="['/user/', acceptedFriends[i+1].USER_TWO_ID]">{{acceptedFriends[i+1].USER_TWO_ID}}</h3>
+                <a data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(acceptedFriends[i+1].USER_TWO_ID)" href="#">Remove</a>
             </div>
             <div *ngIf="i + 2 < acceptedFriends.length" class="friend">
                 <img id="card-img" alt="profilePicture" src="../../assets/images/userProfile.svg" height=100 width=100>
-                <h3 class="card-title" [routerLink]="['/user/', acceptedFriends[i+2].USER_ONE_ID]">{{acceptedFriends[i+2].USER_TWO_ID}}</h3>
-                <a data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(acceptedFriends[i+2].USERID)" href="#">Remove</a>
+                <h3 class="card-title" [routerLink]="['/user/', acceptedFriends[i+2].USER_TWO_ID]">{{acceptedFriends[i+2].USER_TWO_ID}}</h3>
+                <a data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(acceptedFriends[i+2].USER_TWO_ID)" href="#">Remove</a>
             </div>
             <div *ngIf="i + 3 < acceptedFriends.length" class="friend">
                 <img id="card-img" alt="profilePicture" src="../../assets/images/userProfile.svg" height=100 width=100>
-                <h3 class="card-title" [routerLink]="['/user/', acceptedFriends[i+3].USER_ONE_ID]">{{acceptedFriends[i+3].USER_TWO_ID}}</h3>
-                <a data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(acceptedFriends[i+3].USERID)" href="#">Remove</a>
+                <h3 class="card-title" [routerLink]="['/user/', acceptedFriends[i+3].USER_TWO_ID]">{{acceptedFriends[i+3].USER_TWO_ID}}</h3>
+                <a data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(acceptedFriends[i+3].USER_TWO_ID)" href="#">Remove</a>
             </div>
         </div>
       </div>
