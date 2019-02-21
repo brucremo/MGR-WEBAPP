@@ -29,7 +29,7 @@
           </div>
           <div class="col-sm-9">
           <h3 class="card-title" [routerLink]="['/user/', g.USER_TWO_ID]" style="margin-bottom:-5px;">{{g.USER_TWO_ID}}</h3>
-            <a data-target="#modalAccept" data-toggle="modal" (click)="accept()" href="#">Accept Request</a>&nbsp;&nbsp;
+            <a data-target="#modalAccept" data-toggle="modal" (click)="friendAccept(g.USER_TWO_ID)" href="#">Accept Request</a>&nbsp;&nbsp;
             <a data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(g.USER_TWO_ID)" href="#">Decline</a>
           </div>
           <!-- Modal PopUp-->
