@@ -29,8 +29,16 @@
           </div>
           <div class="col-sm-9">
           <h3 class="card-title" [routerLink]="['/user/', g.USER_TWO_ID]" style="margin-bottom:-5px;">{{g.USER_TWO_ID}}</h3>
-            <a data-target="#modalAccept" data-toggle="modal" (click)="accept()" href="#">Accept Request</a>&nbsp;&nbsp;
-            <a data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(g.USER_TWO_ID)" href="#">Decline</a>
+            <!-- If another person was the action user-->
+            <div *ngIf="!actionUser">
+              <a data-target="#modalAccept" data-toggle="modal" (click)="accept()" href="#">Accept Request</a>&nbsp;&nbsp;
+              <a data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(g.USER_TWO_ID)" href="#">Decline</a>
+            </div>
+
+            <!--If you are the action user-->
+            <div *ngIf="actionUser">
+              <p>Request sent</p>
+            </div>
           </div>
           <!-- Modal PopUp-->
           <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalAccept" role="dialog" tabindex="-1">

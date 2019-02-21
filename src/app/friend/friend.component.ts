@@ -20,6 +20,7 @@ export class FriendComponent implements OnInit {
   public pendingFriends: any[] = [];
   public acceptedFriends: any[] = [];
   public delFriend: string = "";
+  public actionUser: boolean;
 
   constructor(private router: Router,
     private r: ActivatedRoute,
@@ -28,6 +29,7 @@ export class FriendComponent implements OnInit {
     this.nav = new NavServiceService();
     this.user = new User();
     this.sameUser = false;
+    this.actionUser = false;
 
   }
 
@@ -91,6 +93,13 @@ export class FriendComponent implements OnInit {
           //swap the values
           this.pendingFriends[i].USER_ONE_ID = theUserID;
           this.pendingFriends[i].USER_TWO_ID = theFriendID;
+        }
+
+        if (this.pendingFriends[i].ACTION_USERID == document.cookie.split("=")[1]){
+          this.actionUser = true;
+        }
+        else{
+          this.actionUser = false;
         }
       }
       console.log(this.friends);
