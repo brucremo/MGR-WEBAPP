@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { ApiService } from '../api.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { stringify } from 'querystring';
 import { NavServiceService } from 'src/app/nav-service.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { NavServiceService } from 'src/app/nav-service.service';
 })
 export class FriendComponent implements OnInit {
 
+  public sameUser: boolean;
   public user: User;
   id: string = "";
   public nav: NavServiceService;
@@ -25,28 +27,52 @@ export class FriendComponent implements OnInit {
 
       this.nav = new NavServiceService();
       this.user = new User();
+      this.sameUser=false;
 
     }
 
   ngOnInit() {
-    if(document.cookie){
+    if (document.cookie) {
       this.nav.loggedInView();
-    }
-    else{
+
+      this.r.params.subscribe(params => { this.id = stringify(params); })
+      this.id = this.id.substring(3, this.id.length);
+      this.user.USERID = this.id;
+
+      console.log("docCookie: " + document.cookie.split("=")[1]);
+      console.log(this.user.USERID);
+      
+      if(document.cookie.split("=")[1] == this.user.USERID){
+        //user is on their own profile page
+        this.sameUser=true;
+      }
+      else{
+        //user is on someone else's profile page
+        this.sameUser=false;
+      }
+
+      this.m.getUser(this.user).subscribe(res => {
+        this.user = res;
+      }, err => {
+        console.log(err);
+        this.router.navigate(['/404']);
+      });
+
+    } else {
+      this.r.params.subscribe(params => { this.id = stringify(params); })
+      this.id = this.id.substring(3, this.id.length);
+      this.user.USERID = this.id;
+
+      this.m.getUser(this.user).subscribe(res => {
+        this.user = res;
+      }, err => {
+        console.log(err);
+        this.router.navigate(['/404']);
+      });
+
       this.nav.loggedOutView();
     }
-
-    // Get the user information
-    var userid = document.cookie;
-    this.user.USERID = userid.substr(9, userid.length);
-
-    this.m.getUser(this.user).subscribe(res => {
-
-      this.user = res;
-    }, err => {
-      console.log(err);
-    });
-
+    
     //object used for retrieving friends list
     var pendingFriendsRetriever = {
       "USER_ONE_ID": document.cookie.split("=")[1],
