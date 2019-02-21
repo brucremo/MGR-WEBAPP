@@ -26,7 +26,8 @@ export class NavbarComponent implements OnInit {
     console.log("Inside ngOnInit! userid: " + document.cookie);
     if (document.cookie) {
       //break down the cookie for user id
-      this.id = document.cookie.split("=")[1];
+      this.r.params.subscribe(params => { this.id = stringify(params); })
+      this.id = this.id.substring(3, this.id.length);
       this.nav.loggedInView();
     }
     else{
