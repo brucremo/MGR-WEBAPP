@@ -16,44 +16,89 @@
   </div>
 
   <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-2">        
+    <div class="col-md-2"></div>
+    <div class="col-md-2">
       <div class="card-info">
         <h3 class="card-title">Pending Requests</h3>
         <br />
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-2"></div>
+
+    <div class="col-md-2"></div>
+    <div class="col-md-2">
+      <div class="card-info">
+        <h3 class="card-title">Accepted Requests</h3>
+        <br />
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+
+  <!-- For pending friends -->
+  <div class="row">
+    <div class="col-md-6">
       <div *ngFor="let f of pendingFriends">
         <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-2">
+          <div class="col-md-4"></div>
+          <div class="col-md-6">
             <img id="card-img" alt="profilePicture" src="../../assets/images/userProfile.svg" height=80 width=90>
             <h3 class="card-title" [routerLink]="['/user/', f.USER_ONE_ID]">{{f.USER_ONE_ID}}</h3>
             <a class="card-text" data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(f.USERID)">Remove</a>
             <!-- Modal PopUp-->
-            <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalConfirm" role="dialog" tabindex="-1">
-                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-body mb-0 p-0">
-                      <p style="text-align: center; padding-top:3%;">Are you sure?</p>
-                    </div>
-                    <div class="modal-footer">
-                      <div style="padding:0px; padding-top:1px; padding-bottom:0%;">
-                      <button (click)="onRemoveFriend(this.delFriend)" type="button" class="btn btn-outline-primary" data-target="#modalConfirm" data-toggle="modal" data-dismiss="modal" style="text-align:left;">Delete</button>
-                      <button class="btn btn-outline-danger btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Cancel</button>
-                      </div>
+            <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalConfirm" role="dialog"
+              tabindex="-1">
+              <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-body mb-0 p-0">
+                    <p style="text-align: center; padding-top:3%;">Are you sure?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <div style="padding:0px; padding-top:1px; padding-bottom:0%;">
+                      <button (click)="onRemoveFriend(this.delFriend)" type="button" class="btn btn-outline-primary"
+                        data-target="#modalConfirm" data-toggle="modal" data-dismiss="modal" style="text-align:left;">Delete</button>
+                      <button class="btn btn-outline-danger btn-rounded btn-md ml-4 text-center" data-dismiss="modal"
+                        type="button">Cancel</button>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
           </div>
-          <div class="col-md-3"></div>
         </div>
       </div>
-
-      <div class="col-md-1"></div>
     </div>
 
+  <!-- For accepted friends -->
+  <div class="col-md-6">
+    <div *ngFor="let f of acceptedFriends">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-6">
+          <img id="card-img" alt="profilePicture" src="../../assets/images/userProfile.svg" height=80 width=90>
+          <h3 class="card-title" [routerLink]="['/user/', f.USER_TWO_ID]">{{f.USER_TWO_ID}}</h3>
+          <a class="card-text" data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(f.USER_TWO_ID)">Remove</a>
+          <!-- Modal PopUp-->
+          <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalConfirm" role="dialog"
+            tabindex="-1">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-body mb-0 p-0">
+                  <p style="text-align: center; padding-top:3%;">Are you sure?</p>
+                </div>
+                <div class="modal-footer">
+                  <div style="padding:0px; padding-top:1px; padding-bottom:0%;">
+                    <button (click)="onRemoveFriend(this.delFriend)" type="button" class="btn btn-outline-primary"
+                      data-target="#modalConfirm" data-toggle="modal" data-dismiss="modal" style="text-align:left;">Delete</button>
+                    <button class="btn btn-outline-danger btn-rounded btn-md ml-4 text-center" data-dismiss="modal"
+                      type="button">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
