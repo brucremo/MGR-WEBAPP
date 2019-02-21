@@ -31,7 +31,7 @@
       <p><a href="#">Eve Online: Valkyrie Warzone</a></p>
       <hr>
       <button class="btn btn-dark btn-sm" *ngIf="!nav.accountOptions || !sameUser" 
-        type="button" (click)="onAddFriend(user.USERID)">
+        type="button" (click)="onAddFriend(user.USERID)" data-target="#modalConfirm" data-toggle="modal" href="#">
         Add Friend
       </button>
       <br/>
@@ -80,3 +80,18 @@
 </div>
 </div>
 </div>
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalConfirm" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body mb-0 p-0">
+          <p style="text-align: center; padding-top:3%;">Friend Request Sent!</p>
+        </div>
+        <div class="modal-footer">
+          <div style="padding:30px; padding-top:1px; padding-bottom:0%; padding-left: 50px;">
+            <button class="btn btn-outline-danger btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button" (click)="reloadPage()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
