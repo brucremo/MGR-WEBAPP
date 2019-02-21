@@ -37,8 +37,8 @@
       <br/>
       <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions" type="button">See Networks</button>
       <br/>
-      <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions || sameUser" type="button" (click)="onViewFriends()">View Friends</button>
-      <hr />
+      <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions && sameUser" type="button" (click)="onViewFriends()">View Friends</button>
+      <hr *ngIf="nav.accountOptions && sameUser" />
       <button class="btn btn-dark btn-sm" *ngIf="nav.accountOptions" type="button" [routerLink]="['/search/']">Create New Review</button>
     </div>
   </div>

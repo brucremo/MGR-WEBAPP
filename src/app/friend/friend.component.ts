@@ -181,4 +181,8 @@ export class FriendComponent implements OnInit {
       console.log("Error in deleting friend: " + err);
     });
   }
+
+  refreshPage(){
+    this.ngOnInit();
+  }
 }
