@@ -19,17 +19,17 @@ export class FriendComponent implements OnInit {
   public friends: any[] = [];
   public pendingFriends: any[] = [];
   public acceptedFriends: any[] = [];
-  public delFriend: string ="";
+  public delFriend: string = "";
 
   constructor(private router: Router,
     private r: ActivatedRoute,
     private m: ApiService) {
 
-      this.nav = new NavServiceService();
-      this.user = new User();
-      this.sameUser=false;
+    this.nav = new NavServiceService();
+    this.user = new User();
+    this.sameUser = false;
 
-    }
+  }
 
   ngOnInit() {
     if (document.cookie) {
@@ -41,14 +41,14 @@ export class FriendComponent implements OnInit {
 
       console.log("docCookie: " + document.cookie.split("=")[1]);
       console.log(this.user.USERID);
-      
-      if(document.cookie.split("=")[1] == this.user.USERID){
+
+      if (document.cookie.split("=")[1] == this.user.USERID) {
         //user is on their own profile page
-        this.sameUser=true;
+        this.sameUser = true;
       }
-      else{
+      else {
         //user is on someone else's profile page
-        this.sameUser=false;
+        this.sameUser = false;
       }
 
       this.m.getUser(this.user).subscribe(res => {
@@ -72,54 +72,78 @@ export class FriendComponent implements OnInit {
 
       this.nav.loggedOutView();
     }
-    
+
     //object used for retrieving friends list
     var pendingFriendsRetriever = {
       "USER_ONE_ID": document.cookie.split("=")[1],
       "STATUS": 0
     };
 
-    this.m.getFriends(pendingFriendsRetriever).subscribe(res =>{
+    this.m.getFriends(pendingFriendsRetriever).subscribe(res => {
       this.pendingFriends = res;
+      //ensuring that USER_ONE_ID is always associated with the cookie
+      for (var i = 0; i < this.pendingFriends.length; i++) {
+        if (this.pendingFriends[i].USER_ONE_ID != document.cookie.split("=")[1]) {
+          //record current order of ID'S
+          var theUserID = this.pendingFriends[i].USER_TWO_ID;
+          var theFriendID = this.pendingFriends[i].USER_ONE_ID;
+
+          //swap the values
+          this.pendingFriends[i].USER_ONE_ID = theUserID;
+          this.pendingFriends[i].USER_TWO_ID = theFriendID;
+        }
+      }
       console.log(this.friends);
     },
-    err => {
-      console.log("error in retrieving friends list: " + err);
-    });
+      err => {
+        console.log("error in retrieving friends list: " + err);
+      });
 
     var acceptedFriendsRetriever = {
       "USER_ONE_ID": document.cookie.split("=")[1],
       "STATUS": 1
     };
 
-    this.m.getFriends(acceptedFriendsRetriever).subscribe(res =>{
+    this.m.getFriends(acceptedFriendsRetriever).subscribe(res => {
       this.acceptedFriends = res;
+      //ensuring that USER_ONE_ID is always associated with the cookie
+      for (var i = 0; i < this.acceptedFriends.length; i++) {
+        if (this.acceptedFriends[i].USER_ONE_ID != document.cookie.split("=")[1]) {
+          //record current order of ID'S
+          var theUserID = this.acceptedFriends[i].USER_TWO_ID;
+          var theFriendID = this.acceptedFriends[i].USER_ONE_ID;
+
+          //swap the values
+          this.acceptedFriends[i].USER_ONE_ID = theUserID;
+          this.acceptedFriends[i].USER_TWO_ID = theFriendID;
+        }
+      }
       console.log(this.friends);
     },
-    err => {
-      console.log("error in retrieving friends list: " + err);
-    });
-    
+      err => {
+        console.log("error in retrieving friends list: " + err);
+      });
+
   }
 
-    // Delete A User
+  // Delete A User
   onRemoveFriend(friendId: string) {
     var friendDeleter = {
       "USER_ONE_ID": this.user.USERID,
       "USER_TWO_ID": friendId
-    };    
-    this.m.deleteFriend(friendDeleter).subscribe(res =>{
+    };
+    this.m.deleteFriend(friendDeleter).subscribe(res => {
       this.ngOnInit();
-    }, err =>{
+    }, err => {
       console.log("Error in deleting friend: " + err);
     });
-    this.router.navigate(['/friends/' + this.user.USERID]);  
+    this.router.navigate(['/friends/' + this.user.USERID]);
   }
-  
-  setDelete(friendId: string){
+
+  setDelete(friendId: string) {
     this.delFriend = friendId;
   }
 
-  
+
 
 }

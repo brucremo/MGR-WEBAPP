@@ -43,8 +43,8 @@
           <div class="col-md-4"></div>
           <div class="col-md-6">
             <img id="card-img" alt="profilePicture" src="../../assets/images/userProfile.svg" height=80 width=90>
-            <h3 class="card-title" [routerLink]="['/user/', f.USER_ONE_ID]">{{f.USER_ONE_ID}}</h3>
-            <a class="card-text" data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(f.USERID)">Remove</a>
+            <h3 class="card-title" [routerLink]="['/user/', f.USER_TWO_ID]">{{f.USER_TWO_ID}}</h3>
+            <a class="card-text" data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(f.USER_TWO_ID)">Remove</a>
             <!-- Modal PopUp-->
             <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalConfirm" role="dialog"
               tabindex="-1">
