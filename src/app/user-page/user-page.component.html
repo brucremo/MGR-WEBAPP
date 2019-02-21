@@ -31,7 +31,7 @@
           <p><a href="#">Eve Online: Valkyrie Warzone</a></p>
           <hr>
 
-          <button class="btn btn-dark btn-sm" *ngIf="(!nav.accountOptions || !sameUser && alreadyAdded)" type="button" (click)="onAddFriend(user.USERID)"
+          <button class="btn btn-dark btn-sm" *ngIf="(!nav.accountOptions || !sameUser)" type="button" (click)="onAddFriend(user.USERID)"
             data-target="#modalConfirm" data-toggle="modal" href="#">
             Add Friend
           </button>
