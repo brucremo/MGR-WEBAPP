@@ -132,7 +132,18 @@ export class FriendComponent implements OnInit {
       "USER_ONE_ID": this.user.USERID,
       "USER_TWO_ID": friendId
     };
+
+    var friendDeleter2 = {
+      "USER_ONE_ID": friendId,
+      "USER_TWO_ID": this.user.USERID
+    };
     this.m.deleteFriend(friendDeleter).subscribe(res => {
+      this.ngOnInit();
+    }, err => {
+      console.log("Error in deleting friend: " + err);
+    });
+
+    this.m.deleteFriend(friendDeleter2).subscribe(res => {
       this.ngOnInit();
     }, err => {
       console.log("Error in deleting friend: " + err);
@@ -146,12 +157,25 @@ export class FriendComponent implements OnInit {
   // Accept Request //
   onAccept(friendId: string){
     var friendAccept = {
+      "USER_ONE_ID": friendId,
+      "USER_TWO_ID": this.user.USERID,
+      "STATUS":  1,
+      "ACTION_USERID": this.user.USERID
+    };
+
+    var friendAccept2 = {
       "USER_ONE_ID": this.user.USERID,
       "USER_TWO_ID": friendId,
       "STATUS":  1,
       "ACTION_USERID": this.user.USERID
     };
     this.m.updateFriend(friendAccept).subscribe(res => {
+      console.log(res);
+    }, err=>{
+      console.log("Error in deleting friend: " + err);
+    });
+
+    this.m.updateFriend(friendAccept2).subscribe(res => {
       console.log(res);
     }, err=>{
       console.log("Error in deleting friend: " + err);
