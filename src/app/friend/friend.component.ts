@@ -152,6 +152,17 @@ export class FriendComponent implements OnInit {
     this.delFriend = friendId;
   }
 
-
-
+  // Accept Request //
+  onAccept(friendId: string){
+    var friendAccept = {
+      "USER_ONE_ID": this.user.USERID,
+      "USER_TWO_ID": friendId,
+      "STATUS":  1
+    };
+    this.m.updateFriend(friendAccept).subscribe(res => {
+      this.ngOnInit();
+    }, err=>{
+      console.log("Error in deleting friend: " + err);
+    });
+  }
 }
