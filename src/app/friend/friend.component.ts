@@ -137,7 +137,6 @@ export class FriendComponent implements OnInit {
     }, err => {
       console.log("Error in deleting friend: " + err);
     });
-    this.router.navigate(['/friends/' + this.user.USERID]);
   }
 
   setDelete(friendId: string) {
