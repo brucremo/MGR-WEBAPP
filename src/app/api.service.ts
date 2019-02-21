@@ -257,8 +257,9 @@ export class ApiService {
   /*PUT: Removes friendship links between users. 
     Requires the object as follows {USER_ONE_ID : String, USER_TWO_ID : String}*/
   deleteFriend(relationship: any): Observable<any>{
+    let params = new HttpParams().set("USER_ONE_ID", relationship.USER_ONE_ID).set("USER_TWO_ID", relationship.USER_TWO_ID);
 
-    return this.http.delete<any>(`${this.api}/friends`, relationship);
+    return this.http.delete<any>(`${this.api}/friends`, {params : params});
   }
 }
 
