@@ -15,6 +15,8 @@ export class FriendComponent implements OnInit {
   id: string = "";
   public nav: NavServiceService;
   public friends: any[] = [];
+  public pendingFriends: any[] = [];
+  public acceptedFriends: any[] = [];
   public delFriend: string ="";
 
   constructor(private router: Router,
@@ -46,21 +48,33 @@ export class FriendComponent implements OnInit {
     });
 
     //object used for retrieving friends list
-    var friendsRetriever = {
-      "USER_ONE_ID": "brucremo",
+    var pendingFriendsRetriever = {
+      "USER_ONE_ID": document.cookie.split("=")[1],
       "STATUS": 0
     };
 
-    this.m.getFriends(friendsRetriever).subscribe(res =>{
-      this.friends = res;
+    this.m.getFriends(pendingFriendsRetriever).subscribe(res =>{
+      this.pendingFriends = res;
       console.log(this.friends);
     },
     err => {
       console.log("error in retrieving friends list: " + err);
     });
-  }
 
-  //sort friends by STATUS
+    var acceptedFriendsRetriever = {
+      "USER_ONE_ID": document.cookie.split("=")[1],
+      "STATUS": 1
+    };
+
+    this.m.getFriends(acceptedFriendsRetriever).subscribe(res =>{
+      this.acceptedFriends = res;
+      console.log(this.friends);
+    },
+    err => {
+      console.log("error in retrieving friends list: " + err);
+    });
+    
+  }
 
     // Delete A User
   onRemoveFriend(friendId: string) {

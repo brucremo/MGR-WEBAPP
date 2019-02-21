@@ -24,12 +24,12 @@
       </div>
     </div>
     <div class="col-md-8">
-      <div *ngFor="let f of friends">
+      <div *ngFor="let f of pendingFriends">
         <div class="row">
           <div class="col-md-3"></div>
           <div class="col-md-2">
             <img id="card-img" alt="profilePicture" src="../../assets/images/userProfile.svg" height=80 width=90>
-            <h3 class="card-title" [routerLink]="['/user/', f.USERID]">{{f.USERID}}</h3>
+            <h3 class="card-title" [routerLink]="['/user/', f.USER_ONE_ID]">{{f.USER_ONE_ID}}</h3>
             <a class="card-text" data-target="#modalConfirm" data-toggle="modal" (click)="setDelete(f.USERID)">Remove</a>
             <!-- Modal PopUp-->
             <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalConfirm" role="dialog" tabindex="-1">
@@ -48,7 +48,7 @@
                 </div>
               </div>
           </div>
-          <div class="col-md-3"></div>>
+          <div class="col-md-3"></div>
         </div>
       </div>
 
