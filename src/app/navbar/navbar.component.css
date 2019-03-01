@@ -26,3 +26,9 @@
   position: absolute;
   left: 10%;
 }
+
+@media (min-width: 992px) {
+  .navbar {
+      height:50px;
+  }
+}

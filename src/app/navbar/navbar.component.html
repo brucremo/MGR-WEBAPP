@@ -1,10 +1,30 @@
-<nav class="navbar navbar-expand-lg navbar-dark" *ngIf="nav.visible" style="padding-right:20%; background-color: #000000;">
+<nav class="navbar center navbar-expand-lg navbar-dark" *ngIf="nav.visible" style="padding-right:20%; background-color: #000000;">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto" id="nav-list">
+        <!-- Search Bar -->
+        <li class="nav-item mx-auto position-relative" style="padding-right:150px;">
+        <div class="input-group">
+          <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" style="width: 500px; background-color: black; border: 1px solid dimgray; color:darkgray;">
+          <div class="input-group-append">
+            <button type="button" class="btn btn-outline-secondary">Action</button>
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div role="separator" class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+          </div>
+        </div>
+        </li>
+      <!-- Right Side Links -->
       <li class="nav-item"><a class="nav-link" routerLink="/search"><span class="glyphicon glyphicon-search"></span> Search</a></li>
       <li class="nav-item"><a class="nav-link" *ngIf="nav.accountOptions" routerLink="/collection/{{nav.username}}"> My Collection</a></li>
       <li class="nav-item dropdown" *ngIf="nav.accountOptions">
