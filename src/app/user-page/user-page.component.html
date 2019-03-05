@@ -55,35 +55,14 @@
           <small class="text-muted">Last updated 3 mins ago</small>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-3">
-        <div class="card" style="line-height:15px;">
-          <h4 class="card-title"><b>DETAILS</b></h4>
-          <p>Location: {{user.USERLOCATION}}</p>
-          <p>Age: {{user.USERAGE}}</p>
-          <p>Bio: {{user.USERSUMMARY}}</p>
-          <h4 class="card-title"><b>ACTIVITY</b></h4>
-          <p>Joined August 2018</p>
-          <h4 class="card-title"><b>RECENTLY PLAYED</b></h4>
-          <p><a href="#">Assassin's Creed Odyssey</a></p>
-          <h4 class="card-title"><b>LATEST REVIEW</b></h4>
-          <p><a href="#">Eve Online: Valkyrie Warzone</a></p>
-          <hr>
-
-          <button class="btn btn-dark btn-sm" *ngIf="(!nav.accountOptions || !sameUser)" type="button" (click)="onAddFriend(user.USERID)"
-            data-target="#modalConfirm" data-toggle="modal" href="#">
-            Add Friend
-          </button>
-            <br />
-            <button class="btn btn-dark btn-sm" *ngIf="sameUser" type="button">See Networks</button>
-            <br />
-            <button class="btn btn-dark btn-sm" *ngIf="sameUser" type="button" (click)="onViewFriends()">View
-              Friends</button>
-            <hr *ngIf="nav.accountOptions && sameUser" />
-            <button class="btn btn-dark btn-sm" *ngIf="sameUser" type="button" [routerLink]="['/search/']">Create
-              New Review</button>
+      <div class="card">
+        <a href="#"><img class="card-img-top" src="../../assets/images/collection2.png" alt="Card image cap"></a>
+        <div class="card-body">
+          <h5 class="card-title"><a [routerLink]="['/favourites/', user.USERID]">Favourites</a></h5>
+          <p class="card-text">This card will show the user's favourite video games</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated 2 mins ago</small>
         </div>
       </div>
       <div class="card">
