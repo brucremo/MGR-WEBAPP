@@ -166,14 +166,11 @@ export class FriendComponent implements OnInit {
     var friendAccept2 = {
       "USER_ONE_ID": this.user.USERID,
       "USER_TWO_ID": friendId,
-      "STATUS":  1
+      "STATUS":  1,
+      "ACTION_USERID": this.user.USERID
     };
     this.m.updateFriend(friendAccept).subscribe(res => {
-<<<<<<< HEAD
       console.log(res);
-=======
-      this.ngOnInit();
->>>>>>> parent of a90d0c07... added action_userid attribute to onAccept() method
     }, err=>{
       console.log("Error in deleting friend: " + err);
     });
