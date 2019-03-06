@@ -38,6 +38,7 @@
             <!--If you are the action user-->
             <div *ngIf="g.USER_TWO_ID != g.ACTION_USERID">
               <p>Request sent</p>
+              <a data-target="#modalConfirm" data-toggle="modal" href="#" (click)="setDelete(g.USER_TWO_ID)">Withdraw Request</a>
             </div>
           </div>
           <!-- Modal PopUp-->

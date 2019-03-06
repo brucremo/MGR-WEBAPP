@@ -131,6 +131,9 @@ export class FriendComponent implements OnInit {
 
   // Delete A User
   onRemoveFriend(friendId: string) {
+    if(this.pendingFriends.length == 1){
+      this.pendingFriends = [];
+    }
     var friendDeleter = {
       "USER_ONE_ID": this.user.USERID,
       "USER_TWO_ID": friendId
@@ -152,7 +155,7 @@ export class FriendComponent implements OnInit {
       console.log("Error in deleting friend: " + err);
     });
 
-    this.refreshPage();
+    this.router.navigate(['/user/' + document.cookie.split("=")[1] + "/friends"]);
   }
 
   setDelete(friendId: string) {
@@ -185,6 +188,15 @@ export class FriendComponent implements OnInit {
     }, err=>{
       console.log("Error in deleting friend: " + err);
     });
+  }
+
+  reloadPage() {
+    var refresh = window.localStorage.getItem('refresh');
+    console.log(refresh);
+    if (refresh === null) {
+      window.location.reload();
+      window.localStorage.setItem('refresh', "1");
+    }
   }
 
   refreshPage(){
