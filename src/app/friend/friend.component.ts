@@ -43,13 +43,16 @@ export class FriendComponent implements OnInit {
       console.log(this.user.USERID);
 
       if (document.cookie.split("=")[1] == this.user.USERID) {
-        //user is on their own profile page
+        //user is on their own profile page, viewing own friends
         this.sameUser = true;
       }
       else {
         //user is on someone else's profile page
         this.sameUser = false;
+        this.router.navigate(['/404']);
       }
+
+
 
       this.m.getUser(this.user).subscribe(res => {
         this.user = res;
@@ -93,7 +96,7 @@ export class FriendComponent implements OnInit {
           this.pendingFriends[i].USER_TWO_ID = theFriendID;
         }
       }
-      console.log(this.friends);
+      console.log(this.pendingFriends);
     },
       err => {
         console.log("error in retrieving friends list: " + err);
@@ -118,7 +121,7 @@ export class FriendComponent implements OnInit {
           this.acceptedFriends[i].USER_TWO_ID = theFriendID;
         }
       }
-      console.log(this.friends);
+      console.log(this.acceptedFriends);
     },
       err => {
         console.log("error in retrieving friends list: " + err);
@@ -148,6 +151,8 @@ export class FriendComponent implements OnInit {
     }, err => {
       console.log("Error in deleting friend: " + err);
     });
+
+    this.refreshPage();
   }
 
   setDelete(friendId: string) {
