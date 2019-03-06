@@ -131,9 +131,20 @@ export class FriendComponent implements OnInit {
 
   // Delete A User
   onRemoveFriend(friendId: string) {
+    //for bug-fixing
+    //original bug: would not withdraw request if only one request left
+    //required a forced refresh from user
     if(this.pendingFriends.length == 1){
       this.pendingFriends = [];
     }
+
+    //for bug-fixing
+    //original bug: would not remove friend if only one friend left
+    //required a forced refresh from user
+    if(this.acceptedFriends.length == 1){
+      this.acceptedFriends = [];
+    }
+
     var friendDeleter = {
       "USER_ONE_ID": this.user.USERID,
       "USER_TWO_ID": friendId
