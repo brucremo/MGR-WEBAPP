@@ -261,6 +261,47 @@ export class ApiService {
 
     return this.http.delete<any>(`${this.api}/friends`, {params : params});
   }
+
+  //--------------------------------- GROUP/USER SEARCH FUNCTIONALITY ---------------------------------
+  /*GET: Pass an object with the desired search parameter. The object should have only one property being either:
+  
+    => returns a group object with GROUPID
+    GROUPID -> to search for a group based on ID          
+
+    => returns a user object with USERID, USERNAME, USERAVATAR, USERSUMMARY and USERLOCATION
+    USEREMAIL -> to search for a user based on its email 
+    USERID -> to search for a user based on id 
+    USERNAME -> to search for a user based on its name
+  */
+ search(searchObject: any): Observable<any> {
+
+  if (searchObject.GROUPID) {
+
+    let params = new HttpParams().set("GROUPID", searchObject.GROUPID);
+
+    return this.http.get<any>(`${this.api}/search`, { params: params });
+  } else {
+
+    if (searchObject.USEREMAIL) {
+
+      let params = new HttpParams().set("USEREMAIL", searchObject.USEREMAIL);
+
+      return this.http.get<any>(`${this.api}/search`, { params: params });
+
+    } else if (searchObject.USERID) {
+
+      let params = new HttpParams().set("USERID", searchObject.USERID);
+
+      return this.http.get<any>(`${this.api}/search`, { params: params });
+
+    } else {
+
+      let params = new HttpParams().set("USERNAME", searchObject.USERNAME);
+
+      return this.http.get<any>(`${this.api}/search`, { params: params });
+    }
+  }
+}
 }
 
   
