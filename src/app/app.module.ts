@@ -26,6 +26,7 @@ import { UserReviewsComponent } from './user-reviews/user-reviews.component';
 import { CollectionsComponent } from './collections/collections.component';
 import { FavouritesComponent } from './favourites/favourites.component';
 import { FriendComponent } from './friend/friend.component';
+import { GroupPageComponent } from './group-page/group-page.component';
 
 const appRoutes: Routes = [
   { path: 'user/:id', component: UserPageComponent },
@@ -58,6 +59,7 @@ const appRoutes: Routes = [
   { path: 'favourites', component: FavouritesComponent},
   { path: 'favourites/:id', component: FavouritesComponent},
   { path: 'user/:id/friends', component: FriendComponent},
+  { path: 'groups/:id', component: GroupPageComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }
@@ -84,7 +86,8 @@ const appRoutes: Routes = [
     UserReviewsComponent,
     CollectionsComponent,
     FavouritesComponent,
-    FriendComponent
+    FriendComponent,
+    GroupPageComponent
   ],
   imports: [
     BrowserModule,

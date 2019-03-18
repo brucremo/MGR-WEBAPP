@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <!-- Adding whitespace -->
+    <div class="col-md-3"></div>
+    <div class="col-md-6" id="group-header">
+      <img id="group-thumbnail" src="../../assets/images/GroupImg.svg">
+      <h1>Group Name</h1>
+      <!-- Will replace above line when loaded
+      <h1>{{group.name}}</h1>
+      -->
+    </div>
+    <!-- Adding whitespace -->
+    <div class="col-md-3"></div>
+  </div>
+  <hr>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card" id="group-card">
+        <div class="card-body">
+          <h5 class="card-title">(Group name here)</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Since (date of creation)</h6>
+          <p class="card-text">Owner: (Owner name here)</p>
+          <p class="card-text">Admins: (Admin names here)</p>
+          <p class="card-text">Members: (Member names here)</p>
+          <p class="card-text">Moderators: (Moderator names here)</p>
+          <button type="button" class="btn btn-success">Join Group</button>
+        </div>
+      </div>
+    </div>
+    <!--Show Brief Description of Group For Non-Members -->
+    <div class="col-md-8">
+      A Brief description of the group for users that are either not logged in, or are not part of the group.
+      This will be implemented with the use of conditionals.
+      <br> <br>
+      (Check if user is one of the group members, if not, show this description)
+    </div>
+  </div>
+</div>
