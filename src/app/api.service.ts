@@ -266,12 +266,12 @@ export class ApiService {
   /*GET: Pass an object with the desired search parameter. The object should have only one property being either:
   
     => returns a group object with GROUPID
-    GROUPID -> to search for a group based on ID          
+    {GROUPID: String} -> to search for a group based on ID          
 
     => returns a user object with USERID, USERNAME, USERAVATAR, USERSUMMARY and USERLOCATION
-    USEREMAIL -> to search for a user based on its email 
-    USERID -> to search for a user based on id 
-    USERNAME -> to search for a user based on its name
+    {USEREMAIL: String} -> to search for a user based on its email 
+    {USERID: String} -> to search for a user based on id 
+    {USERNAME: String} -> to search for a user based on its name
   */
   search(searchObject: any): Observable<any> {
 
