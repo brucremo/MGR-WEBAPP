@@ -335,5 +335,46 @@ export class ApiService {
 
     return this.http.delete<any>(`${this.api}/group`, { params: params });
   }
+
+  //--------------------------------- USER ROLES ADD/REMOVE FUNCTIONALITY ---------------------------------
+  /*POST: The following functions add a user to a group. 
+    Requires the object as follows {GROUPID : String, USERID : String}*/
+  addAdmin(role: any): Observable<any> {
+
+    role.TYPE = "ADMIN";
+    return this.http.post<any>(`${this.api}/role-add`, role);
+  }
+
+  addMember(role: any): Observable<any> {
+
+    role.TYPE = "MEMBER";
+    return this.http.post<any>(`${this.api}/role-add`, role);
+  }
+
+  addModerator(role: any): Observable<any> {
+
+    role.TYPE = "MODERATOR";
+    return this.http.post<any>(`${this.api}/role-add`, role);
+  }
+
+  /*DELETE: The following functions remove a user from a group. 
+   Requires the object as follows {GROUPID : String, USERID : String}*/
+  removeAdmin(role: any): Observable<any> {
+
+    role.TYPE = "ADMIN";
+    return this.http.post<any>(`${this.api}/role-remove`, role);
+  }
+
+  removeMember(role: any): Observable<any> {
+
+    role.TYPE = "MEMBER";
+    return this.http.post<any>(`${this.api}/role-remove`, role);
+  }
+
+  removeModerator(role: any): Observable<any> {
+
+    role.TYPE = "MODERATOR";
+    return this.http.post<any>(`${this.api}/role-remove`, role);
+  }
 }
 
