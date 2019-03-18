@@ -18,7 +18,7 @@ export class ApiService {
 
   //For API local testing
   //public api = "http://localhost:8082"
-  
+
   constructor(
     private http: HttpClient
   ) { }
@@ -93,19 +93,19 @@ export class ApiService {
   //--------------------------------- REVIEW REQUESTS ---------------------------------
 
   // GET: /reviews/:gameid -> Retrieves all stored reviews for a specific game
-  gameGetReviews(gameid: String): Observable<any>{
+  gameGetReviews(gameid: String): Observable<any> {
 
     return this.http.get<any>(`${this.api}/reviews/${gameid}`);
   }
 
   // GET: /reviews/:gameid -> Retrieves all stored reviews for a specific game
-  userGetReviews(userid: String): Observable<any>{
+  userGetReviews(userid: String): Observable<any> {
 
     return this.http.get<any>(`${this.api}/reviews/user/${userid}`);
   }
 
   // GET: /review/:gameid/:userid -> Retrieves all stored reviews for a specific game
-  getReview(gameid: String, userid: String): Observable<any>{
+  getReview(gameid: String, userid: String): Observable<any> {
 
     return this.http.get<any>(`${this.api}/review/${gameid}/${userid}`);
   }
@@ -123,20 +123,20 @@ export class ApiService {
 
   /* POST: /review/:gameid/:userid -> Receives an object with USERID, GAMEID, REVIEWSUMMARY, 
   REVIEWRATING and GAMEPLATFORM to be posted for the parameters gameid and userid */
-  gameReviewAdd(review: any): Observable<any>{
+  gameReviewAdd(review: any): Observable<any> {
 
     return this.http.post<any>(`${this.api}/review/${review.GAMEID}/${review.USERID}`, review);
   }
 
   /* PUT: /review/:gameid/:userid -> Receives an object with USERID, GAMEID, REVIEWSUMMARY, 
   REVIEWRATING and GAMEPLATFORM to be updated for the parameters gameid and userid */
-  gameReviewEdit(review: any): Observable<any>{
+  gameReviewEdit(review: any): Observable<any> {
 
     return this.http.put<any>(`${this.api}/review/${review.GAMEID}/${review.USERID}`, review);
   }
 
   /* DELETE: /review/:gameid/:userid -> Receives an object with GAMEID and USERID for a review to be deleted from the database */
-  gameReviewDelete(review: any): Observable<any>{
+  gameReviewDelete(review: any): Observable<any> {
 
     return this.http.delete<any>(`${this.api}/review/${review.GAMEID}/${review.USERID}`);
   }
@@ -144,34 +144,34 @@ export class ApiService {
   //--------------------------------- LIBRARY MANAGEMENT ---------------------------------
 
   // GET: /library/:userid -> Retrieves all stored games associated with a user library
-  getUserLibrary(userid: String): Observable<any>{
+  getUserLibrary(userid: String): Observable<any> {
 
     return this.http.get<any>(`${this.api}/library/${userid}`);
   }
 
   // PUT: /library/:userid/:gameid -> Associates a gameid to a user's library
-  addToUserLibrary(userid: String, gameid: String): Observable<any>{
+  addToUserLibrary(userid: String, gameid: String): Observable<any> {
 
     const lib = {
-      USERID : userid,
-      GAMEID : gameid
+      USERID: userid,
+      GAMEID: gameid
     }
 
     return this.http.put<any>(`${this.api}/library/${lib.USERID}/${lib.GAMEID}`, lib);
   }
 
   // DELETE: /library/:userid/:gameid -> Removes a gameid from a user's library
-  removeFromUserLibrary(userid: String, gameid: String): Observable<any>{
+  removeFromUserLibrary(userid: String, gameid: String): Observable<any> {
 
     return this.http.delete<any>(`${this.api}/library/${userid}/${gameid}`);
   }
 
   // POST: /library/:userid/:gameid -> Toggles game as favourite for the user's library
-  setFavourite(userid: String, gameid: String): Observable<any>{
+  setFavourite(userid: String, gameid: String): Observable<any> {
 
     const lib = {
-      USERID : userid,
-      GAMEID : gameid
+      USERID: userid,
+      GAMEID: gameid
     }
 
     return this.http.post<any>(`${this.api}/library/${lib.USERID}/${lib.GAMEID}`, lib);
@@ -196,13 +196,13 @@ export class ApiService {
   //--------------------------------- TAG FUNCTIONALITY ---------------------------------
 
   // GET: /tag/:tagid/:userid -> Returns all games related to a tag in a user's library
-  getGamesForTag(userid: String, tagid: String): Observable<any>{
+  getGamesForTag(userid: String, tagid: String): Observable<any> {
 
     return this.http.get<any>(`${this.api}/tag/${tagid}/${userid}`);
   }
 
   // DELETE: /tag/:tagid/:userid -> Removes a tag from a user's library
-  removeTag(userid: String, tagid: String): Observable<any>{
+  removeTag(userid: String, tagid: String): Observable<any> {
 
     return this.http.delete<any>(`${this.api}/tag/${tagid}/${userid}`);
   }
@@ -210,7 +210,7 @@ export class ApiService {
   // POST: /tag -> Receives an object with USERID, GAMEID, and TAGS array to be added to a user's library
   /* NOTE -> THE GAME MUST BE ADDED TO THE USER'S LIBARY BEFORE RUNNING THIS FUNCTIONS, IN OTHER WORDS 
   addToUserLibrary MUST BE RUN BEFORE ADD TAG(S)*/
-  addTags(tags: any): Observable<any>{
+  addTags(tags: any): Observable<any> {
 
     return this.http.post<any>(`${this.api}/tag`, tags);
   }
@@ -235,31 +235,31 @@ export class ApiService {
 
   /*GET: Gets all friends for a specific user. 
     Requires the object as follows {USER_ONE_ID : String, STATUS: Int}*/
-  getFriends(relationship: any): Observable<any>{
+  getFriends(relationship: any): Observable<any> {
     let params = new HttpParams().set("USER_ONE_ID", relationship.USER_ONE_ID).set("STATUS", relationship.STATUS);
 
-    return this.http.get<any>(`${this.api}/friends`, {params : params});
+    return this.http.get<any>(`${this.api}/friends`, { params: params });
   }
 
   /*POST: Adds user as friend and sends it an e-mail with the request if their relationship does not exist yet. 
     Requires the object as follows {USER_ONE_ID : String, USER_TWO_ID : String, ACTION_USERID : String}*/
-  addFriend(relationship: any): Observable<any>{
+  addFriend(relationship: any): Observable<any> {
     return this.http.post<any>(`${this.api}/friends`, relationship);
   }
 
   /*PUT: Updates friendship status between users. 
     Requires the full object with relevant information regarding ACTION_USERID and STATUS*/
-  updateFriend(relationship: any): Observable<any>{
+  updateFriend(relationship: any): Observable<any> {
 
     return this.http.put<any>(`${this.api}/friends`, relationship);
   }
 
-  /*PUT: Removes friendship links between users. 
+  /*DELETE: Removes friendship links between users. 
     Requires the object as follows {USER_ONE_ID : String, USER_TWO_ID : String}*/
-  deleteFriend(relationship: any): Observable<any>{
+  deleteFriend(relationship: any): Observable<any> {
     let params = new HttpParams().set("USER_ONE_ID", relationship.USER_ONE_ID).set("USER_TWO_ID", relationship.USER_TWO_ID);
 
-    return this.http.delete<any>(`${this.api}/friends`, {params : params});
+    return this.http.delete<any>(`${this.api}/friends`, { params: params });
   }
 
   //--------------------------------- GROUP/USER SEARCH FUNCTIONALITY ---------------------------------
@@ -273,35 +273,67 @@ export class ApiService {
     USERID -> to search for a user based on id 
     USERNAME -> to search for a user based on its name
   */
- search(searchObject: any): Observable<any> {
+  search(searchObject: any): Observable<any> {
 
-  if (searchObject.GROUPID) {
+    if (searchObject.GROUPID) {
 
-    let params = new HttpParams().set("GROUPID", searchObject.GROUPID);
-
-    return this.http.get<any>(`${this.api}/search`, { params: params });
-  } else {
-
-    if (searchObject.USEREMAIL) {
-
-      let params = new HttpParams().set("USEREMAIL", searchObject.USEREMAIL);
+      let params = new HttpParams().set("GROUPID", searchObject.GROUPID);
 
       return this.http.get<any>(`${this.api}/search`, { params: params });
-
-    } else if (searchObject.USERID) {
-
-      let params = new HttpParams().set("USERID", searchObject.USERID);
-
-      return this.http.get<any>(`${this.api}/search`, { params: params });
-
     } else {
 
-      let params = new HttpParams().set("USERNAME", searchObject.USERNAME);
+      if (searchObject.USEREMAIL) {
 
-      return this.http.get<any>(`${this.api}/search`, { params: params });
+        let params = new HttpParams().set("USEREMAIL", searchObject.USEREMAIL);
+
+        return this.http.get<any>(`${this.api}/search`, { params: params });
+
+      } else if (searchObject.USERID) {
+
+        let params = new HttpParams().set("USERID", searchObject.USERID);
+
+        return this.http.get<any>(`${this.api}/search`, { params: params });
+
+      } else {
+
+        let params = new HttpParams().set("USERNAME", searchObject.USERNAME);
+
+        return this.http.get<any>(`${this.api}/search`, { params: params });
+      }
     }
   }
-}
+
+  //--------------------------------- GROUP CRUD FUNCTIONALITY ---------------------------------
+  /*GET: Gets all group information and members for a specific group. 
+  Requires the object as follows {GROUPID : String}*/
+  getGroup(group: any): Observable<any> {
+
+    let params = new HttpParams().set("GROUPID", group.GROUPID);
+
+    return this.http.get<any>(`${this.api}/group`, { params: params });
+  }
+
+  /*POST: Creates a new group. 
+    Requires the object as follows {GROUPID : String, GROUPPRIVACY : Int, GROUPOWNER : String}*/
+  createGroup(group: any): Observable<any> {
+
+    return this.http.post<any>(`${this.api}/group`, group);
+  }
+
+  /*PUT: Used to update group privacy or owner. The object should not contain both privacy and owner.
+    Requires the object as follows {GROUPID : String, GROUPPRIVACY : Int ||OR|| GROUPOWNER : String}*/
+  updateGroup(group: any): Observable<any> {
+
+    return this.http.put<any>(`${this.api}/group`, group);
+  }
+
+  /*DELETE: Deletes a group. 
+    Requires the object as follows {GROUPID : String}*/
+  deleteGroup(group: any): Observable<any> {
+    
+    let params = new HttpParams().set("GROUPID", group.GROUPID);
+
+    return this.http.delete<any>(`${this.api}/group`, { params: params });
+  }
 }
 
-  
