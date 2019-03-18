@@ -304,7 +304,7 @@ export class ApiService {
   }
 
   //--------------------------------- GROUP CRUD FUNCTIONALITY ---------------------------------
-  /*GET: Gets all group information and members for a specific group. 
+  /*GET: Gets all group information and members for a specific group divided in 3 arrays for each type of user role. 
   Requires the object as follows {GROUPID : String}*/
   getGroup(group: any): Observable<any> {
 
@@ -330,7 +330,7 @@ export class ApiService {
   /*DELETE: Deletes a group. 
     Requires the object as follows {GROUPID : String}*/
   deleteGroup(group: any): Observable<any> {
-    
+
     let params = new HttpParams().set("GROUPID", group.GROUPID);
 
     return this.http.delete<any>(`${this.api}/group`, { params: params });
