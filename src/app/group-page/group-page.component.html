@@ -18,7 +18,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <h5 id="group-card-title">Details</h5>
+      <h5 id="details-sub-heading">Details</h5>
       <div class="card" id="group-card">
         <div class="card-body">
           <h6 class="card-subtitle mb-2 text-muted">Since {{group[0].GROUPCREATIONDATE}}</h6>
@@ -32,21 +32,53 @@
           <p class="card-text"><b>Other Members </b>
             <span *ngFor="let o of group[0].GROUPMEMBERS">| {{o.USERID}} </span>
           </p>
-          <button type="button" class="btn btn-success">Join Group</button>
+          <hr>
+          <div *ngIf="!this.isMember && !this.askedToJoin">
+            <!-- Non members can ask to join the group -->
+            <button type="button" class="btn btn-success" (click)="onJoinGroup()">Join Group</button>
+            &nbsp; &nbsp;
+
+          </div>
+
+          <div *ngIf="this.askedToJoin">
+            <!-- User has asked to join, joining process is pending -->
+            <p>Your request has been sent!</p>
+            <button type="button" class="btn btn-danger" (click)="onCancelJoinRequest()">Cancel Join Request</button>
+            &nbsp; &nbsp;
+
+          </div>
+
+          <div *ngIf="this.isAdmin">
+            <!-- Admins can edit the group -->
+            <button type="button" class="btn btn-primary">Edit Group</button>
+            &nbsp; &nbsp;
+
+          </div>
+          <div *ngIf="this.isMember">
+            <!-- Members can leave the group -->
+            <button type="button" class="btn btn-danger">Leave Group</button>
+            &nbsp; &nbsp;
+
+            <!-- Members can create a discussion -->
+            <button type="button" class="btn btn-success">Create Discussion</button>
+            &nbsp; &nbsp;
+
+          </div>
         </div>
       </div>
     </div>
-    <!--Show Brief Description of Group For Non-Members -->
     <div class="col-md-8">
       <!-- Conditional: Shows the following if the user is a non-member, or not logged in -->
       <div *ngIf="!this.isMember; else elseBlock">
+        <h5>Description</h5>
         A brief description of the group for users that are either not logged in, or are not part of the group.
         This will be implemented with the use of *ngIf.
         <br> <br>
-        (Check if user is one of the group members, if not, show this description)
+        Find this group interesting? Click the 'Join Group' button to join!
       </div>
+      <!-- Conditional: Shows the following if the user is a member -->
       <ng-template #elseBlock>
-        <h5>Discussion Board</h5> 
+        <h5 class="sub-heading">Discussion Board</h5>
         <p>Coming soon!</p>
       </ng-template>
     </div>

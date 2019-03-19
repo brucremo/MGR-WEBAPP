@@ -5,6 +5,9 @@
         padding: 5px;
         width: 150px;
 }
-#group-card-title{
+#details-sub-heading{
     margin-left: 6%;
+}
+button{
+    margin-bottom: 5%;
 }
