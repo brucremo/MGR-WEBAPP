@@ -3,6 +3,7 @@ import { NavServiceService } from '../nav-service.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { stringify } from 'querystring';
+import { Action } from 'rxjs/internal/scheduler/Action';
 
 @Component({
   selector: 'app-navbar',
@@ -11,14 +12,16 @@ import { stringify } from 'querystring';
 })
 
 export class NavbarComponent implements OnInit {
-  
+  private action: string;
   private id: string;
 
   constructor(public nav: NavServiceService,
   private router: Router,
   private r: ActivatedRoute) { 
     this.id = "";
+    this.action = "Games"
   }
+
 
   ngOnInit() {
     this.nav.show();
@@ -37,6 +40,14 @@ export class NavbarComponent implements OnInit {
 
   navigateToProfile(){
     this.router.navigate(['/user/' + this.id]);
+  }
+
+  setAction(act: string){
+    this.action = act;
+  }
+
+  getAction (){
+    return this.action;
   }
   
 }
