@@ -1,0 +1,45 @@
+<div class="container">
+  <h2 id="page-title">{{user.USERID}}'s Groups</h2>
+  <hr>
+  <!--Groups with admin role-->
+  <table>
+    <h5>Groups with the role: <small class="text-muted">Admin</small></h5>
+    <tr>
+      <th>Group Name</th>
+      <th>Group Description</th>
+    </tr>
+    <tr *ngFor="let ugadmin of userGroups.GROUPADMINS">
+      <td>{{ugadmin.GROUPID}}</td>
+      <td>group made for testing purposes</td>
+      <!--Above line to be replaced with:
+          <td>{{ugadmin.GROUPDESCRIPTION}}</td>
+          -->
+    </tr>
+    <br> <br>
+    <h5>Groups with the role: <small class="text-muted">Moderator</small></h5>
+    <tr>
+      <th>Group Name</th>
+      <th>Group Description</th>
+    </tr>
+    <tr *ngFor="let ugmod of userGroups.GROUPMODERATORS">
+      <td>{{ugmod.GROUPID}}</td>
+      <td>group made for testing purposes</td>
+      <!--Above line to be replaced with:
+          <td>{{ugmod.GROUPDESCRIPTION}}</td> 
+          -->
+    </tr>
+    <br> <br>
+    <h5>Groups with the role:<small class="text-muted">Admin</small></h5>
+    <tr>
+      <th>Group Name</th>
+      <th>Group Description</th>
+    </tr>
+    <tr *ngFor="let ugmem of userGroups.GROUPMEMBERS">
+      <td>{{ugmem.GROUPID}}</td>
+      <td>group made for testing purposes</td>
+      <!--Above line to be replaced with:
+          <td>{{ugmem.GROUPDESCRIPTION}}</td> 
+          -->
+    </tr>
+  </table>
+</div>

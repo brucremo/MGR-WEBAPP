@@ -313,6 +313,15 @@ export class ApiService {
     return this.http.get<any>(`${this.api}/group`, { params: params });
   }
 
+  /*GET: Gets all group id's for a user, meaning all the groups he's part of with its specific roles.
+  Requires the object as follows {USERID : String}*/
+  getGroupsUser(user: any): Observable<any> {
+
+    let params = new HttpParams().set("USERID", user.USERID);
+
+    return this.http.get<any>(`${this.api}/user-groups`, { params: params });
+  }
+
   /*POST: Creates a new group. 
     Requires the object as follows {GROUPID : String, GROUPSUMMARY: String(256), GROUPPRIVACY : Int, GROUPOWNER : String}*/
   createGroup(group: any): Observable<any> {
