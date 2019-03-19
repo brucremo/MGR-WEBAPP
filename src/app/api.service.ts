@@ -314,14 +314,14 @@ export class ApiService {
   }
 
   /*POST: Creates a new group. 
-    Requires the object as follows {GROUPID : String, GROUPPRIVACY : Int, GROUPOWNER : String}*/
+    Requires the object as follows {GROUPID : String, GROUPSUMMARY: String(256), GROUPPRIVACY : Int, GROUPOWNER : String}*/
   createGroup(group: any): Observable<any> {
 
     return this.http.post<any>(`${this.api}/group`, group);
   }
 
   /*PUT: Used to update group privacy or owner. The object should not contain both privacy and owner.
-    Requires the object as follows {GROUPID : String, GROUPPRIVACY : Int ||OR|| GROUPOWNER : String}*/
+    Requires the object as follows {GROUPID : String, GROUPSUMMARY: String(256) ||OR|| GROUPPRIVACY : Int ||OR|| GROUPOWNER : String}*/
   updateGroup(group: any): Observable<any> {
 
     return this.http.put<any>(`${this.api}/group`, group);
