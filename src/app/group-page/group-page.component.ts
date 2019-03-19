@@ -51,7 +51,7 @@ export class GroupPageComponent implements OnInit {
 
       //check if user is a part of the group
       if (document.cookie) {
-        this.userID = "brucremo";//document.cookie.split("=")[1];
+        this.userID = document.cookie.split("=")[1];
 
         //compare userID with owner
         if (this.userID == this.group[0].GROUPOWNER) {
