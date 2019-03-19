@@ -27,6 +27,7 @@ import { CollectionsComponent } from './collections/collections.component';
 import { FavouritesComponent } from './favourites/favourites.component';
 import { FriendComponent } from './friend/friend.component';
 import { GroupPageComponent } from './group-page/group-page.component';
+import { GroupFormComponent } from './group-form/group-form.component';
 
 const appRoutes: Routes = [
   { path: 'user/:id', component: UserPageComponent },
@@ -60,6 +61,7 @@ const appRoutes: Routes = [
   { path: 'favourites/:id', component: FavouritesComponent},
   { path: 'user/:id/friends', component: FriendComponent},
   { path: 'groups/:id', component: GroupPageComponent},
+  { path: 'group/create', component: GroupFormComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }
@@ -87,7 +89,8 @@ const appRoutes: Routes = [
     CollectionsComponent,
     FavouritesComponent,
     FriendComponent,
-    GroupPageComponent
+    GroupPageComponent,
+    GroupFormComponent
   ],
   imports: [
     BrowserModule,

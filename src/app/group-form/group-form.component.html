@@ -1,0 +1,36 @@
+<div class="container">
+  <h3 id='title'>Create a Group</h3>
+  <div class="row">
+    <div class="col-md-3"></div>
+  <form>
+    <!--Get the group's name (aka group id)-->
+    <div class="form-group">
+      <label for="groupName">Name</label>
+      <input type="text" class="form-control" id="groupName" name="groupName" required>
+    </div>
+
+    <!--Get the group's privacy setting-->
+    <div class="form-group">
+      <label for="groupPrivacy">Privacy setting:</label>
+      <input type="number" class="form-control" id="groupPrivacy" name="groupPrivacy" 
+      min="1" max="3" step="1" value="1" required>
+      <p>*NOTE: 1 - open to all users, 2 - users can request to join, 3 - users join on invite only</p>
+    </div>
+
+    <!--Get the group's name (aka group id)-->
+    <div class="form-group">
+      <label for="groupOwner">Group Owner</label>
+      <input type="text" class="form-control" id="groupOwner" name="groupOwner" required>
+    </div>
+
+    <!--Get the group's description-->
+    <div class="form-group">
+      <label for="groupDescription">Group Description</label>
+      <textarea id="groupDescription" name="groupDescription" 
+      placeholder="Write your group description here" style="height:200px"></textarea>
+    </div>
+      <br> <br>
+      <button type="submit" class="btn btn-success">Create Group</button>
+  </form>
+</div>
+</div>
