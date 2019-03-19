@@ -35,19 +35,20 @@
             data-target="#modalConfirm" data-toggle="modal" href="#">
             Add Friend
           </button>
-            <br />
-            <button class="btn btn-dark btn-sm" *ngIf="sameUser" type="button">See Networks</button>
-            <br />
-            <button class="btn btn-dark btn-sm" *ngIf="sameUser" type="button" (click)="onViewFriends()">View
-              Friends</button>
-            <hr *ngIf="nav.accountOptions && sameUser" />
-            <button class="btn btn-dark btn-sm" *ngIf="sameUser" type="button" [routerLink]="['/search/']">Create
-              New Review</button>
+          <br />
+          <button class="btn btn-dark btn-sm" *ngIf="sameUser" type="button">See Networks</button>
+          <br />
+          <button class="btn btn-dark btn-sm" *ngIf="sameUser" type="button" (click)="onViewFriends()">View
+            Friends</button>
+          <hr *ngIf="nav.accountOptions && sameUser" />
+          <button class="btn btn-dark btn-sm" *ngIf="sameUser" type="button" [routerLink]="['/search/']">Create
+            New Review</button>
         </div>
       </div>
 
       <div class="col-md-7">
         <div class="card-deck">
+          <!--Card for User's Collection-->
           <div class="card">
             <a href="#"><img class="card-img-top" src="../../assets/images/collection.png" alt="Card image cap"></a>
             <div class="card-body">
@@ -58,6 +59,7 @@
               <small class="text-muted">Last updated 3 mins ago</small>
             </div>
           </div>
+          <!--Card for User's Favourites-->
           <div class="card">
             <a href="#"><img class="card-img-top" src="../../assets/images/collection2.png" alt="Card image cap"></a>
             <div class="card-body">
@@ -68,6 +70,7 @@
               <small class="text-muted">Last updated 2 mins ago</small>
             </div>
           </div>
+          <!--Card for User's Reviews-->
           <div class="card">
             <a href="#"><img class="card-img-top" src="../../assets/images/review1.png" alt="Card image cap"></a>
             <div class="card-body">
@@ -79,8 +82,29 @@
             </div>
           </div>
         </div>
+        <br> <br>
+        <div class="card-deck">
+          <!--Card for User's Groups-->
+          <div class="card">
+            <a href="#"><img class="card-img-top" src="../../assets/images/review1.png" alt="Card image cap"></a>
+            <div class="card-body">
+              <!--for now, link is hardcoded to the avgr group
+              should be something like: groups/userid-->
+              <h5 class="card-title"><a href="/groups/avgr">Groups</a></h5>
+              <p class="card-text">This card will show the user's groups</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated 9 mins ago</small>
+            </div>
+          </div>
+
+          <!-- New cards to be added when new functionality is introduced-->
+          <div class="card"></div>
+          <div class="card"></div>
+        </div>
       </div>
     </div>
+
   </div>
 </div>
 
