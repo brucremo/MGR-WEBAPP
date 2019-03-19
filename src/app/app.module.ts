@@ -28,6 +28,7 @@ import { FavouritesComponent } from './favourites/favourites.component';
 import { FriendComponent } from './friend/friend.component';
 import { GroupPageComponent } from './group-page/group-page.component';
 import { UsersGroupsComponent } from './users-groups/users-groups.component';
+import { GameGroupComponent } from './game-group/game-group.component';
 
 const appRoutes: Routes = [
   { path: 'user/:id', component: UserPageComponent },
@@ -62,6 +63,9 @@ const appRoutes: Routes = [
   { path: 'user/:id/friends', component: FriendComponent},
   { path: 'groups/:id', component: GroupPageComponent},
   { path: 'userGroups', component: UsersGroupsComponent},
+  { path: 'group/:id', component: GameGroupComponent, resolve: {
+    videogame: VideogameResolve
+  }},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }
@@ -90,7 +94,8 @@ const appRoutes: Routes = [
     FavouritesComponent,
     FriendComponent,
     GroupPageComponent,
-    UsersGroupsComponent
+    UsersGroupsComponent,
+    GameGroupComponent
   ],
   imports: [
     BrowserModule,
