@@ -1,0 +1,45 @@
+.my-container {
+    position: relative;
+    background: #fff;
+    overflow: hidden;
+    height: 15em;
+    border-radius: 15px 15px 0px 0px;
+    margin:10px;
+}
+.my-container h1 {
+    padding: 50px;
+    padding-top:125px;
+    text-align: center;
+    z-index: 2;
+    color: #092e4d;
+    position: relative;
+    font-size:100px;
+    font-weight: bold;
+    font-family: 'Myriad Pro', 'Myriad', helvetica, arial, sans-serif;
+    text-shadow: 2px 3px 3px rgb(196, 196, 196);
+    letter-spacing: -7px;
+    -webkit-text-stroke: 1px rgb(19, 72, 102);
+} 
+.my-container img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    opacity: 0.4;
+}
+
+#group-header{
+    text-align: center;
+}
+#group-thumbnail{
+        padding: 5px;
+        width: 150px;
+}
+#details-sub-heading{
+    margin-left: 6%;
+}
+button{
+    margin-bottom: 5%;
+}

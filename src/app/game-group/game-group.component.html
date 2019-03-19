@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 my-container">
+      <h1>{{game.name}}</h1>
+      <img src="{{game.screenshots[0].url}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card" id="group-card">
+        <div class="card-body">
+          <p>{{game.summary}}</p>
+            <!-- All Users can create a discussion -->
+            <button type="button" class="btn btn-success">Create Discussion</button>
+            &nbsp; &nbsp;
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+        <!-- Conditional: Shows the following if the user is a non-member, or not logged in -->
+        <div *ngIf="!this.isMember; else elseBlock">
+          <h5>Description</h5>
+          A brief description of the group for users that are either not logged in, or are not part of the group.
+          This will be implemented with the use of *ngIf.
+          <br> <br>
+          Find this group interesting? Click the 'Join Group' button to join!
+        </div>
+        <!-- Conditional: Shows the following if the user is a member -->
+        <ng-template #elseBlock>
+          <h5 class="sub-heading">Discussion Board</h5>
+          <p>Coming soon!</p>
+        </ng-template>
+      </div>
+  </div>
+</div>
