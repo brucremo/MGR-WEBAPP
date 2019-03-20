@@ -66,8 +66,7 @@ export class SearchComponent implements OnInit {
     else if (this.action == "users"){
       this.isUser = true;
 
-      this.api.search(this.query).subscribe(res =>{
-        console.log("User found: " + res);
+      this.api.searchUSERID(this.query).subscribe(res =>{
         this.userQuery = res;
       }, err => {
         console.log(err);
@@ -75,7 +74,7 @@ export class SearchComponent implements OnInit {
     } else if (this.action == "groups"){
       this.isGroup = true;
 
-      this.api.search(this.query).subscribe(res =>{
+      this.api.searchGROUPID(this.query).subscribe(res =>{
         this.groupQuery = res;
       }, err => {
         console.log(err);

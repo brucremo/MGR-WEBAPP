@@ -22,21 +22,24 @@
   </div>
 
   <div *ngIf="isUser" class="list-group">
-      <li *ngFor="let user of userQuery" [routerLink]="['/user/', user.id]" class="list-group-item list-group-item-action flex-column align-items-start">
+      <li *ngFor="let user of userQuery" [routerLink]="['/user/', user.USERID]" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="row">
-          <div class="col-md-10"><div class="d-flex w-100 justify-content-between">
-            <h4 class="mb-1">{{ user.id }}</h4>
+            <div class="col-md-1"><img src="{{ user.USERAVATAR }}" id="game-image" class="img-responsive" width="100px"></div>
+            <div class="col-md-10"><div class="d-flex w-100 justify-content-between">
+            <h4 class="mb-1">{{ user.USERID }}</h4>
           </div>
-          <p class="mb-1">{{ user.username }}</p>
+          <p class="mb-1">{{ user.USERNAME }}</p>
+          <p class="mb-1">{{ user.USERLOCATION }}</p>
+          <p class="mb-1">User Description: {{ user.USERSUMMARY }}</p>
         </div></div>
       </li>
     </div>
 
   <div *ngIf="isGroup" class="list-group">
-    <li *ngFor="let group of groupQuery" [routerLink]="['/groups/', group.id]" class="list-group-item list-group-item-action flex-column align-items-start">
+    <li *ngFor="let group of groupQuery" [routerLink]="['/groups/', group.GROUPID]" class="list-group-item list-group-item-action flex-column align-items-start">
       <div class="row">
         <div class="col-md-10"><div class="d-flex w-100 justify-content-between">
-          <h4 class="mb-1">{{ group.id }}</h4>
+          <h4 class="mb-1">{{ group.GROUPID }}</h4>
         </div>
         <p class="mb-1">{{ group.summary }}</p>
       </div></div>
