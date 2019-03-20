@@ -263,46 +263,6 @@ export class ApiService {
   }
 
   //--------------------------------- GROUP/USER SEARCH FUNCTIONALITY ---------------------------------
-  /*GET: Pass an object with the desired search parameter. The object should have only one property being either:
-  
-    => returns a group object with GROUPID
-    {GROUPID: String} -> to search for a group based on ID          
-
-    => returns a user object with USERID, USERNAME, USERAVATAR, USERSUMMARY and USERLOCATION
-    {USEREMAIL: String} -> to search for a user based on its email 
-    {USERID: String} -> to search for a user based on id 
-    {USERNAME: String} -> to search for a user based on its name
-  */
-  search(searchObject: any): Observable<any> {
-
-    if (searchObject.GROUPID) {
-
-      let params = new HttpParams().set("GROUPID", searchObject.GROUPID);
-
-      return this.http.get<any>(`${this.api}/search`, { params: params });
-    } else {
-
-      if (searchObject.USEREMAIL) {
-
-        let params = new HttpParams().set("USEREMAIL", searchObject.USEREMAIL);
-
-        return this.http.get<any>(`${this.api}/search`, { params: params });
-
-      } else if (searchObject.USERID) {
-
-        let params = new HttpParams().set("USERID", searchObject.USERID);
-
-        return this.http.get<any>(`${this.api}/search`, { params: params });
-
-      } else {
-
-        let params = new HttpParams().set("USERNAME", searchObject.USERNAME);
-
-        return this.http.get<any>(`${this.api}/search`, { params: params });
-      }
-    }
-  }
-
   //GET: Searches for a specific USERID
   searchUSERID(USERID: any): Observable<any> {
 
@@ -311,7 +271,29 @@ export class ApiService {
     return this.http.get<any>(`${this.api}/search`, { params: params });
   }
 
+  //GET: Searches for a specific USEREMAIL
+  searchUSEREMAIL(USEREMAIL: any): Observable<any> {
 
+    let params = new HttpParams().set("USEREMAIL", USEREMAIL);
+
+    return this.http.get<any>(`${this.api}/search`, { params: params });
+  }
+
+  //GET: Searches for a specific USERNAME
+  searchUSERNAME(USERNAME: any): Observable<any> {
+
+    let params = new HttpParams().set("USERNAME", USERNAME);
+
+    return this.http.get<any>(`${this.api}/search`, { params: params });
+  }
+
+  //GET: Searches for a specific GROUPID
+  searchGROUPID(GROUPID: any): Observable<any> {
+
+    let params = new HttpParams().set("GROUPID", GROUPID);
+
+    return this.http.get<any>(`${this.api}/search`, { params: params });
+  }
 
   //--------------------------------- GROUP CRUD FUNCTIONALITY ---------------------------------
   /*GET: Gets all group information and members for a specific group divided in 3 arrays for each type of user role. 
