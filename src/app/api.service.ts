@@ -304,12 +304,14 @@ export class ApiService {
   }
 
   //GET: Searches for a specific USERID
-  searchUSERID(searchObject: any): Observable<any> {
+  searchUSERID(USERID: any): Observable<any> {
 
-    let params = new HttpParams().set("USERID", searchObject.USERID);
+    let params = new HttpParams().set("USERID", USERID);
 
     return this.http.get<any>(`${this.api}/search`, { params: params });
   }
+
+
 
   //--------------------------------- GROUP CRUD FUNCTIONALITY ---------------------------------
   /*GET: Gets all group information and members for a specific group divided in 3 arrays for each type of user role. 
