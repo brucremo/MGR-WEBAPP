@@ -51,6 +51,7 @@ const appRoutes: Routes = [
   { path: 'passwordChanged', component: PasswordChangedComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'search/:action/:query', component: SearchComponent },
   { path: 'review/:id', component:ReviewPageComponent },
   { path: 'review', component:ReviewPageComponent },
   { path: 'editReview', component: EditReviewComponent},
