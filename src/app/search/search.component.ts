@@ -5,8 +5,7 @@ import { NgForm } from '@angular/forms';
 import { NavServiceService } from 'src/app/nav-service.service';
 import { User } from '../user';
 import { ActivatedRoute } from '@angular/router';
-import { stringify } from 'querystring';
-
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-search',
@@ -20,20 +19,17 @@ export class SearchComponent implements OnInit {
 
   public game = new Game();
   public gamesQuery = [];
-
-  public user = new User();
   public userQuery = [];
+  public groupQuery = [];
 
   public query: string;
   public action: string;
 
-  // public group = new Group();
-  public groupQuery = [];
-
   constructor(
     private igdb: IgdbService,
     private nav: NavServiceService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private api: ApiService
   ) {
     this.isGame = false;
     this.isUser = false;
@@ -67,10 +63,24 @@ export class SearchComponent implements OnInit {
         console.log(err);
       });
     }
-    else if (this.action == "users")
+    else if (this.action == "users"){
       this.isUser = true;
-    else if (this.action == "groups")
-      this.isGroup = true;      
+
+      this.api.search(this.query).subscribe(res =>{
+        console.log("User found: " + res);
+        this.userQuery = res;
+      }, err => {
+        console.log(err);
+      });
+    } else if (this.action == "groups"){
+      this.isGroup = true;
+
+      this.api.search(this.query).subscribe(res =>{
+        this.groupQuery = res;
+      }, err => {
+        console.log(err);
+      });
+    }
   }
 
   onSubmit(f: NgForm): void {
