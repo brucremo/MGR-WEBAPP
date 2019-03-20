@@ -263,44 +263,36 @@ export class ApiService {
   }
 
   //--------------------------------- GROUP/USER SEARCH FUNCTIONALITY ---------------------------------
-  /*GET: Pass an object with the desired search parameter. The object should have only one property being either:
-  
-    => returns a group object with GROUPID
-    {GROUPID: String} -> to search for a group based on ID          
+  //GET: Searches for a specific USERID
+  searchUSERID(USERID: any): Observable<any> {
 
-    => returns a user object with USERID, USERNAME, USERAVATAR, USERSUMMARY and USERLOCATION
-    {USEREMAIL: String} -> to search for a user based on its email 
-    {USERID: String} -> to search for a user based on id 
-    {USERNAME: String} -> to search for a user based on its name
-  */
-  search(searchObject: any): Observable<any> {
+    let params = new HttpParams().set("USERID", USERID);
 
-    if (searchObject.GROUPID) {
+    return this.http.get<any>(`${this.api}/search`, { params: params });
+  }
 
-      let params = new HttpParams().set("GROUPID", searchObject.GROUPID);
+  //GET: Searches for a specific USEREMAIL
+  searchUSEREMAIL(USEREMAIL: any): Observable<any> {
 
-      return this.http.get<any>(`${this.api}/search`, { params: params });
-    } else {
+    let params = new HttpParams().set("USEREMAIL", USEREMAIL);
 
-      if (searchObject.USEREMAIL) {
+    return this.http.get<any>(`${this.api}/search`, { params: params });
+  }
 
-        let params = new HttpParams().set("USEREMAIL", searchObject.USEREMAIL);
+  //GET: Searches for a specific USERNAME
+  searchUSERNAME(USERNAME: any): Observable<any> {
 
-        return this.http.get<any>(`${this.api}/search`, { params: params });
+    let params = new HttpParams().set("USERNAME", USERNAME);
 
-      } else if (searchObject.USERID) {
+    return this.http.get<any>(`${this.api}/search`, { params: params });
+  }
 
-        let params = new HttpParams().set("USERID", searchObject.USERID);
+  //GET: Searches for a specific GROUPID
+  searchGROUPID(GROUPID: any): Observable<any> {
 
-        return this.http.get<any>(`${this.api}/search`, { params: params });
+    let params = new HttpParams().set("GROUPID", GROUPID);
 
-      } else {
-
-        let params = new HttpParams().set("USERNAME", searchObject.USERNAME);
-
-        return this.http.get<any>(`${this.api}/search`, { params: params });
-      }
-    }
+    return this.http.get<any>(`${this.api}/search`, { params: params });
   }
 
   //--------------------------------- GROUP CRUD FUNCTIONALITY ---------------------------------
@@ -313,15 +305,24 @@ export class ApiService {
     return this.http.get<any>(`${this.api}/group`, { params: params });
   }
 
+  /*GET: Gets all group id's for a user, meaning all the groups he's part of with its specific roles.
+  Requires the object as follows {USERID : String}*/
+  getGroupsUser(user: any): Observable<any> {
+
+    let params = new HttpParams().set("USERID", user.USERID);
+
+    return this.http.get<any>(`${this.api}/user-groups`, { params: params });
+  }
+
   /*POST: Creates a new group. 
-    Requires the object as follows {GROUPID : String, GROUPPRIVACY : Int, GROUPOWNER : String}*/
+    Requires the object as follows {GROUPID : String, GROUPSUMMARY: String(256), GROUPPRIVACY : Int, GROUPOWNER : String}*/
   createGroup(group: any): Observable<any> {
 
     return this.http.post<any>(`${this.api}/group`, group);
   }
 
   /*PUT: Used to update group privacy or owner. The object should not contain both privacy and owner.
-    Requires the object as follows {GROUPID : String, GROUPPRIVACY : Int ||OR|| GROUPOWNER : String}*/
+    Requires the object as follows {GROUPID : String, GROUPSUMMARY: String(256) ||OR|| GROUPPRIVACY : Int ||OR|| GROUPOWNER : String}*/
   updateGroup(group: any): Observable<any> {
 
     return this.http.put<any>(`${this.api}/group`, group);

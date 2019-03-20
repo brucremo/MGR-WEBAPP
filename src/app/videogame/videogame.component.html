@@ -23,10 +23,13 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4"></div>
+          <div class="col-md-1"></div>
           <div class="col-md-2">
             <button *ngIf="visible" type="button" class="btn btn-info" [routerLink]="['/review/', game.id]">Create
               Review</button>
+          </div>
+          <div class="col-md-1">
+            <button type="button" class="btn btn-info" [routerLink]="['/group/', game.id]">Visit Group</button>
           </div>
           <div class="col-md-1"></div>
           <div class="col-md-2">

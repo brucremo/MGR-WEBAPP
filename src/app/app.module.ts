@@ -28,6 +28,8 @@ import { FavouritesComponent } from './favourites/favourites.component';
 import { FriendComponent } from './friend/friend.component';
 import { GroupPageComponent } from './group-page/group-page.component';
 import { GroupFormComponent } from './group-form/group-form.component';
+import { UsersGroupsComponent } from './users-groups/users-groups.component';
+import { GameGroupComponent } from './game-group/game-group.component';
 
 const appRoutes: Routes = [
   { path: 'user/:id', component: UserPageComponent },
@@ -50,6 +52,7 @@ const appRoutes: Routes = [
   { path: 'passwordChanged', component: PasswordChangedComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'search/:action/:query', component: SearchComponent },
   { path: 'review/:id', component:ReviewPageComponent },
   { path: 'review', component:ReviewPageComponent },
   { path: 'editReview', component: EditReviewComponent},
@@ -62,6 +65,10 @@ const appRoutes: Routes = [
   { path: 'user/:id/friends', component: FriendComponent},
   { path: 'groups/:id', component: GroupPageComponent},
   { path: 'group/create', component: GroupFormComponent},
+  { path: 'userGroups', component: UsersGroupsComponent},
+  { path: 'group/:id', component: GameGroupComponent, resolve: {
+    videogame: VideogameResolve
+  }},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }
@@ -90,7 +97,9 @@ const appRoutes: Routes = [
     FavouritesComponent,
     FriendComponent,
     GroupPageComponent,
-    GroupFormComponent
+    GroupFormComponent,
+    UsersGroupsComponent,
+    GameGroupComponent
   ],
   imports: [
     BrowserModule,

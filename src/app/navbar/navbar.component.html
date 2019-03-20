@@ -7,22 +7,23 @@
     <ul class="navbar-nav ml-auto" id="nav-list">
         <!-- Search Bar -->
         <li class="nav-item mx-auto position-relative" style="padding-right:150px;">
+        <form (ngSubmit)="onSubmit(searchform)" #searchform="ngForm">
         <div class="input-group">
-          <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" style="width: 500px; background-color: black; border: 1px solid dimgray; color:darkgray;">
-          <div class="input-group-append">
-            <button type="button" class="btn btn-outline-secondary">Action</button>
-            <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <div role="separator" class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Separated link</a>
+          <input type="text" #Search="ngModel" name="Search" [(ngModel)]="query" class="form-control" 
+          aria-label="Text input with segmented dropdown button" style="width: 500px; background-color: black; border: 1px solid dimgray; color:darkgray;">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Search {{action}}
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" (click)="setAction('Games')">Games</a>
+                      <a class="dropdown-item" (click)="setAction('Groups')">Groups</a>
+                      <a class="dropdown-item" (click)="setAction('Users')">Users</a>
+                    </div>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
             </div>
-          </div>
         </div>
+      </form>
         </li>
       <!-- Right Side Links -->
       <li class="nav-item"><a class="nav-link" routerLink="/search"><span class="glyphicon glyphicon-search"></span> Search</a></li>
