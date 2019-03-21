@@ -362,23 +362,23 @@ export class ApiService {
    Requires the object as follows {GROUPID : String, USERID : String}*/
   removeAdmin(role: any): Observable<any> {
 
-    role.TYPE = "ADMIN";
-    console.log("the role is: " + role.USERID);
-    return this.http.delete<any>(`${this.api}/role-remove`, role);
+    let params = new HttpParams().set("GROUPID", role.GROUPID).set("USERID", role.USERID).set("TYPE", "ADMIN");
+
+    return this.http.delete<any>(`${this.api}/role-remove`, { params: params });
   }
 
   removeMember(role: any): Observable<any> {
 
-    role.TYPE = "MEMBER";
-    console.log("the role is: " + role.USERID);
+    let params = new HttpParams().set("GROUPID", role.GROUPID).set("USERID", role.USERID).set("TYPE", "MEMBER");
 
-    return this.http.delete<any>(`${this.api}/role-remove`, role);
+    return this.http.delete<any>(`${this.api}/role-remove`, { params: params });
   }
 
   removeModerator(role: any): Observable<any> {
 
-    role.TYPE = "MODERATOR";
-    return this.http.delete<any>(`${this.api}/role-remove`, role);
+    let params = new HttpParams().set("GROUPID", role.GROUPID).set("USERID", role.USERID).set("TYPE", "MODERATOR");
+
+    return this.http.delete<any>(`${this.api}/role-remove`, { params: params });
   }
 }
 
