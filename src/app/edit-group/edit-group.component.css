@@ -1,0 +1,18 @@
+.special-button{
+    float: left;
+    margin-left: 50%;
+}
+.special-label{
+    display: inline-block;
+    clear: left;
+    width: 35%;
+    text-align: right;
+    margin-right: 2%;
+}
+input {
+  display: inline-block;
+  margin-left: 2%;
+}
+.user-not-found{
+    text-align: center;
+}

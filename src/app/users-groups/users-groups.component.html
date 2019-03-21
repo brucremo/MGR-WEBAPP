@@ -4,42 +4,36 @@
   <!--Groups with admin role-->
   <table>
     <h5>Groups with the role: <small class="text-muted">Admin</small></h5>
-    <tr>
-      <th>Group Name</th>
-      <th>Group Description</th>
+    <tr *ngIf="userGroups.GROUPADMINS.length == 0">
+      <td>None</td>
     </tr>
     <tr *ngFor="let ugadmin of userGroups.GROUPADMINS">
-      <td>{{ugadmin.GROUPID}}</td>
-      <td>group made for testing purposes</td>
-      <!--Above line to be replaced with:
-          <td>{{ugadmin.GROUPDESCRIPTION}}</td>
-          -->
+      <td><a href="/groups/{{ugadmin.GROUPID}}">{{ugadmin.GROUPID}}</a></td>
+      <td>{{ugadmin.GROUPSUMMARY}}</td>
     </tr>
     <br> <br>
     <h5>Groups with the role: <small class="text-muted">Moderator</small></h5>
-    <tr>
-      <th>Group Name</th>
-      <th>Group Description</th>
-    </tr>
+    <tr *ngIf="userGroups.GROUPADMINS.length == 0">
+        <td>None</td>
+      </tr>
     <tr *ngFor="let ugmod of userGroups.GROUPMODERATORS">
-      <td>{{ugmod.GROUPID}}</td>
-      <td>group made for testing purposes</td>
-      <!--Above line to be replaced with:
-          <td>{{ugmod.GROUPDESCRIPTION}}</td> 
-          -->
+        <td><a href="/groups/{{ugmod.GROUPID}}">{{ugmod.GROUPID}}</a></td>
+        <td>{{ugmod.GROUPSUMMARY}}</td> 
     </tr>
     <br> <br>
-    <h5>Groups with the role:<small class="text-muted">Admin</small></h5>
-    <tr>
-      <th>Group Name</th>
-      <th>Group Description</th>
-    </tr>
+    <h5>Groups with the role:<small class="text-muted"> Member</small></h5>
+    <tr *ngIf="userGroups.GROUPADMINS.length == 0">
+        <td>None</td>
+      </tr>
     <tr *ngFor="let ugmem of userGroups.GROUPMEMBERS">
-      <td>{{ugmem.GROUPID}}</td>
-      <td>group made for testing purposes</td>
-      <!--Above line to be replaced with:
-          <td>{{ugmem.GROUPDESCRIPTION}}</td> 
-          -->
+        <td><a href="/groups/{{ugmem.GROUPID}}">{{ugmem.GROUPID}}</a></td>
+        <td>{{ugmem.GROUPSUMMARY}}</td> 
     </tr>
   </table>
+  <br> <br>
+  <div class="row">
+    <div class="col-md-7"></div>
+    <button class="btn btn-success" onclick="window.location='group/create'">Create a New Group</button>
+
+  </div>
 </div>

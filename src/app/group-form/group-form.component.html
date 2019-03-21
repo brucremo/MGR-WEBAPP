@@ -2,35 +2,63 @@
   <h3 id='title'>Create a Group</h3>
   <div class="row">
     <div class="col-md-3"></div>
-  <form>
-    <!--Get the group's name (aka group id)-->
-    <div class="form-group">
-      <label for="groupName">Name</label>
-      <input type="text" class="form-control" id="groupName" name="groupName" required>
-    </div>
+    <div class="col-md-6">
+      <form (ngSubmit)='GroupFormSubmit(f)' #f='ngForm' id="groupForm">
+        <!--Get the group's ID -->
+        <div class="form-group">
+          <label for="groupName">Group ID:</label>
+          <small> This value may not be modified later</small>
+          <input type="text" class="form-control" id="groupId" name="groupId" #groupId="ngModel" [(ngModel)]="group.GROUPID"
+            pattern="[A-Za-z0-9_ ]{2,50}" required>
+          <div *ngIf='groupId.invalid && (groupId.dirty || groupId.touched)' class='alert alert-danger'>
+            <div *ngIf='groupId.errors.required'>Group ID is required, 2 to 50 characters</div>
+            <div *ngIf='groupId.errors.pattern'>Group ID must be at least 2 characters</div>
+          </div>
+        </div>
 
-    <!--Get the group's privacy setting-->
-    <div class="form-group">
-      <label for="groupPrivacy">Privacy setting:</label>
-      <input type="number" class="form-control" id="groupPrivacy" name="groupPrivacy" 
-      min="1" max="3" step="1" value="1" required>
-      <p>*NOTE: 1 - open to all users, 2 - users can request to join, 3 - users join on invite only</p>
-    </div>
+        <!--Get the group's name-->
+        <div class="form-group">
+          <label for="groupName">Group Name:</label>
+          <input type="text" class="form-control" id="groupName" name="groupName" #groupName="ngModel" [(ngModel)]="group.GROUPNAME"
+            pattern="[A-Za-z0-9_ ]{2,50}" required>
+          <div *ngIf='groupName.invalid && (groupName.dirty || groupName.touched)' class='alert alert-danger'>
+            <div *ngIf='groupName.errors.required'>Group name is required, 2 to 50 characters</div>
+            <div *ngIf='groupName.errors.pattern'>Group name must be at least 2 characters</div>
+          </div>
+        </div>
 
-    <!--Get the group's name (aka group id)-->
-    <div class="form-group">
-      <label for="groupOwner">Group Owner</label>
-      <input type="text" class="form-control" id="groupOwner" name="groupOwner" required>
-    </div>
 
-    <!--Get the group's description-->
-    <div class="form-group">
-      <label for="groupDescription">Group Description</label>
-      <textarea id="groupDescription" name="groupDescription" 
-      placeholder="Write your group description here" style="height:200px"></textarea>
+        <!--Get the group's privacy setting-->
+        <div class="form-group">
+          <label for="groupPrivacy">Privacy setting:</label>
+          <input type="number" class="form-control" id="groupPrivacy" name="groupPrivacy" [(ngModel)]="group.GROUPPRIVACY"
+            #groupPrivacy="ngModel" pattern="[0-2]" min="0" max="2" step="1" value="0" required>
+          <small> 0 - open to all users
+            <br>
+            1 - users can join with an invite
+            <br>
+            2 - only a member's friend may join
+          </small>
+          <div *ngIf='groupPrivacy.invalid && (groupPrivacy.dirty || groupPrivacy.touched)' class='alert alert-danger'>
+            <div *ngIf='groupPrivacy.errors.required'>Group Privacy is required, between 0 and 2</div>
+            <div *ngIf='groupPrivacy.errors.pattern'>Group Privacy must be between 0 and 2</div>
+          </div>
+        </div>
+
+        <!--Get the group's description-->
+        <div class="form-group">
+          <label class="control-label" for="groupSummary">Group Summary:</label>
+          <input type="text" class="form-control" id="groupSummary" name="groupSummary" #groupSummary="ngModel"
+            [(ngModel)]="group.GROUPSUMMARY" pattern="[A-Za-z0-9_ ]{5,256}" required>
+          <div *ngIf='groupSummary.invalid && (groupSummary.dirty || groupSummary.touched)' class='alert alert-danger'>
+            <div *ngIf='groupSummary.errors.required'>Group Summary is required, between 5 and 256 characters</div>
+            <div *ngIf='groupSummary.errors.pattern'>Group Summary must have 5 to 256 characters</div>
+          </div>
+        </div>
+        <br> <br>
+        <button type="submit" class="btn btn-success" form="groupForm" [disabled]="!f.form.valid">Create Group</button>
+
+      </form>
     </div>
-      <br> <br>
-      <button type="submit" class="btn btn-success">Create Group</button>
-  </form>
-</div>
+  </div>
 </div>

@@ -4,7 +4,7 @@
     <div class="col-md-3"></div>
     <div class="col-md-6" id="group-header">
       <img id="group-thumbnail" src="../../assets/images/GroupImg.svg">
-      <h1>{{group[0].GROUPID}}</h1>
+      <h1>{{group[0].GROUPNAME}}</h1>
       <!-- Will replace above line when loaded
       <h1>{{group.name}}</h1>
       -->
@@ -33,7 +33,7 @@
             <span *ngFor="let o of group[0].GROUPMEMBERS">| {{o.USERID}} </span>
           </p>
           <hr>
-          <div *ngIf="!this.isMember && !this.askedToJoin">
+          <div *ngIf="this.nonMember && !this.askedToJoin">
             <!-- Non members can ask to join the group -->
             <button type="button" class="btn btn-success" (click)="onJoinGroup()">Join Group</button>
             &nbsp; &nbsp;
@@ -47,40 +47,49 @@
             &nbsp; &nbsp;
 
           </div>
-
-          <div *ngIf="this.isAdmin">
-            <!-- Admins can edit the group -->
-            <button type="button" class="btn btn-primary">Edit Group</button>
+          <div *ngIf="this.isOwner">
+            <!-- Owner can delete the group -->
+            <button type="button" class="btn btn-danger" (click)="onDeleteGroup()">Delete Group</button>
             &nbsp; &nbsp;
 
           </div>
-          <div *ngIf="this.isMember">
+
+          <div *ngIf="this.isAdmin || this.isModerator || this.isOwner">
+            <!-- Admins can edit the group -->
+            <button type="button" class="btn btn-primary" (click)="onEditGroup()">Edit Group</button>
+            &nbsp; &nbsp;
+
+          </div>
+          <div *ngIf="this.isMember || this.isModerator || this.isAdmin">
             <!-- Members can leave the group -->
-            <button type="button" class="btn btn-danger">Leave Group</button>
+            <button type="button" class="btn btn-danger" (click)="this.onLeaveGroup()">Leave Group</button>
             &nbsp; &nbsp;
 
             <!-- Members can create a discussion -->
             <button type="button" class="btn btn-success">Create Discussion</button>
             &nbsp; &nbsp;
-
           </div>
+
+
         </div>
       </div>
     </div>
     <div class="col-md-8">
-      <!-- Conditional: Shows the following if the user is a non-member, or not logged in -->
-      <div *ngIf="!this.isMember; else elseBlock">
-        <h5>Description</h5>
-        A brief description of the group for users that are either not logged in, or are not part of the group.
-        This will be implemented with the use of *ngIf.
-        <br> <br>
-        Find this group interesting? Click the 'Join Group' button to join!
+        <!-- Conditional: Shows the following if the user is a non-member, or not logged in -->
+        <div *ngIf="this.nonMember; else elseBlock">
+          <h5>Description</h5>
+          {{group[0].GROUPSUMMARY}}
+          <br> <br>
+          Find this group interesting? Click the 'Join Group' button to join!
+        </div>
+        <!-- Conditional: Shows the following if the user is a member -->
+        <ng-template #elseBlock>
+          <h5>Description</h5>
+          {{group[0].GROUPSUMMARY}}
+          <br> <br>
+          <h5 class="sub-heading">Discussion Board</h5>
+          <p>Coming soon!</p>
+        </ng-template>
       </div>
-      <!-- Conditional: Shows the following if the user is a member -->
-      <ng-template #elseBlock>
-        <h5 class="sub-heading">Discussion Board</h5>
-        <p>Coming soon!</p>
-      </ng-template>
-    </div>
   </div>
 </div>

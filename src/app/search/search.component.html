@@ -39,9 +39,9 @@
     <li *ngFor="let group of groupQuery" [routerLink]="['/groups/', group.GROUPID]" class="list-group-item list-group-item-action flex-column align-items-start">
       <div class="row">
         <div class="col-md-10"><div class="d-flex w-100 justify-content-between">
-          <h4 class="mb-1">{{ group.GROUPID }}</h4>
+          <h4 class="mb-1">{{ group.GROUPNAME }}</h4>
         </div>
-        <p class="mb-1">{{ group.summary }}</p>
+        <p class="mb-1">{{ group.GROUPSUMMARY }}</p>
       </div></div>
       </li>
     </div>
