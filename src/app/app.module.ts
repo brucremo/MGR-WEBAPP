@@ -30,6 +30,7 @@ import { GroupPageComponent } from './group-page/group-page.component';
 import { GroupFormComponent } from './group-form/group-form.component';
 import { UsersGroupsComponent } from './users-groups/users-groups.component';
 import { GameGroupComponent } from './game-group/game-group.component';
+import { EditGroupComponent } from './edit-group/edit-group.component';
 
 const appRoutes: Routes = [
   { path: 'user/:id', component: UserPageComponent },
@@ -66,6 +67,7 @@ const appRoutes: Routes = [
   { path: 'groups/:id', component: GroupPageComponent},
   { path: 'group/create', component: GroupFormComponent},
   { path: 'userGroups', component: UsersGroupsComponent},
+  { path: 'editGroup/:id', component: EditGroupComponent},
   { path: 'group/:id', component: GameGroupComponent, resolve: {
     videogame: VideogameResolve
   }},
@@ -99,7 +101,8 @@ const appRoutes: Routes = [
     GroupPageComponent,
     GroupFormComponent,
     UsersGroupsComponent,
-    GameGroupComponent
+    GameGroupComponent,
+    EditGroupComponent
   ],
   imports: [
     BrowserModule,

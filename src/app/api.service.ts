@@ -288,9 +288,9 @@ export class ApiService {
   }
 
   //GET: Searches for a specific GROUPID
-  searchGROUPID(GROUPID: any): Observable<any> {
+  searchGROUPNAME(GROUPNAME: any): Observable<any> {
 
-    let params = new HttpParams().set("GROUPID", GROUPID);
+    let params = new HttpParams().set("GROUPNAME", GROUPNAME);
 
     return this.http.get<any>(`${this.api}/search`, { params: params });
   }

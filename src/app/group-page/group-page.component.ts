@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { stringify } from 'querystring';
-import { User } from '../user';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-group-page',
@@ -12,18 +9,21 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class GroupPageComponent implements OnInit {
   public group: any;
+  public groupname: String;
   public userID: String;
   public isMember: boolean;
   public isAdmin: boolean;
   public isModerator: boolean;
   public isOwner: boolean;
   public askedToJoin: boolean;
+  public nonMember: boolean;
 
   constructor(private router: Router,
     private r: ActivatedRoute,
     private api: ApiService) {
     this.group = {};
     this.userID = "";
+    this.nonMember = true;
     this.isMember = false;
     this.isAdmin = false;
     this.isModerator = false;
@@ -35,6 +35,7 @@ export class GroupPageComponent implements OnInit {
     //get the group from the API
     //extract the group id from the url
     var url = window.location.href;
+    this.groupname = url.slice(url.lastIndexOf('/') + 1);
     var groupID = {
       "GROUPID": url.slice(url.lastIndexOf('/') + 1)
     };
@@ -46,7 +47,6 @@ export class GroupPageComponent implements OnInit {
       this.group = res;
 
       //format the received object's date
-      this.group[0].GROUPID = this.group[0].GROUPID.toUpperCase();
       this.group[0].GROUPCREATIONDATE = new Date(this.group[0].GROUPCREATIONDATE).toLocaleDateString("en-US");
 
       //check if user is a part of the group
@@ -55,23 +55,23 @@ export class GroupPageComponent implements OnInit {
 
         //compare userID with owner
         if (this.userID == this.group[0].GROUPOWNER) {
-          this.isMember = true;
           this.isOwner = true;
+          this.nonMember = false;
         }
 
         //compare userID with admins
         for (var i = 0; i < this.group[0].GROUPADMINS.length; i++) {
           if (this.userID == this.group[0].GROUPADMINS[i].USERID) {
-            this.isMember = true;
             this.isAdmin = true;
+            this.nonMember = false;
           }
         }
 
         //compare userID with moderators
         for (var i = 0; i < this.group[0].GROUPMODERATORS.length; i++) {
           if (this.userID == this.group[0].GROUPMODERATORS[i].USERID) {
-            this.isMember = true;
             this.isModerator = true;
+            this.nonMember = false;
           }
         }
 
@@ -79,6 +79,7 @@ export class GroupPageComponent implements OnInit {
         for (var i = 0; i < this.group[0].GROUPMEMBERS.length; i++) {
           if (this.userID == this.group[0].GROUPMEMBERS[i].USERID)
             this.isMember = true;
+            this.nonMember = false;
         }
       }
     }, err => {
@@ -94,4 +95,56 @@ export class GroupPageComponent implements OnInit {
   onCancelJoinRequest(){
     this.askedToJoin=false;
   }
+  
+  onEditGroup(){
+    console.log("triggered OnEditGroup()");
+    this.router.navigate(['/editGroup/', this.groupname]);
+  }
+
+  onDeleteGroup(){
+    console.log("triggered OnDeleteGroup()");
+    var url = window.location.href;
+    var obj = {
+      "GROUPID": url.slice(url.lastIndexOf('/') + 1)
+    };
+    console.log("deleting group with the ID: " + obj.GROUPID);
+    this.api.deleteGroup(obj).subscribe(res=>{
+      console.log(res);
+      this.router.navigate(['/userGroups']);
+
+    }, err=>{
+      console.log("error: " + err);
+    });
+
+  }
+
+  onLeaveGroup(){
+    var url = window.location.href;
+    var obj = {
+      "GROUPID": url.slice(url.lastIndexOf('/') + 1),
+      "USERID": document.cookie.split("=")[1]
+    };
+    if(this.isAdmin){
+      this.api.removeAdmin(obj).subscribe(res=>{
+        this.ngOnInit();
+      }, err=>{
+        console.log("error: " + err);
+      })
+    }
+    if(this.isMember){
+      this.api.removeMember(obj).subscribe(res =>{
+        this.ngOnInit();
+      }, err=>{
+      console.log('err: ' + err);
+      })
+    }
+    if(this.isModerator){
+      this.api.removeModerator(obj).subscribe(res=>{
+        this.ngOnInit();
+      }, err =>{
+        console.log("err: " + err);
+      })
+    }
+  }
+
 }

@@ -3,6 +3,7 @@ import { User } from '../user';
 import { NavServiceService } from '../nav-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
+import { Group } from '../group';
 
 @Component({
   selector: 'app-users-groups',
@@ -12,6 +13,7 @@ import { ApiService } from '../api.service';
 export class UsersGroupsComponent implements OnInit {
 
   public user: User;
+  public groups: Group[];
   public userGroups: any;
   public nav: NavServiceService;
   constructor(private router: Router,
@@ -41,6 +43,7 @@ export class UsersGroupsComponent implements OnInit {
     }
     this.api.getGroupsUser(this.user).subscribe(res =>{
       this.userGroups = res;
+
     }, err =>{
       console.log("Error:" + err);
     });

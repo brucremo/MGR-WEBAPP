@@ -1,0 +1,144 @@
+<div class="row">
+    <br />
+    <div class="col-md-3"></div>
+    <div class="col-md-5">
+        <br />
+        <div class="card">
+            <form (ngSubmit)='onGroupSubmit(editgroup)' #editgroup="ngForm">
+
+                <div class="card-header">
+                    <h3><label class="control-label" for="groupID">Edit Group Info</label></h3>
+                </div>
+
+                <div class="card-body">
+                    <!--Get the group's name-->
+                    <div class="form-group">
+                        <label for="groupName">Group Name:</label>
+                        <input type="text" class="form-control" id="groupName" name="groupName" #groupName="ngModel"
+                            [(ngModel)]="group.GROUPNAME" pattern="[A-Za-z0-9_ ]{2,50}" required>
+                        <div *ngIf='groupName.invalid && (groupName.dirty || groupName.touched)' class='alert alert-danger'>
+                            <div *ngIf='groupName.errors.required'>Group name is required, 2 to 50 characters</div>
+                            <div *ngIf='groupName.errors.pattern'>Name must be at least 2 characters</div>
+                        </div>
+                    </div>
+
+                    <!--Get the group's privacy setting-->
+                    <div class="form-group">
+                        <label for="groupPrivacy">Privacy setting:</label>
+                        <input type="number" class="form-control" id="groupPrivacy" name="groupPrivacy" [(ngModel)]="group.GROUPPRIVACY"
+                            #groupPrivacy="ngModel" pattern="[0-2]" min="0" max="2" step="1" value="0" required>
+                        <small> 0 - open to all users
+                            <br>
+                            1 - users can join with an invite
+                            <br>
+                            2 - only a member's friend may join
+                        </small>
+                        <div *ngIf='groupPrivacy.invalid && (groupPrivacy.dirty || groupPrivacy.touched)' class='alert alert-danger'>
+                            <div *ngIf='groupPrivacy.errors.required'>Group Privacy is required, between 0 and 2</div>
+                            <div *ngIf='groupPrivacy.errors.pattern'>Group Privacy must be between 0 and 2</div>
+                        </div>
+                    </div>
+
+                    <!--Get the group's description-->
+                    <div class="form-group">
+                        <label class="control-label" for="groupSummary">Group Summary:</label>
+                        <input type="text" class="form-control" id="groupSummary" name="groupSummary" #groupSummary="ngModel"
+                            [(ngModel)]="group.GROUPSUMMARY" pattern="[A-Za-z0-9_ ]{5,256}" required>
+                        <div *ngIf='groupSummary.invalid && (groupSummary.dirty || groupSummary.touched)' class='alert alert-danger'>
+                            <div *ngIf='groupSummary.errors.required'>Group Summary is required, between 5 and 256
+                                characters</div>
+                            <div *ngIf='groupSummary.errors.pattern'>Group Summary must have 5 to 256 characters</div>
+                        </div>
+                    </div>
+
+
+                    <button class="btn btn-primary" type="submit">Confirm</button>&nbsp;
+                    <button class="btn btn-danger" (click)='this.onCancel()'>Cancel</button>
+                </div>
+            </form>
+        </div>
+        <br>
+        <!-- Admins only -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Member Management</h3>
+                    <small>Input a user ID and hit 'Enter'</small>
+                </div>
+                <div class="card-body">
+                        <div *ngIf="isAdmin">
+
+                    <label class="special-label">Add an Admin: </label>
+                    <input type="text" id="addAdmin" name="addAdmin" #addAdminID (keyup.enter)="onEnterAddAdmin(addAdminID.value)" required>
+                    <div *ngIf="activatedAddAdmin">
+                            <button class="btn btn-success special-button" (click)="onAddAdmin()">Add</button>
+                    </div>
+                    <div *ngIf="addAdmin_IDerror">
+                        <p class="user-not-found">User not found</p>
+                    </div>
+                        <br><br>
+
+                    <label class="special-label">Remove an Admin: </label>
+                    <input type="text" id="removeAdmin" name="removeAdmin" #removeAdminID (keyup.enter)="onEnterRemoveAdmin(removeAdminID.value)" required>
+                    <div *ngIf="activatedRemoveAdmin">
+                            <button class="btn btn-danger special-button" (click)="onRemoveAdmin()">Remove</button>
+                        </div>
+                        <div *ngIf="removeAdmin_IDerror">
+                                <p class="user-not-found">User not found</p>
+                            </div>
+                        <br>
+                        <hr>
+
+                    <label class="special-label">Add a Moderator: </label>
+                    <input type="text" id="addModerator" name="addModerator" #addModeratorID (keyup.enter)="onEnterAddModerator(addModeratorID.value)"
+                        required>
+                    <div *ngIf="activatedAddModerator">
+                        <button class="btn btn-success special-button" (click)="onAddModerator()">Add</button>
+                    </div>
+                    <div *ngIf="addModerator_IDerror">
+                            <p class="user-not-found">User not found</p>
+                        </div>
+                    <br><br>
+
+                    <label class="special-label">Remove a Moderator: </label>
+                    <input type="text" id="removeModerator" name="removeModerator" #removeModeratorID (keyup.enter)="onEnterRemoveModerator(removeModeratorID.value)" required>
+                    <div *ngIf="activatedRemoveModerator">
+                            <button class="btn btn-danger special-button" (click)="onRemoveModerator()">Remove</button>
+                        </div>
+                        <div *ngIf="removeModerator_IDerror">
+                                <p class="user-not-found">User not found</p>
+                            </div>
+                    <br>
+                    <hr>
+                </div>
+                    <label class="special-label">Add a Member: </label>
+                    <input type="text" id="addMember" name="addMember" #addMemberID (keyup.enter)="onEnterAddMember(addMemberID.value)" required>
+                    <div *ngIf="activatedAddMember">
+                            <button class="btn btn-success special-button" (click)="onAddMember()">Add</button>
+                        </div>
+                        <div *ngIf="addMember_IDerror">
+                                <p class="user-not-found">User not found</p>
+                            </div>
+                        <br><br>
+
+                    <label class="special-label">Remove a Member: </label>
+                    <input type="text" id="removeMember" name="removeMember" #removeMemberID (keyup.enter)="onEnterRemoveMember(removeMemberID.value)" required>
+                    <div *ngIf="activatedRemoveMember">
+                            <button class="btn btn-danger special-button" (click)="onRemoveMember()">Remove</button>
+                        </div>
+                        <div *ngIf="removeMember_IDerror">
+                                <p class="user-not-found">User not found</p>
+                            </div>
+                    </div>
+            </div>
+            <br>
+    </div>
+
+
+    <div class="col-md-2">
+        <br />
+        <div class="text-center">
+            <img alt="profilePicture" src="../../assets/images/GroupImg.svg" height=80 width=90 />
+            <h6><a href="/editUser">Upload New Picture</a></h6>
+        </div>
+    </div>
+</div>

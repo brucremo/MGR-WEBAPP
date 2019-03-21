@@ -48,6 +48,7 @@ export class SearchComponent implements OnInit {
     }
 
     this.query = this.route.snapshot.params['query'];
+    console.log("this.querry is: " + this.query);
     this.action = this.route.snapshot.params['action'];
 
     if (this.action == "games"){
@@ -73,8 +74,8 @@ export class SearchComponent implements OnInit {
       });
     } else if (this.action == "groups"){
       this.isGroup = true;
-
-      this.api.searchGROUPID(this.query).subscribe(res =>{
+      console.log('this.query: ' + this.query);
+      this.api.searchGROUPNAME(this.query).subscribe(res =>{
         this.groupQuery = res;
       }, err => {
         console.log(err);
