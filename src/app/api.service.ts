@@ -322,7 +322,7 @@ export class ApiService {
   }
 
   /*PUT: Used to update group information. The object should not contain anything more than GROUPID and one property.
-    Requires the object as follows {GROUPID : String, GROUPNAME:String ||OR|| GROUPSUMMARY: String(256) ||OR|| GROUPPRIVACY : Int ||OR|| GROUPOWNER : String}*/
+    Requires the object as follows {GROUPID : String, GROUPNAME : String, GROUPSUMMARY: String(256), GROUPPRIVACY : Int, GROUPOWNER : String}*/
   updateGroup(group: any): Observable<any> {
 
     return this.http.put<any>(`${this.api}/group`, group);
