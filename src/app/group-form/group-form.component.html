@@ -4,18 +4,6 @@
     <div class="col-md-3"></div>
     <div class="col-md-6">
       <form (ngSubmit)='GroupFormSubmit(f)' #f='ngForm' id="groupForm">
-        <!--Get the group's ID -->
-        <div class="form-group">
-          <label for="groupName">Group ID:</label>
-          <small> This value may not be modified later</small>
-          <input type="text" class="form-control" id="groupId" name="groupId" #groupId="ngModel" [(ngModel)]="group.GROUPID"
-            pattern="[A-Za-z0-9_ ]{2,50}" required>
-          <div *ngIf='groupId.invalid && (groupId.dirty || groupId.touched)' class='alert alert-danger'>
-            <div *ngIf='groupId.errors.required'>Group ID is required, 2 to 50 characters</div>
-            <div *ngIf='groupId.errors.pattern'>Group ID must be at least 2 characters</div>
-          </div>
-        </div>
-
         <!--Get the group's name-->
         <div class="form-group">
           <label for="groupName">Group Name:</label>

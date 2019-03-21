@@ -36,7 +36,7 @@ export class GroupFormComponent implements OnInit {
       "GROUPSUMMARY": this.group.GROUPSUMMARY,
       "GROUPOWNER": this.group.GROUPOWNER
     };    
-    console.log("obj: (before creation)" + obj);
+    console.log("obj: (before creation)" + obj.GROUPNAME + " | " + obj.GROUPOWNER + " | " + obj.GROUPPRIVACY + " | " + obj.GROUPSUMMARY);
     //use the API function to create the group
     this.api.createGroup(obj).subscribe(res =>{
       console.log(res);
