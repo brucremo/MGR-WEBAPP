@@ -363,19 +363,22 @@ export class ApiService {
   removeAdmin(role: any): Observable<any> {
 
     role.TYPE = "ADMIN";
-    return this.http.post<any>(`${this.api}/role-remove`, role);
+    console.log("the role is: " + role.USERID);
+    return this.http.delete<any>(`${this.api}/role-remove`, role);
   }
 
   removeMember(role: any): Observable<any> {
 
     role.TYPE = "MEMBER";
-    return this.http.post<any>(`${this.api}/role-remove`, role);
+    console.log("the role is: " + role.USERID);
+
+    return this.http.delete<any>(`${this.api}/role-remove`, role);
   }
 
   removeModerator(role: any): Observable<any> {
 
     role.TYPE = "MODERATOR";
-    return this.http.post<any>(`${this.api}/role-remove`, role);
+    return this.http.delete<any>(`${this.api}/role-remove`, role);
   }
 }
 

@@ -222,6 +222,7 @@ export class EditGroupComponent implements OnInit {
       console.log(res);
     }, err =>{
       console.log("error: " + err);
+      alert("Error: Unable to add member.");
     });
 
     //redirect user
@@ -235,14 +236,19 @@ export class EditGroupComponent implements OnInit {
       "USERID": this.id
     };
     //api call
+    console.log("info acquired for delete:\n" +
+      "groupID: " + this.group.GROUPID +
+      "\nuserID: " + this.id
+    );
     this.m.removeMember(obj).subscribe(res=>{
       console.log(res);
     }, err =>{
       console.log("error: " + err);
+      alert("Error: Unable to remove member.");
     });
 
     //redirect user
-    this.router.navigate(['/groups/', this.group.GROUPID]);
+   // this.router.navigate(['/groups/', this.group.GROUPID]);
 
   }
 
@@ -258,6 +264,8 @@ export class EditGroupComponent implements OnInit {
       console.log(res);
     }, err =>{
       console.log("error: " + err);
+      alert("Error: Unable to remove moderator.");
+
     });
 
     //redirect user
@@ -276,6 +284,8 @@ export class EditGroupComponent implements OnInit {
       console.log(res);
     }, err =>{
       console.log("error: " + err);
+      alert("Error: Unable to remove moderator.");
+
     });
 
     //redirect user
@@ -293,6 +303,8 @@ export class EditGroupComponent implements OnInit {
       console.log(res);
     }, err =>{
       console.log("error: " + err);
+      alert("Error: Unable to add Admin.");
+
     });
 
     //redirect user
@@ -309,6 +321,8 @@ export class EditGroupComponent implements OnInit {
       console.log(res);
     }, err =>{
       console.log("error: " + err);
+      alert("Error: Unable to remove admin.");
+
     });
 
     //redirect user
