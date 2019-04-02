@@ -248,7 +248,7 @@ export class EditGroupComponent implements OnInit {
     });
 
     //redirect user
-   // this.router.navigate(['/groups/', this.group.GROUPID]);
+    this.router.navigate(['/groups/', this.group.GROUPID]);
 
   }
 
