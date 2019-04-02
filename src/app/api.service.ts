@@ -305,7 +305,7 @@ export class ApiService {
     return this.http.get<any>(`${this.api}/group`, { params: params });
   }
 
-  /*GET: Gets all group id's for a user, meaning all the groups he's part of with its specific roles.
+  /*GET: Gets all group names for a user, meaning all the groups he's part of with its specific roles.
   Requires the object as follows {USERID : String}*/
   getGroupsUser(user: any): Observable<any> {
 
