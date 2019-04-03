@@ -109,7 +109,17 @@ export class GroupPageComponent implements OnInit {
   }
 
   onCancelJoinRequest(){
-    this.askedToJoin=false;
+    var membershipRemover = {
+      "GROUPID": this.group.GROUPID,
+      "USERID": document.cookie.split("=")[1]
+    }
+    this.api.sendRequest(membershipRemover).subscribe(res=>{
+      console.log(res);
+      this.askedToJoin = false;
+      this.isMember = false;
+    }, err=>{
+      console.log("Error: " + err);
+    })
   }
   
   onEditGroup(){
