@@ -55,7 +55,7 @@
               <button type="button" class="btn btn-outline-dark" (click)="onEditGroup()">Edit Group</button>
           </div>
           <hr>
-          <div *ngIf="this.nonMember || !this.askedToJoin" style="display: inline;">
+          <div *ngIf="!this.isMember && !this.askedToJoin" style="display: inline;">
             <!-- Non members can ask to join the group -->
             <button type="button" class="btn btn-outline-dark" (click)="onJoinGroup()">Join Group</button>
           </div>
