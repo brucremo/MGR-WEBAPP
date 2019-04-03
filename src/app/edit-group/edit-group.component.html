@@ -24,19 +24,17 @@
 
                     <!--Get the group's privacy setting-->
                     <div class="form-group">
-                        <label for="groupPrivacy">Privacy setting:</label>
-                        <input type="number" class="form-control" id="groupPrivacy" name="groupPrivacy" [(ngModel)]="group.GROUPPRIVACY"
-                            #groupPrivacy="ngModel" pattern="[0-2]" min="0" max="2" step="1" value="0" required>
-                        <small> 0 - open to all users
-                            <br>
-                            1 - users can join with an invite
-                            <br>
-                            2 - only a member's friend may join
-                        </small>
+                        <label for="priv">Group Privacy: </label> &nbsp;
+                        <select id="groupPrivacy" name="groupPrivacy" [(ngModel)]="group.GROUPPRIVACY" #groupPrivacy="ngModel" required>
+                            <option value="0">0 - open to all users</option>
+                            <option value="1">1 - users can request to join with an invite</option>
+                            <option value="2">2 - only a member's friends may request to join</option>
+                        </select>
+
                         <div *ngIf='groupPrivacy.invalid && (groupPrivacy.dirty || groupPrivacy.touched)' class='alert alert-danger'>
-                            <div *ngIf='groupPrivacy.errors.required'>Group Privacy is required, between 0 and 2</div>
-                            <div *ngIf='groupPrivacy.errors.pattern'>Group Privacy must be between 0 and 2</div>
+                            <div *ngIf='groupPrivacy.errors.required'>Group Privacy is required!</div>
                         </div>
+
                     </div>
 
                     <!--Get the group's description-->

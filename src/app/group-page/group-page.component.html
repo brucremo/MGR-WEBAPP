@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
     <!-- Adding whitespace -->
-    <div class="col-md-3"></div>
-    <div class="col-md-6" id="group-header">
+    <div class="col-md-2"></div>
+    <div class="col-md-8" id="group-header">
       <img id="group-thumbnail" src="../../assets/images/GroupImg.svg">
       <h1>{{group[0].GROUPNAME}}</h1>
       <!-- Will replace above line when loaded
@@ -10,86 +10,84 @@
       -->
     </div>
     <!-- Adding whitespace -->
-    <div class="col-md-3"></div>
+    <div class="col-md-2"></div>
   </div>
   <hr>
 </div>
 
-<div class="container">
   <div class="row">
-    <div class="col-md-4">
-      <h5 id="details-sub-heading">Details</h5>
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
       <div class="card" id="group-card">
         <div class="card-body">
+          <p class="card-text" style="text-transform: uppercase; font-weight: bold; text-align:center;"><b>DETAILS</b></p>
+          <hr>
+          <p class="card-text">{{group[0].GROUPSUMMARY}}</p>
           <h6 class="card-subtitle mb-2 text-muted">Since {{group[0].GROUPCREATIONDATE}}</h6>
-          <p class="card-text"><b>Owner</b> | {{group[0].GROUPOWNER}}</p>
+          <hr>
+          <p class="card-text"><b>Owner</b> | <a [routerLink]="['/user/', group[0].GROUPOWNER]">{{group[0].GROUPOWNER}}</a> </p>
           <p class="card-text"><b>Admins </b>
-            <span *ngFor="let a of group[0].GROUPADMINS">| {{a.USERID}} </span>
+            <span *ngFor="let a of group[0].GROUPADMINS">| <a [routerLink]="['/user/', a.USERID]">{{a.USERID}} </a> </span>
           </p>
           <p class="card-text"><b>Moderators </b>
-            <span *ngFor="let m of group[0].GROUPMODERATORS">| {{m.USERID}} </span>
-          </p>
-          <p class="card-text"><b>Other Members </b>
-            <span *ngFor="let o of group[0].GROUPMEMBERS">| {{o.USERID}} </span>
+            <span *ngFor="let m of group[0].GROUPMODERATORS">| <a [routerLink]="['/user/', m.USERID]">{{m.USERID}} </a> </span>
           </p>
           <hr>
-          <div *ngIf="this.nonMember && !this.askedToJoin">
-            <!-- Non members can ask to join the group -->
-            <button type="button" class="btn btn-success" (click)="onJoinGroup()">Join Group</button>
-            &nbsp; &nbsp;
+          <p class="card-text" style="text-transform: uppercase; font-weight: bold; text-align:center;"><b>Members</b></p>
+          <hr>
+          <p>
+            <span *ngFor="let o of group[0].GROUPMEMBERS;let i=index"><a [routerLink]="['/user/', o.USERID]">{{o.USERID}}</a>
+              <span *ngIf="i+1 != group[0].GROUPMEMBERS.length"> | </span></span>
+            <span *ngIf="group[0].GROUPMEMBERS.length == 0">Oh no! There are no members yet! Join Now!</span>
+          </p>
+          <div *ngIf="this.isAdmin || this.isModerator || this.isOwner">
+          <hr>
+          <p class="card-text" style="text-transform: uppercase; font-weight: bold; text-align:center;"><b>ADMIN CONTROLS</b></p>
+          <hr>
+          </div>
+          <div *ngIf="this.isOwner" style="display: inline;">
+              <!-- Owner can delete the group -->
+              <button type="button" class="btn btn-outline-danger" (click)="onDeleteGroup()">Delete Group</button>
+          </div>
 
+          <div *ngIf="this.isAdmin || this.isModerator || this.isOwner" style="padding-bottom:0px; display: inline;">
+              <!-- Admins can edit the group -->
+              <button type="button" class="btn btn-outline-dark" (click)="onEditGroup()">Edit Group</button>
+          </div>
+          <hr>
+          <div *ngIf="!this.isMember && !this.askedToJoin" style="display: inline;">
+            <!-- Non members can ask to join the group -->
+            <button type="button" class="btn btn-outline-dark" (click)="onJoinGroup()">Join Group</button>
           </div>
 
           <div *ngIf="this.askedToJoin">
             <!-- User has asked to join, joining process is pending -->
             <p>Your request has been sent!</p>
-            <button type="button" class="btn btn-danger" (click)="onCancelJoinRequest()">Cancel Join Request</button>
-            &nbsp; &nbsp;
-
-          </div>
-          <div *ngIf="this.isOwner">
-            <!-- Owner can delete the group -->
-            <button type="button" class="btn btn-danger" (click)="onDeleteGroup()">Delete Group</button>
-            &nbsp; &nbsp;
-
+            <button type="button" class="btn btn-outline-dark" (click)="onCancelJoinRequest()">Cancel Join Request</button>
           </div>
 
-          <div *ngIf="this.isAdmin || this.isModerator || this.isOwner">
-            <!-- Admins can edit the group -->
-            <button type="button" class="btn btn-primary" (click)="onEditGroup()">Edit Group</button>
-            &nbsp; &nbsp;
-
-          </div>
           <div *ngIf="this.isMember || this.isModerator || this.isAdmin">
             <!-- Members can leave the group -->
-            <button type="button" class="btn btn-danger" (click)="this.onLeaveGroup()">Leave Group</button>
-            &nbsp; &nbsp;
+            <button type="button" class="btn btn-outline-danger" (click)="this.onLeaveGroup()">Leave Group</button>
 
             <!-- Members can create a discussion -->
-            <button type="button" class="btn btn-success">Create Discussion</button>
-            &nbsp; &nbsp;
+            <button type="button" class="btn btn-outline-success">Create Discussion</button>
           </div>
 
 
         </div>
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-6">
         <!-- Conditional: Shows the following if the user is a non-member, or not logged in -->
         <div *ngIf="this.nonMember; else elseBlock">
-          <h5>Description</h5>
-          {{group[0].GROUPSUMMARY}}
-          <br> <br>
           Find this group interesting? Click the 'Join Group' button to join!
         </div>
         <!-- Conditional: Shows the following if the user is a member -->
         <ng-template #elseBlock>
-          <h5>Description</h5>
-          {{group[0].GROUPSUMMARY}}
-          <br> <br>
           <h5 class="sub-heading">Discussion Board</h5>
           <p>Coming soon!</p>
         </ng-template>
       </div>
   </div>
-</div>
+

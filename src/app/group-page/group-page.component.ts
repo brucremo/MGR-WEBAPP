@@ -126,6 +126,7 @@ export class GroupPageComponent implements OnInit {
     };
     if(this.isAdmin){
       this.api.removeAdmin(obj).subscribe(res=>{
+        this.isAdmin = false;
         this.ngOnInit();
       }, err=>{
         console.log("error: " + err);
@@ -133,6 +134,7 @@ export class GroupPageComponent implements OnInit {
     }
     if(this.isMember){
       this.api.removeMember(obj).subscribe(res =>{
+        this.isMember = false;
         this.ngOnInit();
       }, err=>{
       console.log('err: ' + err);
@@ -140,6 +142,7 @@ export class GroupPageComponent implements OnInit {
     }
     if(this.isModerator){
       this.api.removeModerator(obj).subscribe(res=>{
+        this.isModerator = false;
         this.ngOnInit();
       }, err =>{
         console.log("err: " + err);

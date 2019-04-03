@@ -43,7 +43,7 @@ export class GroupFormComponent implements OnInit {
     }, err =>{
       console.log("Error: " + err);
     });
-    //this.router.navigate(['/user/', document.cookie.split("=")[1]]);
+    this.router.navigate(['/userGroups']);
 
   }
 
