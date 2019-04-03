@@ -89,7 +89,17 @@ export class GroupPageComponent implements OnInit {
   }
 
   onJoinGroup() {
-    this.askedToJoin = true;
+    console.log("triggered OnJoinGroup()");
+    var membershipRequester = {
+      "GROUPID": this.group.GROUPID,
+      "USERID": document.cookie.split("=")[1]
+    }
+    this.api.sendRequest(membershipRequester).subscribe(res =>{
+      console.log(res);
+      this.askedToJoin = true;
+    }, err =>{
+      console.log("Error: " + err);
+    })
   }
 
   onCancelJoinRequest(){

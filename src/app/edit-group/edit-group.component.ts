@@ -38,6 +38,8 @@ export class EditGroupComponent implements OnInit {
   public group: Group;
   public id: string = "";
   public users: User[];
+  public requesters = [];
+  public existingMembers = [];
 
   constructor(private router: Router,
     private r: ActivatedRoute,
@@ -90,6 +92,14 @@ export class EditGroupComponent implements OnInit {
       for (var i = 0; i < this.receiver[0].GROUPMODERATORS.length; i++) {
         if (document.cookie.split("=")[1] == this.receiver[0].GROUPMODERATORS[i].USERID) {
           this.isModerator = true;
+        }
+      }
+      for(var i = 0; i < this.receiver[0].GROUPMEMBERS.length; i++){
+        if(this.receiver[0].GROUPMEMBERS[i].STATUS == 0){
+          this.requesters.push(this.receiver[0].GROUPMEMBERS[i])
+        }
+        else{
+          this.existingMembers.push(this.receiver[0].GROUPMEMEBERS[i]);
         }
       }
 
