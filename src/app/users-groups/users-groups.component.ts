@@ -48,5 +48,10 @@ export class UsersGroupsComponent implements OnInit {
       console.log("Error:" + err);
     });
   }
-
+  ngAfterContentInit(){
+    this.reload();
+  }
+  reload(){
+    this.ngOnInit();
+  }
 }
