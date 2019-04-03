@@ -83,7 +83,7 @@ export class GroupPageComponent implements OnInit {
             this.nonMember = false;
           }
           //user is not a memeber, but has asked to join
-          if(this.userID == this.group[0].GROUPMEMBERS[i].USERID && this.group[0].GROUPMEMBERS[i].STATUS == 1){
+          if(this.userID == this.group[0].GROUPMEMBERS[i].USERID && this.group[0].GROUPMEMBERS[i].STATUS == 0){
             this.askedToJoin = true;
           }
         }
