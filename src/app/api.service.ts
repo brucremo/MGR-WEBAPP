@@ -380,5 +380,30 @@ export class ApiService {
 
     return this.http.delete<any>(`${this.api}/role-remove`, { params: params });
   }
+
+  //--------------------------------- GROUP MEMBERSHIP REQUEST ---------------------------------
+  /*POST: Sends a request to join a group. 
+    Requires the object as follows {GROUPID : String, USERID : String}*/
+  sendRequest(request: any): Observable<any> {
+
+    return this.http.post<any>(`${this.api}/group-request`, request);
+  }
+
+  /*PUT: Alters the request status to 1 when the request is accepted. 
+    Requires the object as follows {GROUPID : String, USERID : String}*/
+  acceptRequest(request: any): Observable<any> {
+
+    return this.http.put<any>(`${this.api}/group-request`, request);
+  }
+
+  /*DELETE: Removes a relationship if its status is 0, if status is 1 an error will be returned.
+   When an error occurs it means you should be using removeMember instead of deleteRequest
+    Requires the object as follows {GROUPID : String, USERID : String}*/
+  deleteRequest(request: any): Observable<any> {
+
+    let params = new HttpParams().set("GROUPID", request.GROUPID).set("USERID", request.USERID);
+
+    return this.http.put<any>(`${this.api}/group-request`, { params: params });
+  }
 }
 

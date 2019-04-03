@@ -25,8 +25,6 @@
           <p class="card-text">{{group[0].GROUPSUMMARY}}</p>
           <h6 class="card-subtitle mb-2 text-muted">Since {{group[0].GROUPCREATIONDATE}}</h6>
           <hr>
-          <p class="card-text" style="text-transform: uppercase; font-weight: bold; text-align:center;"><b>MODERATORS</b></p>
-          <hr>
           <p class="card-text"><b>Owner</b> | <a [routerLink]="['/user/', group[0].GROUPOWNER]">{{group[0].GROUPOWNER}}</a> </p>
           <p class="card-text"><b>Admins </b>
             <span *ngFor="let a of group[0].GROUPADMINS">| <a [routerLink]="['/user/', a.USERID]">{{a.USERID}} </a> </span>
