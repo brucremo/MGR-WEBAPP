@@ -77,9 +77,15 @@ export class GroupPageComponent implements OnInit {
 
         //compare userID with other members
         for (var i = 0; i < this.group[0].GROUPMEMBERS.length; i++) {
-          if (this.userID == this.group[0].GROUPMEMBERS[i].USERID)
+          //check if the member exists as a group memeber
+          if (this.userID == this.group[0].GROUPMEMBERS[i].USERID && this.group[0].GROUPMEMBERS[i].STATUS == 1){
             this.isMember = true;
             this.nonMember = false;
+          }
+          //user is not a memeber, but has asked to join
+          if(this.userID == this.group[0].GROUPMEMBERS[i].USERID && this.group[0].GROUPMEMBERS[i].STATUS == 1){
+            this.askedToJoin = true;
+          }
         }
       }
     }, err => {
