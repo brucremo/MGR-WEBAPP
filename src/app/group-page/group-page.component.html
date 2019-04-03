@@ -38,7 +38,8 @@
           <p class="card-text" style="text-transform: uppercase; font-weight: bold; text-align:center;"><b>Members</b></p>
           <hr>
           <p>
-            <span *ngFor="let o of group[0].GROUPMEMBERS"><a [routerLink]="['/user/', o.USERID]">{{o.USERID}}</a> | </span>
+            <span *ngFor="let o of group[0].GROUPMEMBERS;let i=index"><a [routerLink]="['/user/', o.USERID]">{{o.USERID}}</a>
+              <span *ngIf="i+1 != group[0].GROUPMEMBERS.length"> | </span></span>
             <span *ngIf="group[0].GROUPMEMBERS.length == 0">Oh no! There are no members yet! Join Now!</span>
           </p>
           <div *ngIf="this.isAdmin || this.isModerator || this.isOwner">
@@ -56,7 +57,7 @@
               <button type="button" class="btn btn-outline-dark" (click)="onEditGroup()">Edit Group</button>
           </div>
           <hr>
-          <div *ngIf="this.nonMember && !this.askedToJoin" style="display: inline;">
+          <div *ngIf="this.nonMember || !this.askedToJoin" style="display: inline;">
             <!-- Non members can ask to join the group -->
             <button type="button" class="btn btn-outline-dark" (click)="onJoinGroup()">Join Group</button>
           </div>
@@ -79,7 +80,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-6">
         <!-- Conditional: Shows the following if the user is a non-member, or not logged in -->
         <div *ngIf="this.nonMember; else elseBlock">
           Find this group interesting? Click the 'Join Group' button to join!
