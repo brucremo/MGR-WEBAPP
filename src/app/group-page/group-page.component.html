@@ -36,7 +36,7 @@
           <p class="card-text" style="text-transform: uppercase; font-weight: bold; text-align:center;"><b>Members</b></p>
           <hr>
           <p>
-            <span *ngFor="let o of group[0].GROUPMEMBERS;let i=index"><a [routerLink]="['/user/', o.USERID]">{{o.USERID}}</a>
+            <span *ngFor="let o of group[0].GROUPMEMBERS;let i=index"><a *ngIf="o.STATUS == 1" [routerLink]="['/user/', o.USERID]">{{o.USERID}}</a>
               <span *ngIf="i+1 != group[0].GROUPMEMBERS.length"> | </span></span>
             <span *ngIf="group[0].GROUPMEMBERS.length == 0">Oh no! There are no members yet! Join Now!</span>
           </p>

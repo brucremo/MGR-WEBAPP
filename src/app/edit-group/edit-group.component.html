@@ -68,7 +68,6 @@
             </div>
             <div class="card-body">
                 <div *ngIf="isAdmin">
-                    <small>Input a user ID and hit 'Enter'</small>
                     <label class="special-label">Add an Admin: </label>
                     <input type="text" id="addAdmin" name="addAdmin" #addAdminID
                         (keyup.enter)="onEnterAddAdmin(addAdminID.value)" required>
@@ -137,12 +136,12 @@
                 </div>
 
                 <!-- Show list of pending requests -->
-                
+                <hr>
                 <label class="spceial-label">Pending Requests:</label>
+                <!-- add ul and li's here-->
                 <ul>
-                    <li *ngFor = "let r of requesters">
-                        {{r.USERID}}
-                    </li>
+                    <li>wannabe member 1</li>   <button class="btn btn-primary">Accept</button>
+                    <li *ngFor="let r of requesters">{{r.USERID}}</li>
                 </ul>
             </div>
         </div>

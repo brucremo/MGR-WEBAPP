@@ -74,7 +74,7 @@ export class EditGroupComponent implements OnInit {
     };
     this.m.getGroup(obj).subscribe(res => {
       this.receiver = res;
-
+      console.log(res);
       //copy the data into our group for binding
       this.group.GROUPID = this.receiver[0].GROUPID;
       this.group.GROUPNAME = this.receiver[0].GROUPNAME;
@@ -98,10 +98,13 @@ export class EditGroupComponent implements OnInit {
         if(this.receiver[0].GROUPMEMBERS[i].STATUS == 0){
           this.requesters.push(this.receiver[0].GROUPMEMBERS[i])
         }
-        else{
-          this.existingMembers.push(this.receiver[0].GROUPMEMEBERS[i]);
+        if(this.receiver[0].GROUPMEMBERS[i].STATUS == 1){
+          this.requesters.push(this.receiver[0].GROUPMEMBERS[i])
         }
       }
+
+      console.log("Requesters: " + this.requesters.length);
+      console.log("Existing Members: " + this.existingMembers.length);
 
     }, err => {
       console.log("Error: " + err);

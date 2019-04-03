@@ -97,9 +97,10 @@ export class GroupPageComponent implements OnInit {
   onJoinGroup() {
     console.log("triggered OnJoinGroup()");
     var membershipRequester = {
-      "GROUPID": this.group.GROUPID,
-      "USERID": document.cookie.split("=")[1]
+      "GROUPID": document.cookie.split("=")[1],
+      "USERID": "MadDog"
     }
+    console.log("Object being sent contains following properties: " + membershipRequester.GROUPID + " and " + membershipRequester.USERID);
     this.api.sendRequest(membershipRequester).subscribe(res =>{
       console.log(res);
       this.askedToJoin = true;
