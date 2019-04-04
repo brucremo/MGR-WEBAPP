@@ -46,5 +46,10 @@ export class GroupFormComponent implements OnInit {
     this.router.navigate(['/userGroups']);
 
   }
-
+  ngAfterContentInit(){
+    this.reload();
+  }
+  reload(){
+    this.ngOnInit();
+  }
 }

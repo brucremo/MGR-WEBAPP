@@ -98,9 +98,6 @@ export class EditGroupComponent implements OnInit {
         if(this.receiver[0].GROUPMEMBERS[i].STATUS == 0){
           this.requesters.push(this.receiver[0].GROUPMEMBERS[i])
         }
-        if(this.receiver[0].GROUPMEMBERS[i].STATUS == 1){
-          this.requesters.push(this.receiver[0].GROUPMEMBERS[i])
-        }
       }
 
       console.log("Requesters: " + this.requesters.length);
@@ -339,6 +336,40 @@ export class EditGroupComponent implements OnInit {
     });
 
     //redirect user
+    this.router.navigate(['/groups/', this.group.GROUPID]);
+  }
+
+  acceptMember(value: string){
+    var obj = {
+      "GROUPID": this.group.GROUPID,
+      "USERID": value
+    };
+
+    //api call
+    this.m.acceptRequest(obj).subscribe(res=>{
+      console.log(res);
+    }, err =>{
+      console.log("error: " + err);
+      alert("Error: Unable to accept request.");
+    });
+
+    this.router.navigate(['/groups/', this.group.GROUPID]);
+  }
+
+  declineMember(value: string){
+    var obj = {
+      "GROUPID": this.group.GROUPID,
+      "USERID": value
+    };
+
+    //api call
+    this.m.deleteRequest(obj).subscribe(res=>{
+      console.log(res);
+    }, err =>{
+      console.log("error: " + err);
+      alert("Error: Unable to decline request.");
+    });
+
     this.router.navigate(['/groups/', this.group.GROUPID]);
   }
 }
