@@ -80,6 +80,7 @@ export class UsersGroupsComponent implements OnInit {
       for(var i = 0; i < this.pendingGroups.length; i++){
         if(this.pendingGroups[i] == undefined){
           this.pendingGroups.splice(i, 1);
+          i = i-1;
         }
       }
     }, err =>{
@@ -87,4 +88,20 @@ export class UsersGroupsComponent implements OnInit {
     });
   }
 
+  ngAfterContentInit(){
+    this.reloadOnce();
+  }
+  reloadOnce(){
+    if( window.localStorage )
+    {
+      if( !localStorage.getItem( 'firstLoad' ) )
+      {
+        localStorage[ 'firstLoad' ] = true;
+        window.location.reload();
+      }  
+  
+      else
+        localStorage.removeItem( 'firstLoad' );
+    }
+  }
 }
