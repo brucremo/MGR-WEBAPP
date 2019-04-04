@@ -137,20 +137,23 @@
 
                 <!-- Show list of pending requests -->
                 <hr>
-                <label class="spceial-label">Pending Requests:</label>
-                <!-- add ul and li's here-->
-                <ul>
-                    <li>wannabe member 1</li>   <button class="btn btn-primary">Accept</button>
-                    <li *ngFor="let r of requesters">{{r.USERID}}</li>
-                </ul>
+                <p class="card-text" style="font-size: 20pt;text-align:center;"><b>Pending Requests</b></p>
+                <hr>
+                <div class="card-body" style="text-align: center;">
+                    <div class="row">
+                        <div *ngFor="let r of requesters; let i=index;" style="white-space: nowrap; padding-right:20px;">
+                            <div class="col-md-6">
+                            <b>{{r.USERID}}</b> &nbsp;&nbsp; 
+                            <button class="btn btn-outline-primary" (click)="OnAcceptMember(r.USERID)">Accept</button> &nbsp;&nbsp;
+                            <button class="btn btn-outline-danger" (click)="OnDeclineMember(r.USERID)">Decline</button> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
         <br>
-
-        <div>
-            <!--Manage join requests -->
-
-        </div>
     </div>
 
 
