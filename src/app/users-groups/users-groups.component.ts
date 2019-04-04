@@ -16,8 +16,8 @@ export class UsersGroupsComponent implements OnInit {
   public groups: Group[];
   public userGroups: any;
   public nav: NavServiceService;
-  public acceptedGroups = [ "" ];
-  public pendingGroups = [ "" ];
+  public acceptedGroups = [""];
+  public pendingGroups = [""];
   constructor(private router  : Router,
     private r: ActivatedRoute,
     private api: ApiService) {
@@ -50,23 +50,41 @@ export class UsersGroupsComponent implements OnInit {
       console.log(res);
       this.userGroups = res;
       
+      //get all of user's pending groups into pendingGroups array
       for(var i = 0; i < res.GROUPMEMBERS.length; i++){
         if(res.GROUPMEMBERS[i].STATUS == 0){
+          console.log("adding to pending groups: " + res.GROUPMEMBERS[i].GROUPNAME);
           this.pendingGroups[i] = res.GROUPMEMBERS[i];
         } 
+      }
+
+      //get all of user's accepted groups into acceptedGroups array
+      for(var i = 0; i < res.GROUPMEMBERS.length; i++){
+        //check for null -> user was adding without requesting to be added
         if(res.GROUPMEMBERS[i].STATUS == 1 || res.GROUPMEMBERS[i].STATUS == null) {
+          console.log("adding to accepted groups: " + res.GROUPMEMBERS[i].GROUPNAME);
           this.acceptedGroups[i] = res.GROUPMEMBERS[i];
         }
       }
 
+      //splicing added to avoid strange outputs
+
+      //removes any undefined elements in acceptedGroups array
+      for(var i = 0; i < this.acceptedGroups.length; i++){
+        if(this.acceptedGroups[i] == undefined){
+          this.acceptedGroups.splice(i, 1);
+        }
+      }
+
+      //removes any undefined elements in pendingGroups array
+      for(var i = 0; i < this.pendingGroups.length; i++){
+        if(this.pendingGroups[i] == undefined){
+          this.pendingGroups.splice(i, 1);
+        }
+      }
     }, err =>{
       console.log("Error:" + err);
     });
   }
-  ngAfterContentInit(){
-    this.reload();
-  }
-  reload(){
-    this.ngOnInit();
-  }
+
 }
