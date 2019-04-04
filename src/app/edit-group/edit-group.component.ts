@@ -372,4 +372,12 @@ export class EditGroupComponent implements OnInit {
 
     this.router.navigate(['/groups/', this.group.GROUPID]);
   }
+
+  ngAfterContentInit(){
+    this.reload();
+  }
+
+  reload(){
+    this.ngOnInit();
+  }
 }

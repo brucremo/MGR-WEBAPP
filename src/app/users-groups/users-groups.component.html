@@ -9,7 +9,6 @@
     </tr>
     <tr *ngFor="let ugadmin of userGroups.GROUPADMINS">
       <td><a href="/groups/{{ugadmin.GROUPID}}">{{ugadmin.GROUPNAME}}</a></td>
-      <td>{{ugadmin.GROUPSUMMARY}}</td>
     </tr>
     <br> <br>
     <h5>Groups with the role: <small class="text-muted">Moderator</small></h5>
@@ -18,7 +17,6 @@
     </tr>
     <tr *ngFor="let ugmod of userGroups.GROUPMODERATORS">
       <td><a href="/groups/{{ugmod.GROUPID}}">{{ugmod.GROUPNAME}}</a></td>
-      <td>{{ugmod.GROUPSUMMARY}}</td>
     </tr>
     <br> <br>
     <h5>Groups with the role:<small class="text-muted"> Member</small></h5>
@@ -27,7 +25,6 @@
     </tr>
     <tr *ngFor="let ugmem of this.acceptedGroups">
       <td><a href="/groups/{{ugmem.GROUPID}}">{{ugmem.GROUPNAME}}</a></td>
-      <td>{{ugmem.GROUPSUMMARY}}</td>
     </tr>
     <br><br>
     <h5>Pending Requests</h5>
@@ -35,8 +32,7 @@
         <td>None</td>
     </tr>
       <tr *ngFor="let ugpen of this.pendingGroups">
-        <td><a href="/groups/{{ugpen.GROUPID}}">{{ugmem.GROUPNAME}}</a></td>
-        <td>{{ugmem.GROUPSUMMARY}}</td>
+        <td><a href="/groups/{{ugpen.GROUPID}}">{{ugpen.GROUPNAME}}</a></td>
       </tr>
   </table>
   <br> <br>

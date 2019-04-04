@@ -16,8 +16,8 @@ export class UsersGroupsComponent implements OnInit {
   public groups: Group[];
   public userGroups: any;
   public nav: NavServiceService;
-  public acceptedGroups = [];
-  public pendingGroups = [];
+  public acceptedGroups = [ "" ];
+  public pendingGroups = [ "" ];
   constructor(private router  : Router,
     private r: ActivatedRoute,
     private api: ApiService) {
@@ -47,17 +47,18 @@ export class UsersGroupsComponent implements OnInit {
     console.log("USERID: " + obj.USERID);
     this.api.getGroupsUser(obj).subscribe(res =>{
       console.log("Triggered getGroupsUser()");
-      console.log(res.GROUPMEMBERS);
+      console.log(res);
       this.userGroups = res;
       
       for(var i = 0; i < res.GROUPMEMBERS.length; i++){
         if(res.GROUPMEMBERS[i].STATUS == 0){
-          this.pendingGroups.push(res.GROUPMEMBERS[i]);
+          this.pendingGroups[i] = res.GROUPMEMBERS[i];
         } 
-        if(res.GROUPMEMBERS[i].STATUS == 1) {
-          this.acceptedGroups.push(res.GROUPMEMEBERS[i]);
+        if(res.GROUPMEMBERS[i].STATUS == 1 || res.GROUPMEMBERS[i].STATUS == null) {
+          this.acceptedGroups[i] = res.GROUPMEMBERS[i];
         }
       }
+
     }, err =>{
       console.log("Error:" + err);
     });

@@ -78,7 +78,7 @@ export class GroupPageComponent implements OnInit {
         //compare userID with other members
         for (var i = 0; i < this.group[0].GROUPMEMBERS.length; i++) {
           //check if the member exists as a group memeber
-          if (this.userID == this.group[0].GROUPMEMBERS[i].USERID && this.group[0].GROUPMEMBERS[i].STATUS == 1){
+          if (this.userID == this.group[0].GROUPMEMBERS[i].USERID && (this.group[0].GROUPMEMBERS[i].STATUS == 1 || this.group[0].GROUPMEMBERS[i].STATUS == null)){
             this.isMember = true;
             this.nonMember = false;
           }
