@@ -178,5 +178,7 @@ export class GroupPageComponent implements OnInit {
       })
     }
   }
-
+  ngAfterContentInit(){
+    this.ngOnInit();
+  }
 }
