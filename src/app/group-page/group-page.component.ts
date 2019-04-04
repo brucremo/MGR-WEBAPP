@@ -78,12 +78,12 @@ export class GroupPageComponent implements OnInit {
         //compare userID with other members
         for (var i = 0; i < this.group[0].GROUPMEMBERS.length; i++) {
           //check if the member exists as a group memeber
-          if (this.userID == this.group[0].GROUPMEMBERS[i].USERID && (this.group[0].GROUPMEMBERS[i].STATUS == 1 || this.group[0].GROUPMEMBERS[i].STATUS == null)){
+          if (this.userID == this.group[0].GROUPMEMBERS[i].USERID && (this.group[0].GROUPMEMBERS[i].STATUS == 1 || this.group[0].GROUPMEMBERS[i].STATUS == null)) {
             this.isMember = true;
             this.nonMember = false;
           }
           //user is not a memeber, but has asked to join
-          if(this.userID == this.group[0].GROUPMEMBERS[i].USERID && this.group[0].GROUPMEMBERS[i].STATUS == 0){
+          if (this.userID == this.group[0].GROUPMEMBERS[i].USERID && this.group[0].GROUPMEMBERS[i].STATUS == 0) {
             this.askedToJoin = true;
           }
         }
@@ -101,84 +101,95 @@ export class GroupPageComponent implements OnInit {
       "USERID": document.cookie.split("=")[1]
     }
     console.log("Object being sent contains following properties: " + membershipRequester.GROUPID + " and " + membershipRequester.USERID);
-    this.api.sendRequest(membershipRequester).subscribe(res =>{
+    this.api.sendRequest(membershipRequester).subscribe(res => {
       console.log(res);
       this.askedToJoin = true;
-    }, err =>{
+    }, err => {
       console.log("Error: " + err);
     })
   }
 
-  onCancelJoinRequest(){
+  onCancelJoinRequest() {
     console.log("triggered OnCancelJoinGroup()");
     var membershipRemover = {
       "GROUPID": this.group[0].GROUPID,
       "USERID": document.cookie.split("=")[1]
     }
     console.log("MembershipRemover: " + membershipRemover.GROUPID + " " + membershipRemover.USERID);
-    this.api.deleteRequest(membershipRemover).subscribe(res=>{
+    this.api.deleteRequest(membershipRemover).subscribe(res => {
       console.log(res);
       this.askedToJoin = false;
       this.isMember = false;
-    }, err=>{
+    }, err => {
       console.log("Error: " + err);
     })
   }
-  
-  onEditGroup(){
+
+  onEditGroup() {
     console.log("triggered OnEditGroup()");
     this.router.navigate(['/editGroup/', this.groupname]);
   }
 
-  onDeleteGroup(){
+  onDeleteGroup() {
     console.log("triggered OnDeleteGroup()");
     var url = window.location.href;
     var obj = {
       "GROUPID": url.slice(url.lastIndexOf('/') + 1)
     };
     console.log("deleting group with the ID: " + obj.GROUPID);
-    this.api.deleteGroup(obj).subscribe(res=>{
+    this.api.deleteGroup(obj).subscribe(res => {
       console.log(res);
       this.router.navigate(['/userGroups']);
 
-    }, err=>{
+    }, err => {
       console.log("error: " + err);
     });
 
   }
 
-  onLeaveGroup(){
+  onLeaveGroup() {
     var url = window.location.href;
     var obj = {
       "GROUPID": url.slice(url.lastIndexOf('/') + 1),
       "USERID": document.cookie.split("=")[1]
     };
-    if(this.isAdmin){
-      this.api.removeAdmin(obj).subscribe(res=>{
+    if (this.isAdmin) {
+      this.api.removeAdmin(obj).subscribe(res => {
         this.isAdmin = false;
         this.ngOnInit();
-      }, err=>{
+      }, err => {
         console.log("error: " + err);
       })
     }
-    if(this.isMember){
-      this.api.removeMember(obj).subscribe(res =>{
+    if (this.isMember) {
+      this.api.removeMember(obj).subscribe(res => {
         this.isMember = false;
         this.ngOnInit();
-      }, err=>{
-      console.log('err: ' + err);
+      }, err => {
+        console.log('err: ' + err);
       })
     }
-    if(this.isModerator){
-      this.api.removeModerator(obj).subscribe(res=>{
+    if (this.isModerator) {
+      this.api.removeModerator(obj).subscribe(res => {
         this.isModerator = false;
         this.ngOnInit();
-      }, err =>{
+      }, err => {
         console.log("err: " + err);
       })
     }
   }
-  ngAfterContentInit(){
-    this.ngOnInit();
+  ngAfterContentInit() {
+    this.reloadOnce();
+  }
+  reloadOnce() {
+    if (window.localStorage) {
+      if (!localStorage.getItem('firstLoad')) {
+        localStorage['firstLoad'] = true;
+        window.location.reload();
+      }
+
+      else
+        localStorage.removeItem('firstLoad');
+    }
   }
 }
