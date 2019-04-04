@@ -13,22 +13,31 @@
     </tr>
     <br> <br>
     <h5>Groups with the role: <small class="text-muted">Moderator</small></h5>
-    <tr *ngIf="userGroups.GROUPADMINS.length == 0">
-        <td>None</td>
-      </tr>
+    <tr *ngIf="userGroups.GROUPMODERATORS.length == 0">
+      <td>None</td>
+    </tr>
     <tr *ngFor="let ugmod of userGroups.GROUPMODERATORS">
-        <td><a href="/groups/{{ugmod.GROUPID}}">{{ugmod.GROUPNAME}}</a></td>
-        <td>{{ugmod.GROUPSUMMARY}}</td> 
+      <td><a href="/groups/{{ugmod.GROUPID}}">{{ugmod.GROUPNAME}}</a></td>
+      <td>{{ugmod.GROUPSUMMARY}}</td>
     </tr>
     <br> <br>
     <h5>Groups with the role:<small class="text-muted"> Member</small></h5>
-    <tr *ngIf="userGroups.GROUPADMINS.length == 0">
-        <td>None</td>
-      </tr>
-    <tr *ngFor="let ugmem of userGroups.GROUPMEMBERS">
-        <td><a href="/groups/{{ugmem.GROUPID}}">{{ugmem.GROUPNAME}}</a></td>
-        <td>{{ugmem.GROUPSUMMARY}}</td> 
+    <tr *ngIf="this.acceptedGroups.length == 0">
+      <td>None</td>
     </tr>
+    <tr *ngFor="let ugmem of this.acceptedGroups">
+      <td><a href="/groups/{{ugmem.GROUPID}}">{{ugmem.GROUPNAME}}</a></td>
+      <td>{{ugmem.GROUPSUMMARY}}</td>
+    </tr>
+    <br><br>
+    <h5>Pending Requests</h5>
+    <tr *ngIf="this.pendingGroups.length == 0">
+        <td>None</td>
+    </tr>
+      <tr *ngFor="let ugpen of this.pendingGroups">
+        <td><a href="/groups/{{ugpen.GROUPID}}">{{ugmem.GROUPNAME}}</a></td>
+        <td>{{ugmem.GROUPSUMMARY}}</td>
+      </tr>
   </table>
   <br> <br>
   <div class="row">

@@ -16,7 +16,9 @@ export class UsersGroupsComponent implements OnInit {
   public groups: Group[];
   public userGroups: any;
   public nav: NavServiceService;
-  constructor(private router: Router,
+  public acceptedGroups = [];
+  public pendingGroups = [];
+  constructor(private router  : Router,
     private r: ActivatedRoute,
     private api: ApiService) {
     this.nav = new NavServiceService();
@@ -37,13 +39,25 @@ export class UsersGroupsComponent implements OnInit {
       this.router.navigate(['/404']);
     }
 
-    //get the user's groups
-    var retriever = {
+    var obj ={
       "USERID": this.user.USERID
     }
-    this.api.getGroupsUser(this.user).subscribe(res =>{
-      this.userGroups = res;
 
+    console.log("obj being sent has following properties: ");
+    console.log("USERID: " + obj.USERID);
+    this.api.getGroupsUser(obj).subscribe(res =>{
+      console.log("Triggered getGroupsUser()");
+      console.log(res.GROUPMEMBERS);
+      this.userGroups = res;
+      
+      for(var i = 0; i < res.GROUPMEMBERS.length; i++){
+        if(res.GROUPMEMBERS[i].STATUS == 0){
+          this.pendingGroups.push(res.GROUPMEMBERS[i]);
+        } 
+        if(res.GROUPMEMBERS[i].STATUS == 1) {
+          this.acceptedGroups.push(res.GROUPMEMEBERS[i]);
+        }
+      }
     }, err =>{
       console.log("Error:" + err);
     });

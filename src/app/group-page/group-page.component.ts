@@ -97,8 +97,8 @@ export class GroupPageComponent implements OnInit {
   onJoinGroup() {
     console.log("triggered OnJoinGroup()");
     var membershipRequester = {
-      "GROUPID": document.cookie.split("=")[1],
-      "USERID": "MadDog"
+      "GROUPID": this.group[0].GROUPID,
+      "USERID": document.cookie.split("=")[1]
     }
     console.log("Object being sent contains following properties: " + membershipRequester.GROUPID + " and " + membershipRequester.USERID);
     this.api.sendRequest(membershipRequester).subscribe(res =>{
@@ -110,11 +110,13 @@ export class GroupPageComponent implements OnInit {
   }
 
   onCancelJoinRequest(){
+    console.log("triggered OnCancelJoinGroup()");
     var membershipRemover = {
-      "GROUPID": this.group.GROUPID,
+      "GROUPID": this.group[0].GROUPID,
       "USERID": document.cookie.split("=")[1]
     }
-    this.api.sendRequest(membershipRemover).subscribe(res=>{
+    console.log("MembershipRemover: " + membershipRemover.GROUPID + " " + membershipRemover.USERID);
+    this.api.deleteRequest(membershipRemover).subscribe(res=>{
       console.log(res);
       this.askedToJoin = false;
       this.isMember = false;

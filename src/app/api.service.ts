@@ -403,7 +403,7 @@ export class ApiService {
 
     let params = new HttpParams().set("GROUPID", request.GROUPID).set("USERID", request.USERID);
 
-    return this.http.put<any>(`${this.api}/group-request`, { params: params });
+    return this.http.delete<any>(`${this.api}/group-request`, { params: params });
   }
 }
 
