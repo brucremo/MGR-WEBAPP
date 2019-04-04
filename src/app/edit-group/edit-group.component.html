@@ -144,8 +144,8 @@
                         <div *ngFor="let r of requesters; let i=index;" style="white-space: nowrap; padding-right:20px;">
                             <div class="col-md-6">
                             <b>{{r.USERID}}</b> &nbsp;&nbsp; 
-                            <button class="btn btn-outline-primary" (click)="OnAcceptMember(r.USERID)">Accept</button> &nbsp;&nbsp;
-                            <button class="btn btn-outline-danger" (click)="OnDeclineMember(r.USERID)">Decline</button> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+                            <button class="btn btn-outline-primary" (click)="acceptMember(r.USERID)">Accept</button> &nbsp;&nbsp;
+                            <button class="btn btn-outline-danger" (click)="declineMember(r.USERID)">Decline</button> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
                             </div>
                         </div>
 
