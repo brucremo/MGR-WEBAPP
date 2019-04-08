@@ -236,7 +236,10 @@ export class ApiService {
   /*GET: Gets all friends for a specific user. 
     Requires the object as follows {USER_ONE_ID : String, STATUS: Int}*/
   getFriends(relationship: any): Observable<any> {
-    let params = new HttpParams().set("USER_ONE_ID", relationship.USER_ONE_ID).set("STATUS", relationship.STATUS);
+
+    let params = new HttpParams()
+      .set("USER_ONE_ID", relationship.USER_ONE_ID)
+      .set("STATUS", relationship.STATUS);
 
     return this.http.get<any>(`${this.api}/friends`, { params: params });
   }
@@ -257,7 +260,9 @@ export class ApiService {
   /*DELETE: Removes friendship links between users. 
     Requires the object as follows {USER_ONE_ID : String, USER_TWO_ID : String}*/
   deleteFriend(relationship: any): Observable<any> {
-    let params = new HttpParams().set("USER_ONE_ID", relationship.USER_ONE_ID).set("USER_TWO_ID", relationship.USER_TWO_ID);
+    let params = new HttpParams()
+      .set("USER_ONE_ID", relationship.USER_ONE_ID)
+      .set("USER_TWO_ID", relationship.USER_TWO_ID);
 
     return this.http.delete<any>(`${this.api}/friends`, { params: params });
   }
@@ -266,7 +271,8 @@ export class ApiService {
   //GET: Searches for a specific USERID
   searchUSERID(USERID: any): Observable<any> {
 
-    let params = new HttpParams().set("USERID", USERID);
+    let params = new HttpParams()
+      .set("USERID", USERID);
 
     return this.http.get<any>(`${this.api}/search`, { params: params });
   }
@@ -274,7 +280,8 @@ export class ApiService {
   //GET: Searches for a specific USEREMAIL
   searchUSEREMAIL(USEREMAIL: any): Observable<any> {
 
-    let params = new HttpParams().set("USEREMAIL", USEREMAIL);
+    let params = new HttpParams()
+      .set("USEREMAIL", USEREMAIL);
 
     return this.http.get<any>(`${this.api}/search`, { params: params });
   }
@@ -290,7 +297,8 @@ export class ApiService {
   //GET: Searches for a specific GROUPID
   searchGROUPNAME(GROUPNAME: any): Observable<any> {
 
-    let params = new HttpParams().set("GROUPNAME", GROUPNAME);
+    let params = new HttpParams()
+      .set("GROUPNAME", GROUPNAME);
 
     return this.http.get<any>(`${this.api}/search`, { params: params });
   }
@@ -300,7 +308,8 @@ export class ApiService {
   Requires the object as follows {GROUPID : String}*/
   getGroup(group: any): Observable<any> {
 
-    let params = new HttpParams().set("GROUPID", group.GROUPID);
+    let params = new HttpParams()
+      .set("GROUPID", group.GROUPID);
 
     return this.http.get<any>(`${this.api}/group`, { params: params });
   }
@@ -309,7 +318,8 @@ export class ApiService {
   Requires the object as follows {USERID : String}*/
   getGroupsUser(user: any): Observable<any> {
 
-    let params = new HttpParams().set("USERID", user.USERID);
+    let params = new HttpParams()
+      .set("USERID", user.USERID);
 
     return this.http.get<any>(`${this.api}/user-groups`, { params: params });
   }
@@ -362,21 +372,30 @@ export class ApiService {
    Requires the object as follows {GROUPID : String, USERID : String}*/
   removeAdmin(role: any): Observable<any> {
 
-    let params = new HttpParams().set("GROUPID", role.GROUPID).set("USERID", role.USERID).set("TYPE", "ADMIN");
+    let params = new HttpParams()
+      .set("GROUPID", role.GROUPID)
+      .set("USERID", role.USERID)
+      .set("TYPE", "ADMIN");
 
     return this.http.delete<any>(`${this.api}/role-remove`, { params: params });
   }
 
   removeMember(role: any): Observable<any> {
 
-    let params = new HttpParams().set("GROUPID", role.GROUPID).set("USERID", role.USERID).set("TYPE", "MEMBER");
+    let params = new HttpParams()
+      .set("GROUPID", role.GROUPID)
+      .set("USERID", role.USERID)
+      .set("TYPE", "MEMBER");
 
     return this.http.delete<any>(`${this.api}/role-remove`, { params: params });
   }
 
   removeModerator(role: any): Observable<any> {
 
-    let params = new HttpParams().set("GROUPID", role.GROUPID).set("USERID", role.USERID).set("TYPE", "MODERATOR");
+    let params = new HttpParams()
+      .set("GROUPID", role.GROUPID)
+      .set("USERID", role.USERID)
+      .set("TYPE", "MODERATOR");
 
     return this.http.delete<any>(`${this.api}/role-remove`, { params: params });
   }
@@ -401,9 +420,141 @@ export class ApiService {
     Requires the object as follows {GROUPID : String, USERID : String}*/
   deleteRequest(request: any): Observable<any> {
 
-    let params = new HttpParams().set("GROUPID", request.GROUPID).set("USERID", request.USERID);
+    let params = new HttpParams()
+      .set("GROUPID", request.GROUPID)
+      .set("USERID", request.USERID);
 
     return this.http.delete<any>(`${this.api}/group-request`, { params: params });
+  }
+
+  //--------------------------------- THREAD CRUD ---------------------------------
+  /*IMPORTANT INFORMATION:
+
+    CREATED_BY -> A relevant USERID that indicates which user created the thread
+    GROUPID -> Threads belong to groups so the GROUPID must also be relevant
+    STATUS -> 0 if the thread is either not approved by a moderator or any 
+              other case on which it should not be displayed. 
+              (Up to you to decide how to define these permissions)
+              1 if the thread has been approved and is set visible.
+  */
+
+  /*GET (double functionality): 
+  Gets all thread information for a specific thread belonging to a group 
+  Requires the object as follows {THREAD_ID : String, GROUPID : String}
+
+  OR 
+
+  Gets all threads belonging a specific group.
+  Requires the object as follows {GROUPID : String}*/
+  getThread(thread: any): Observable<any> {
+
+    let params = new HttpParams()
+      .set("THREAD_ID", thread.THREAD_ID)
+      .set("GROUPID", thread.GROUPID);
+
+    return this.http.get<any>(`${this.api}/thread`, { params: params });
+  }
+
+  /*POST: Creates a thread for a group
+  Requires the object as follows 
+  {THREAD_SUBJECT : String, THREAD_TITLE : String, STATUS : NUMBER(0||1), 
+    CREATED_BY : String(USERID), GROUPID : String}*/
+  createThread(thread: any): Observable<any> {
+
+    return this.http.post<any>(`${this.api}/thread`, thread);
+  }
+
+  /*PUT: Updates a THREAD_TITLE and/or THREAD_SUBJECT
+  Requires the object as follows 
+  {THREAD_ID : String, THREAD_SUBJECT : String, THREAD_TITLE : String, GROUPID : String}*/
+  updateThread(thread: any): Observable<any> {
+
+    return this.http.put<any>(`${this.api}/thread`, thread);
+  }
+
+  /*PUT: Updates the thread's STATUS
+  Requires the object as follows 
+  {THREAD_ID : String, STATUS : NUMBER(0||1), GROUPID : String}*/
+  changeThreadStatus(thread: any): Observable<any> {
+
+    return this.http.put<any>(`${this.api}/thread-status`, thread);
+  }
+
+  /*DELETE: Removes a thread from the DB
+  Requires the object as follows 
+  {THREAD_ID : String, GROUPID : String}*/
+  deleteThread(thread: any): Observable<any> {
+
+    let params = new HttpParams()
+    .set("THREAD_ID", thread.THREAD_ID)
+    .set("GROUPID", thread.GROUPID);
+
+    return this.http.delete<any>(`${this.api}/thread`, { params: params });
+  }
+
+  //--------------------------------- POST CRUD ---------------------------------
+  /*IMPORTANT INFORMATION:
+
+    CREATED_BY -> A relevant USERID that indicates which user created the thread
+    THREAD_ID -> Posts belong to threads so the THREAD_ID must also be relevant
+    STATUS -> 0 if the post is either not approved by a moderator or any 
+              other case on which it should not be displayed. 
+              (Up to you to decide how to define these permissions)
+              1 if the post has been approved and is set visible.
+  */
+
+  /*GET (double functionality): 
+  Gets all post information for a specific post belonging to a thread 
+  Requires the object as follows {POST_ID : String, THREAD_ID : String}
+
+  OR 
+
+  Gets all threads belonging a specific group.
+  Requires the object as follows {THREAD_ID : String}*/
+  getPost(post: any): Observable<any> {
+
+    let params = new HttpParams()
+      .set("THREAD_ID", post.THREAD_ID)
+      .set("POST_ID", post.POST_ID);
+
+    return this.http.get<any>(`${this.api}/thread-post`, { params: params });
+  }
+
+  /*POST: Creates a post for a thread
+  Requires the object as follows 
+  {POST_CONTENT : String, STATUS : NUMBER(0||1), 
+    CREATED_BY : String(USERID), THREAD_ID : String}*/
+  createPost(post: any): Observable<any> {
+
+    return this.http.post<any>(`${this.api}/thread-post`, post);
+  }
+
+  /*PUT: Updates a POST_CONTENT
+  Requires the object as follows 
+  {POST_ID : String, POST_CONTENT : String, THREAD_ID : String}*/
+  updatePost(post: any): Observable<any> {
+
+    return this.http.put<any>(`${this.api}/thread-post`, post);
+  }
+
+  /*PUT: Updates the post's STATUS
+  Requires the object as follows 
+  {POST_ID : String, STATUS : NUMBER(0||1), THREAD_ID : String}*/
+  changePostStatus(post: any): Observable<any> {
+
+    return this.http.put<any>(`${this.api}/thread-status`, post);
+  }
+
+  /*DELETE: Removes a post from the DB
+  Requires the object as follows 
+  {POST_ID : String, THREAD_ID : String}*/
+  deletePost(post: any): Observable<any> {
+
+    let params = new HttpParams()
+    .set("THREAD_ID", post.THREAD_ID)
+    .set("POST_ID", post.POST_ID);
+
+    return this.http.delete<any>(`${this.api}/thread-post`, { params: params });
   }
 }
 
