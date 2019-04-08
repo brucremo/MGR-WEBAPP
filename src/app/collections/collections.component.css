@@ -60,3 +60,7 @@ h1{
     transform: scale(1) rotateZ(0deg);
     opacity: 1;
 }
+
+.sorted:hover{
+    cursor: pointer;
+}

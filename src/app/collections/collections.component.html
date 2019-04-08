@@ -20,16 +20,16 @@
             <p><b>COVER</b></p>
           </div>
           <div class="col-md-2">
-            <p><b>TITLE</b></p>
+            <p><b><div (click)="sortByName()" class="sorted">TITLE <i *ngIf="actSort == 0;" class="fa fa-caret-up"></i><i *ngIf="actSort != 0;" class="fa fa-caret-down"></i></div></b></p>
           </div>
           <div class="col-md-4">
             <p><b>DESCRIPTION</b></p>
           </div>
           <div class="col-md-1">
-            <p><b>RATING</b></p>
+            <p><b><div (click)="sortByRating()" class="sorted">RATING <i *ngIf="actSort == 1;" class="fa fa-caret-up"></i><i *ngIf="actSort != 1;" class="fa fa-caret-down"></i></div></b></p>
           </div>
-          <div class="col-md-1">
-            <p><b>FAVOURITE?</b></p>
+          <div class="col-md-2">
+            <p><b><div (click)="sortFaves()" class="sorted">FAVOURITE? <i *ngIf="actSort == 2;" class="fa fa-caret-up"></i><i *ngIf="actSort != 2;" class="fa fa-caret-down"></i></div></b></p>
             </div>
           <div class="col-md-1">
           </div>

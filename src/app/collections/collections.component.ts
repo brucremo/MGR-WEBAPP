@@ -14,15 +14,18 @@ import { User } from 'src/app/user';
 export class CollectionsComponent implements OnInit {
 
   public library: any[] = [];
+  public sorted: any[] = [];
   public id: string = "";
   public user: User;
   public delID: Number;
+  public actSort: Number;
 
   constructor(private nav: NavServiceService,
     private api: ApiService,
     private router: Router,
     private route: ActivatedRoute) {
       this.user = new User();
+      this.actSort = 0;
   }
 
   ngOnInit() {
@@ -103,4 +106,45 @@ export class CollectionsComponent implements OnInit {
     this.delID = gameid;
   }
 
+  sortByName(){
+    this.actSort = 0;
+
+    for (let i = 0; i < this.library.length; i++){
+      for (let j = 0; j < (this.library.length - i - 1); j++){
+        if (this.library[j].name > this.library[j+1].name){
+          var tmp = this.library[j];
+          this.library[j] = this.library[j+1];
+          this.library[j+1] = tmp;
+        }
+      }
+    }
+  }
+
+  sortByRating(){
+    this.actSort = 1;
+
+    for (let i = 0; i < this.library.length; i++){
+      for (let j = 0; j < (this.library.length - i - 1); j++){
+        if (this.library[j].rating > this.library[j+1].rating){
+          var tmp = this.library[j];
+          this.library[j] = this.library[j+1];
+          this.library[j+1] = tmp;
+        }
+      }
+    }
+  }
+
+  sortFaves(){
+    this.actSort = 2;
+
+    for (let i = 0; i < this.library.length; i++){
+      for (let j = 0; j < (this.library.length - i - 1); j++){
+        if (this.library[j].favourite < this.library[j+1].favourite){
+          var tmp = this.library[j];
+          this.library[j] = this.library[j+1];
+          this.library[j+1] = tmp;
+        }
+      }
+    }
+  }
 }
