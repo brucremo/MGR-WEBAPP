@@ -1,0 +1,30 @@
+<!-- Conditional: Shows the following if the user is a non-member, or not logged in -->
+<div *ngIf="this.nonMember; else elseBlock">
+  Find this group interesting? Click the 'Join Group' button to join!
+</div>
+<!-- Conditional: Shows the following if the user is a member -->
+<ng-template #elseBlock>
+  <div class="card" id="group-card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-8"><b>Title Here</b></div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-sm-2">
+          <img src="../../assets/images/userProfile.svg" height="75" width="75">
+          <br/>
+          <b>User Name</b>
+          <br/>
+          Posted: 04/15/18
+        </div>
+        <div class="col-sm-9">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque varius felis vel leo molestie rutrum. Vestibulum et nibh facilisis, luctus turpis ut, accumsan lacus. Donec tempor, ex non aliquet dapibus, enim arcu pellentesque sem, eget dapibus orci risus sed dolor. Aliquam euismod ligula nibh, id lobortis elit gravida non. Morbi pulvinar mi feugiat ex facilisis, a blandit sem interdum. Nunc vel bibendum lectus. Nam fermentum lorem in tortor consequat porttitor. Aliquam pretium, nisl vitae tristique scelerisque, dui metus elementum ante, vitae tristique mauris ligula vel arcu.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque varius felis vel leo molestie rutrum. Vestibulum et nibh facilisis, luctus turpis ut, accumsan lacus. Donec tempor, ex non aliquet dapibus, enim arcu pellentesque sem, eget dapibus orci risus sed dolor. Aliquam euismod ligula nibh, id lobortis elit gravida non. Morbi pulvinar mi feugiat ex facilisis, a blandit sem interdum. Nunc vel bibendum lectus. Nam fermentum lorem in tortor consequat porttitor. Aliquam pretium, nisl vitae tristique scelerisque, dui metus elementum ante, vitae tristique mauris ligula vel arcu.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <button type="button" class="btn btn-outline-dark" [routerLink]="['/groups/35/createPost/12']" style="float: right">Post Reply</button>
+</ng-template>

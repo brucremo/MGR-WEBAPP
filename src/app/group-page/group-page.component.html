@@ -71,22 +71,40 @@
             <button type="button" class="btn btn-outline-danger" (click)="this.onLeaveGroup()">Leave Group</button>
 
             <!-- Members can create a discussion -->
-            <button type="button" class="btn btn-outline-success">Create Discussion</button>
+            <button type="button" class="btn btn-outline-success" [routerLink]="['/groups/' + this.groupname + '/createThread/']">Create Discussion</button>
           </div>
 
 
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-7">
         <!-- Conditional: Shows the following if the user is a non-member, or not logged in -->
         <div *ngIf="this.nonMember; else elseBlock">
           Find this group interesting? Click the 'Join Group' button to join!
         </div>
         <!-- Conditional: Shows the following if the user is a member -->
         <ng-template #elseBlock>
-          <h5 class="sub-heading">Discussion Board</h5>
-          <p>Coming soon!</p>
+          <router-outlet></router-outlet>
+          <!--
+          <div class="card" id="group-card">
+            <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-8">Threads</div>
+                  <div class="col-sm-1">Posts</div>
+                  <div class="col-sm-3">Activity</div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-8"><b><a [routerLink]="['/groups/12/35']">Discussion Name</a></b><br>
+                  Discussion description listed here</div>
+                  <div class="col-sm-1">6</div>
+                  <div class="col-sm-3">Last Post By: <b><a [routerLink]="">User Name</a></b></div>
+
+                </div>
+            </div>
+          </div>
+          -->
         </ng-template>
       </div>
   </div>

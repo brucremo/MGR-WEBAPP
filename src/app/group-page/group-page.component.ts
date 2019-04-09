@@ -17,6 +17,7 @@ export class GroupPageComponent implements OnInit {
   public isOwner: boolean;
   public askedToJoin: boolean;
   public nonMember: boolean;
+  public threads: any[] = []
 
   constructor(private router: Router,
     private r: ActivatedRoute,
@@ -91,7 +92,16 @@ export class GroupPageComponent implements OnInit {
     }, err => {
       console.log("error: " + err);
       this.router.navigate(['/404']);
-    })
+    });
+
+    console.log("id sent:" + groupID.GROUPID);
+    // Get Threads for Discussion Board //
+    this.api.getThread(groupID).subscribe(res => {
+      this.threads = res;
+    }, err => {
+      console.log("Could not retrieve all threads: " + err);
+      //this.router.navigate(['/404']);
+    });
   }
 
   onJoinGroup() {

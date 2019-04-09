@@ -1,0 +1,32 @@
+<div class="card" id="group-card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-8"><b>Thread Creation</b></div>
+      </div>
+      <hr />
+      <form (ngSubmit)='threadSubmit(f)' #f='ngForm' id="threadForm">
+        <div class="row">
+          <div class="col-md-12">
+              <div class="form-group">
+                <input type="text" class="form-control" id="threadTitle" name="threadTitle" pattern="[A-Za-z0-9_ ]{1,50}" placeholder="Title Here" required>
+                  <div *ngIf='threadTitle.invalid && (threadTitle.dirty || threadTitle.touched)' class='alert alert-danger'>
+                    <div *ngIf='threadTitle.errors.required'>Title is required</div>
+                  </div>
+                  <br />
+                  <input type="text" class="form-control" id="threadSummary" name="threadSummary" pattern="[A-Za-z0-9_ ]{1,50}" placeholder="Summary Here (Optional)" required>
+                  <div *ngIf='threadSummary.invalid && (threadSummary.dirty || threadSummary.touched)' class='alert alert-danger'>
+                    <div *ngIf='threadSummary.errors.required'>Title is required</div>
+                  </div>
+                  <br />
+                  <textarea rows="8" class="form-control" id="threadContent" name="threadContent"></textarea>
+                  <br />
+                  <div style="float:right">
+                    <button type="button" class="btn btn-outline-danger" [routerLink]="['/groups/', group[0].GROUPID]">Back</button> &nbsp;&nbsp;
+                    <button type="button" class="btn btn-outline-success" [routerLink]="['/groups/', group[0].GROUPID, '/viewThread/12']">Submit</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+      </form>
+    </div>
+  </div>

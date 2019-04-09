@@ -1,0 +1,14 @@
+#group-header{
+    text-align: center;
+}
+#group-thumbnail{
+        padding: 5px;
+        width: 150px;
+}
+#details-sub-heading{
+    margin-left: 6%;
+}
+button{
+    margin-bottom: 5%;
+    margin-left: 5%;
+}

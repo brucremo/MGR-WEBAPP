@@ -1,0 +1,23 @@
+<div class="card" id="group-card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-8"><b>Create Post</b></div>
+      </div>
+      <hr />
+      <form (ngSubmit)='threadSubmit(f)' #f='ngForm' id="threadForm">
+        <div class="row">
+          <div class="col-md-12">
+              <div class="form-group">
+                  <br />
+                  <textarea rows="8" class="form-control" id="threadContent" name="threadContent"></textarea>
+                  <br />
+                  <div style="float: right">
+                    <button type="button" class="btn btn-outline-danger" [routerLink]="['/groups/', group[0].GROUPID]">Back</button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-outline-success" [routerLink]="['/groups/', group[0].GROUPID, '+', threadID]">Submit</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+      </form>
+    </div>
+  </div>

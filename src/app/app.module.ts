@@ -31,6 +31,10 @@ import { GroupFormComponent } from './group-form/group-form.component';
 import { UsersGroupsComponent } from './users-groups/users-groups.component';
 import { GameGroupComponent } from './game-group/game-group.component';
 import { EditGroupComponent } from './edit-group/edit-group.component';
+import { DiscussionComponent } from './discussion/discussion.component';
+import { ThreadPageComponent } from './thread-page/thread-page.component';
+import { CreatePostComponent } from './create-post/create-post.component';
+import { CreateThreadComponent } from './create-thread/create-thread.component';
 
 const appRoutes: Routes = [
   { path: 'user/:id', component: UserPageComponent },
@@ -64,13 +68,17 @@ const appRoutes: Routes = [
   { path: 'favourites', component: FavouritesComponent},
   { path: 'favourites/:id', component: FavouritesComponent},
   { path: 'user/:id/friends', component: FriendComponent},
-  { path: 'groups/:id', component: GroupPageComponent},
+  { path: 'groups/:id', component: GroupPageComponent,
+  children: [
+    { path: '', component: DiscussionComponent},
+    { path: 'viewThread/:threadid', component: ThreadPageComponent},
+    { path: 'createThread', component: CreateThreadComponent},
+    { path: 'createPost/:threadid', component: CreatePostComponent}
+  ]},
   { path: 'group/create', component: GroupFormComponent},
   { path: 'userGroups', component: UsersGroupsComponent},
   { path: 'editGroup/:id', component: EditGroupComponent},
-  { path: 'group/:id', component: GameGroupComponent, resolve: {
-    videogame: VideogameResolve
-  }},
+  { path: 'group/:id', component: GameGroupComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }
@@ -102,7 +110,11 @@ const appRoutes: Routes = [
     GroupFormComponent,
     UsersGroupsComponent,
     GameGroupComponent,
-    EditGroupComponent
+    EditGroupComponent,
+    DiscussionComponent,
+    ThreadPageComponent,
+    CreatePostComponent,
+    CreateThreadComponent
   ],
   imports: [
     BrowserModule,
