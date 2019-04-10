@@ -10,28 +10,31 @@
         <div class="col-sm-8"><b>{{threadInfo[0].THREAD_TITLE}}</b></div>
       </div>
       <hr />
-      <div class="row">
-        <div class="col-sm-2">
+      <div class="row" *ngFor="let p of allPosts">
+        <div class="col-sm-2" style="text-align: center">
           <img src="../../assets/images/userProfile.svg" height="75" width="75">
           <br/>
-          <b>User Name</b>
-          <br/>
-          Posted: 04/15/18
-          <hr>
-          <button type="button" class="btn btn-outline-danger" (click)="onDeletePost()">Delete Post</button>
+          <b>{{p.CREATED_BY}}</b>
+          <div *ngIf="p.CREATED_BY == this.userID">
+            <button type="button" class="btn btn-outline-danger" (click)="onDeletePost(p.POST_ID)">Delete</button>
+          </div>
+          <hr>  
         </div>
         <div class="col-sm-9">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque varius felis vel leo molestie rutrum. Vestibulum et nibh facilisis, luctus turpis ut, accumsan lacus. Donec tempor, ex non aliquet dapibus, enim arcu pellentesque sem, eget dapibus orci risus sed dolor. Aliquam euismod ligula nibh, id lobortis elit gravida non. Morbi pulvinar mi feugiat ex facilisis, a blandit sem interdum. Nunc vel bibendum lectus. Nam fermentum lorem in tortor consequat porttitor. Aliquam pretium, nisl vitae tristique scelerisque, dui metus elementum ante, vitae tristique mauris ligula vel arcu.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque varius felis vel leo molestie rutrum. Vestibulum et nibh facilisis, luctus turpis ut, accumsan lacus. Donec tempor, ex non aliquet dapibus, enim arcu pellentesque sem, eget dapibus orci risus sed dolor. Aliquam euismod ligula nibh, id lobortis elit gravida non. Morbi pulvinar mi feugiat ex facilisis, a blandit sem interdum. Nunc vel bibendum lectus. Nam fermentum lorem in tortor consequat porttitor. Aliquam pretium, nisl vitae tristique scelerisque, dui metus elementum ante, vitae tristique mauris ligula vel arcu.</p>
+          {{p.POST_CONTENT}}  
         </div>
       </div>
+      <br> <br>
     </div>
+    
   </div>
   <br />
   <button type="button" class="btn btn-outline-dark" (click)="onCreatePost()" style="float: right">Post</button>
   <button type="button" class="btn btn-outline-success" [routerLink]="['/groups/', this.groupID]" style="float: right">Back</button>
   <!-- Will be a conditional button, only creator of threads can delete threads -->
-  <button type="button" class="btn btn-outline-danger" (click)="onDeleteThread()" style="float: right">Delete Thread</button>
+  <div *ngIf="threadInfo[0].CREATED_BY == this.userID">
+    <button type="button" class="btn btn-outline-danger" (click)="onDeleteThread()" style="float: right">Delete Thread</button>
+  </div>
 
 
 </ng-template>

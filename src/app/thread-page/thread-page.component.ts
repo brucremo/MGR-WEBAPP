@@ -8,19 +8,23 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./thread-page.component.css']
 })
 export class ThreadPageComponent implements OnInit {
+  public sameUser: boolean;
   public allPosts = [];
   public threadInfo = [];
   public groupID: String;
   public threadID: String;
+  public userID: String;
   constructor(private router: Router,
     private r: ActivatedRoute,
     private api: ApiService) {
+      this.sameUser = false;
   }
 
-  //figure out if user is creator of post
+  //figure out if user is creator of post only allow them to delete post
 
   ngOnInit() {
        //get the group id from the URL
+       this.userID = document.cookie.split("=")[1];
        var str = window.location.href;
        var pos = str.search('groups/');
        var _str = str.slice(pos + 7);
@@ -43,13 +47,19 @@ export class ThreadPageComponent implements OnInit {
         console.log(res);
         this.allPosts = res;
         console.log("Posts retrieved successfully!");
+
+        //sort posts
+        this.allPosts.sort((a,b) =>{
+          var dateA = new Date(a.POSTCREATIONDATE), dateB = new Date(b.POSTCREATIONDATE);
+          return dateB.getTime() - dateA.getTime();
+        }
+        );
        }, err=>{
          console.log("Error: " + err);
        })
 
-       //get entire thread info
+       //get thread info
        var threadRetriever = {
-         "THREAD_ID": this.threadID,
          "GROUPID": this.groupID
        };
        this.api.getThread(threadRetriever).subscribe(res=>{
@@ -79,13 +89,42 @@ export class ThreadPageComponent implements OnInit {
     this.router.navigate(['/groups/', this.groupID]);
   }
 
-  onDeletePost(){
-    console.log("Triggered onDeletePost()");
+  onDeletePost(post_id: String){
     console.log("--- Beginning process of deleting this post ---");
+    console.log("POST_ID to be deleted is: " + post_id);
+    console.log("THREAD_ID associated is: " + this.threadID);
+    var postDelete = {
+      "POST_ID": post_id,
+      "THREAD_ID": this.threadID
+    };
+    this.api.deletePost(postDelete).subscribe(res=>{
+      console.log(res);
+      console.log("--- Post deleted successfully! ---");
+    },err=>{
+      console.log("error: " + err);
+    })
+
+    this.refresh();
   }
 
   onCreatePost(){
     console.log("Triggered onCreatePost()");
     this.router.navigate(['/groups/' + this.groupID + '/createPost/' + this.threadID]);
+  }
+
+  ngAfterViewInit(){
+    this.refresh();
+  }
+
+  refresh(){
+    if (window.localStorage) {
+      if (!localStorage.getItem('firstLoad')) {
+        localStorage['firstLoad'] = true;
+        window.location.reload();
+      }
+
+      else
+        localStorage.removeItem('firstLoad');
+    }
   }
 }

@@ -36,10 +36,14 @@ export class GroupPageComponent implements OnInit {
   ngOnInit() {
     //get the group from the API
     //extract the group id from the url
-    var url = window.location.href;
-    this.groupname = url.slice(url.lastIndexOf('/') + 1);
+    var str = window.location.href;
+    var pos = str.search('groups/');
+    this.groupname = str.slice(pos + 7);
+    if(this.groupname.indexOf('/') != -1){
+      this.groupname = this.groupname.substr(0, this.groupname.indexOf('/'));
+    }
     var groupID = {
-      "GROUPID": url.slice(url.lastIndexOf('/') + 1)
+      "GROUPID": this.groupname
     };
     console.log("group ID: " + groupID.GROUPID);
     //pass it as a parameter to the relevant API function
@@ -147,9 +151,8 @@ export class GroupPageComponent implements OnInit {
 
   onDeleteGroup() {
     console.log("triggered OnDeleteGroup()");
-    var url = window.location.href;
     var obj = {
-      "GROUPID": url.slice(url.lastIndexOf('/') + 1)
+      "GROUPID": this.groupname
     };
     console.log("deleting group with the ID: " + obj.GROUPID);
     this.api.deleteGroup(obj).subscribe(res => {
@@ -163,9 +166,8 @@ export class GroupPageComponent implements OnInit {
   }
 
   onLeaveGroup() {
-    var url = window.location.href;
     var obj = {
-      "GROUPID": url.slice(url.lastIndexOf('/') + 1),
+      "GROUPID": this.groupname,
       "USERID": document.cookie.split("=")[1]
     };
     if (this.isAdmin) {

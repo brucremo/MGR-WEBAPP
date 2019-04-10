@@ -27,8 +27,8 @@ export class CreatePostComponent implements OnInit {
     var str = window.location.href;
     var pos = str.search('groups/');
     var _str = str.slice(pos + 7);
-    var groupID = _str.substring(0, _str.indexOf('/'));
-    console.log("Group ID extracted as: " + groupID);
+    this.groupID = _str.substring(0, _str.indexOf('/'));
+    console.log("Group ID extracted as: " + this.groupID);
   }
 
   PostFormSubmit(f: NgForm): void {
