@@ -1,20 +1,20 @@
 <div class="card" id="group-card">
   <div class="card-body">
     <div class="row">
-      <div class="col-sm-8">Threads</div>
+      <div class="col-sm-8">Discussions</div>
       <div class="col-sm-1">Posts</div>
       <div class="col-sm-3">Activity</div>
     </div>
     <hr />
-    <div class="row">
-      <div class="col-sm-8"><b><a [routerLink]="['/groups/35/viewThread/12']">Discussion Name</a></b><br>
-        Discussion description listed here</div>
+    <div class="row" *ngFor="let t of threads">
+      <div class="col-sm-8"><b><a [routerLink]="['/groups/' + t.GROUPID + '/viewThread/' + t.THREAD_ID]">{{t.THREAD_TITLE}}</a></b><br>
+        {{t.THREAD_SUBJECT}}</div>
       <div class="col-sm-1">6</div>
       <div class="col-sm-3">Last Post By: <b><a [routerLink]="">User Name</a></b></div>
     </div>
   </div>
 </div>
 <br />
-<button type="button" class="btn btn-outline-success" [routerLink]="['/groups/35/createThread/']" style="float:right;">Create Discussion</button> 
+<button type="button" class="btn btn-outline-success" [routerLink]="['/groups/' + this.groupname + '/createThread/']" style="float:right;">Create Discussion</button> 
 
 

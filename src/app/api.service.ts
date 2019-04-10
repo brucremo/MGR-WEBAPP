@@ -447,11 +447,16 @@ export class ApiService {
   Gets all threads belonging a specific group.
   Requires the object as follows {GROUPID : String}*/
   getThread(thread: any): Observable<any> {
-
-    let params = new HttpParams()
-      .set("THREAD_ID", thread.THREAD_ID)
-      .set("GROUPID", thread.GROUPID);
-
+    let params;
+    if (thread.THREAD_ID == undefined){
+      params = new HttpParams()
+        .set("GROUPID", thread.GROUPID);  
+    }
+    else{
+     params = new HttpParams()
+     .set("THREAD_ID", thread.THREAD_ID)
+     .set("GROUPID", thread.GROUPID);
+    }
     return this.http.get<any>(`${this.api}/thread`, { params: params });
   }
 
@@ -513,11 +518,20 @@ export class ApiService {
   Requires the object as follows {THREAD_ID : String}*/
   getPost(post: any): Observable<any> {
 
-    let params = new HttpParams()
-      .set("THREAD_ID", post.THREAD_ID)
-      .set("POST_ID", post.POST_ID);
+    let params;
 
-    return this.http.get<any>(`${this.api}/thread-post`, { params: params });
+    if(post.POST_ID == undefined){
+      params = new HttpParams()
+        .set("THREAD_ID", post.THREAD_ID);
+    }
+    else{
+      params = new HttpParams()
+        .set("THREAD_ID", post.THREAD_ID)
+        .set("POST_ID", post.POST_ID);
+
+    }
+  
+   return this.http.get<any>(`${this.api}/thread-post`, { params: params });
   }
 
   /*POST: Creates a post for a thread

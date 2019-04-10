@@ -32,9 +32,10 @@
         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" 
         aria-expanded="false" href="/user/{{nav.username}}">Profile</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" routerLink="/user/{{nav.username}}" (click)="navigateToProfile()">See Profile</a>
+            <a class="dropdown-item" routerLink="/user/{{nav.username}}" (click)="navigateToProfile()">View Profile</a>
             <a class="dropdown-item" routerLink="/editUser/{{nav.username}}">Edit Profile</a>
             <a class="dropdown-item" routerLink="/user/{{nav.username}}/friends">View Friends</a>
+            <a class="dropdown-item" routerLink="/userGroups">View Groups</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/logout">Sign Out</a>
           </div>

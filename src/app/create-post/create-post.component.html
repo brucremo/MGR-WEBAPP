@@ -4,16 +4,19 @@
         <div class="col-sm-8"><b>Create Post</b></div>
       </div>
       <hr />
-      <form (ngSubmit)='threadSubmit(f)' #f='ngForm' id="threadForm">
+      <form (ngSubmit)='PostFormSubmit(f)' #f='ngForm' id="postForm">
         <div class="row">
           <div class="col-md-12">
               <div class="form-group">
                   <br />
-                  <textarea rows="8" class="form-control" id="threadContent" name="threadContent"></textarea>
+                  <textarea rows="8" class="form-control" id="postContent" name="postContent" #postContent="ngModel" [(ngModel)]="post.POST_CONTENT" required></textarea>
+                  <div *ngIf='postContent.invalid && (postContent.dirty || postContent.touched)' class='alert alert-danger'>
+                    <div *ngIf='postContent.errors.required'>Content is required</div>
+                  </div>
                   <br />
                   <div style="float: right">
-                    <button type="button" class="btn btn-outline-danger" [routerLink]="['/groups/', group[0].GROUPID]">Back</button>&nbsp;&nbsp;
-                    <button type="button" class="btn btn-outline-success" [routerLink]="['/groups/', group[0].GROUPID, '+', threadID]">Submit</button>
+                    <button type="button" class="btn btn-outline-danger" [routerLink]="['/groups/' + this.groupID]">Back</button>&nbsp;&nbsp;
+                    <button type="submit" class="btn btn-outline-success" form="postForm" [disabled]="!f.form.valid">Submit</button>
                   </div>
               </div>
             </div>

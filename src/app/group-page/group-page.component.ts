@@ -17,7 +17,7 @@ export class GroupPageComponent implements OnInit {
   public isOwner: boolean;
   public askedToJoin: boolean;
   public nonMember: boolean;
-  public threads: any[] = []
+  public threads: any;
 
   constructor(private router: Router,
     private r: ActivatedRoute,
@@ -30,6 +30,7 @@ export class GroupPageComponent implements OnInit {
     this.isModerator = false;
     this.isOwner = false;
     this.askedToJoin = false;
+    this.threads = {};
   }
 
   ngOnInit() {
@@ -89,19 +90,23 @@ export class GroupPageComponent implements OnInit {
           }
         }
       }
+      //get threads
+      console.log("---INITIATING THREAD RETRIEVAL---");
+      console.log("id sent:" + groupID.GROUPID);
+      // Get Threads for Discussion Board //
+      this.api.getThread(groupID).subscribe(res => {
+        this.threads = res;
+        console.log("Thread Retrieval: SUCCESS!");
+        console.log(this.threads[0].THREAD_SUBJECT);
+      }, err => {
+        console.log("Could not retrieve all threads: " + err);
+        //this.router.navigate(['/404']);
+      });
     }, err => {
       console.log("error: " + err);
       this.router.navigate(['/404']);
     });
 
-    console.log("id sent:" + groupID.GROUPID);
-    // Get Threads for Discussion Board //
-    this.api.getThread(groupID).subscribe(res => {
-      this.threads = res;
-    }, err => {
-      console.log("Could not retrieve all threads: " + err);
-      //this.router.navigate(['/404']);
-    });
   }
 
   onJoinGroup() {
@@ -187,10 +192,12 @@ export class GroupPageComponent implements OnInit {
         console.log("err: " + err);
       })
     }
-  }
-  ngAfterContentInit() {
+
     this.reloadOnce();
   }
+//  ngAfterContentInit() {
+//    this.ngOnInit();
+//  }
   reloadOnce() {
     if (window.localStorage) {
       if (!localStorage.getItem('firstLoad')) {
