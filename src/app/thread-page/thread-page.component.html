@@ -29,8 +29,8 @@
     
   </div>
   <br />
-  <button type="button" class="btn btn-outline-dark" (click)="onCreatePost()" style="float: right">Post</button>
-  <button type="button" class="btn btn-outline-success" [routerLink]="['/groups/', this.groupID]" style="float: right">Back</button>
+  <button type="button" class="btn btn-outline-success" (click)="onCreatePost()" style="float: right">Post</button>
+  <button type="button" class="btn btn-outline-dark" [routerLink]="['/groups/', this.groupID]" style="float: right">Back</button>
   <!-- Will be a conditional button, only creator of threads can delete threads -->
   <div *ngIf="threadInfo[0].CREATED_BY == this.userID">
     <button type="button" class="btn btn-outline-danger" (click)="onDeleteThread()" style="float: right">Delete Thread</button>
