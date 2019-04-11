@@ -1,5 +1,7 @@
 <!-- Conditional: Shows the following if the user is a non-member, or not logged in -->
-
+<div *ngIf="this.nonMember; else elseBlock">
+	  Find this group interesting? Click the 'Join Group' button to join!
+	</div>
 <!-- Conditional: Shows the following if the user is a member -->
 <ng-template #elseBlock>
   <div class="card" id="group-card">
